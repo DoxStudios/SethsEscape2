@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     public float speed = 45f;
     public float jumpForce = 60f;
     public float doubleJumpForce = 45f;
@@ -14,14 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer sr;
     public GameObject groundCheck;
 
-    float groundedRadius = 0.3f;
+    float groundedRadius = 1f;
     bool isGrounded = true;
     bool doubleJumpRemaining = true;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
