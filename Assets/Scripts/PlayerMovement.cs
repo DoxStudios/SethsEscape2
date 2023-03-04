@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-	public Transform tempObject;
-
 	public float speed = 45f;
 	public float jumpForce = 60f;
 	public float doubleJumpForce = 45f;
@@ -57,12 +54,6 @@ public class PlayerMovement : MonoBehaviour
 			psm.Heal(1);
 		}
 
-		if(Input.GetKeyDown(KeyCode.O))
-		{
-			psm.Damage(1, tempObject, 1, 0.15f, 0.2f);
-		}
-
-
 		if((isGrounded || doubleJumpRemaining) && Input.GetButtonDown("Jump") && !psm.stunned)
 		{
 			if(!isGrounded)
@@ -89,5 +80,18 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 		return false;
+	}
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if(col.gameObject.tag == "Hurt")
+		{
+			EnemyStatsManager esm = col.gameObject.transform.parent.GetComponent<EnemyStatsManager>();
+			psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+		}
+		else if(col.gameObject.tag == "Attack")
+		{
+			col.gameObject.transform.parent.GetComponent<EnemyStatsManager>().Damage(1);
+		}
 	}
 }

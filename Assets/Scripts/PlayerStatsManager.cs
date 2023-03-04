@@ -8,9 +8,8 @@ public class PlayerStatsManager : MonoBehaviour
 	public GameObject heartPrefab;
 	public bool stunned = false;
 	public bool dead;
-	public UnityEvent OnBegin, OnDone;
+	public int health = 3;
 	GameObject canvas;
-	int health = 3;
 	int prevHealth;
 	Rigidbody2D rb;
 	int heartOffset;
@@ -37,7 +36,6 @@ public class PlayerStatsManager : MonoBehaviour
 	{
 		if(health != prevHealth)
 		{
-			Debug.Log("Changed!");
 
 			GameObject[] hearts = GameObject.FindGameObjectsWithTag("Heart");
 			heartOffset = 0;
@@ -57,7 +55,6 @@ public class PlayerStatsManager : MonoBehaviour
 
 			if(health <= 0)
 			{
-				Debug.Log("Dead");
 				dead = true;
 			}
 		}
@@ -68,7 +65,6 @@ public class PlayerStatsManager : MonoBehaviour
 	public void DealKnockback(Transform sender, float knockbackAmount, float knockbackTime, float stunTime)
 	{
 		StopAllCoroutines();
-		OnBegin?.Invoke();
 		Vector2 direction = (transform.position-sender.position).normalized;
 		rb.AddForce(direction*knockbackAmount*100, ForceMode2D.Impulse);
 		stunned = true;
@@ -81,7 +77,6 @@ public class PlayerStatsManager : MonoBehaviour
 		yield return new WaitForSeconds(delay);
 		Vector3 minimizedVelocity = new Vector2(rb.velocity.x/5, rb.velocity.y/5);
 		rb.velocity = minimizedVelocity;
-		OnDone?.Invoke();
 	}
 
 	private IEnumerator ResetStun(float delay)
