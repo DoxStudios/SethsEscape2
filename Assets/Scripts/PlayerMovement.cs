@@ -27,14 +27,14 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 
-	   isGrounded = checkGrounded();
-	   if(isGrounded)
-	   {
-			doubleJumpRemaining = true;
-	   }
-
+		isGrounded = checkGrounded();
+		if(isGrounded)
+		{
+				doubleJumpRemaining = true;
+		}
+		
 		float horizontal = Input.GetAxisRaw("Horizontal");
-		Vector3 move = new Vector3(horizontal, 0, 0);
+
 		if(horizontal < 0)
 		{
 			sr.flipX = true;
@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
 		{
 			sr.flipX = false;
 		}
+
+		Vector3 move = new Vector3(horizontal, 0, 0);
 
 		if(!psm.stunned)
 		{
@@ -84,14 +86,18 @@ public class PlayerMovement : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		if(col.gameObject.tag == "Hurt")
+		if(col.gameObject.tag == "Enemy")
 		{
-			EnemyStatsManager esm = col.gameObject.transform.parent.GetComponent<EnemyStatsManager>();
-			psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
-		}
-		else if(col.gameObject.tag == "Attack")
-		{
-			col.gameObject.transform.parent.GetComponent<EnemyStatsManager>().Damage(1);
+			Vector2 direction = col.GetContact(0).normal;
+			if(direction.y == -1)
+			{
+				col.gameObject.GetComponent<EnemyStatsManager>().Damage(1);
+			}
+			else
+			{
+				EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
+				psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+			}
 		}
 	}
 }
