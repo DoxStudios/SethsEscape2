@@ -7,7 +7,8 @@ public class PlayerStatsManager : MonoBehaviour
 {
 	public GameObject heartPrefab;
 	public bool stunned = false;
-	public bool dead;
+	public bool dead = false;
+	public bool inWall = false;
 	public int health = 3;
 	int startingHealth = 3;
 	GameObject canvas;
@@ -84,7 +85,6 @@ public class PlayerStatsManager : MonoBehaviour
 
 			if(sprite.localScale.x < -22)
 			{
-				Debug.Log(lastCheckpoint.position);
 				transform.position = lastCheckpoint.position;
 				sprite.rotation = Quaternion.Euler(0, 0, 0);
 				sprite.localScale = new Vector3(1, 1, 1);
@@ -93,6 +93,7 @@ public class PlayerStatsManager : MonoBehaviour
 				health = startingHealth;
 				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 				rb.gravityScale = 10f;
+				inWall = false;
 			}
 		}
 	}
@@ -127,7 +128,6 @@ public class PlayerStatsManager : MonoBehaviour
 	{
 		if(col.gameObject.tag == "Checkpoint" || col.gameObject.tag == "Spawn")
 		{
-			Debug.Log(col.gameObject.transform.position);
 			lastCheckpoint = col.gameObject.transform;
 		}
 	}

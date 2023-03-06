@@ -31,11 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
-		if(psm.dead)
-		{
-			inWall = false;
-		}
-
 		isGrounded = checkGrounded();
 		if(isGrounded)
 		{
@@ -94,12 +89,12 @@ public class PlayerMovement : MonoBehaviour
 			hasDash = false;
 		}
 
-		if(inWall && currentWallDamageCooldown > 0 && !psm.dead)
+		if(psm.inWall && currentWallDamageCooldown > 0 && !psm.dead)
 		{
 			currentWallDamageCooldown -= Time.deltaTime;
 		}
 
-		if(inWall && currentWallDamageCooldown <= 0 && !psm.dead)
+		if(psm.inWall && currentWallDamageCooldown <= 0 && !psm.dead)
 		{
 			psm.DamageWithoutKnockback(1);
 			currentWallDamageCooldown = wallDamageCooldown;
@@ -117,20 +112,22 @@ public class PlayerMovement : MonoBehaviour
 		return false;
 	}
 
-	void OnCollisionEnter2D(Collision2D col)
+	void OnCollisionStay2D(Collision2D col)
 	{
-
 		if(col.gameObject.layer == 3)
 		{
-			if(col.collider.bounds.Contains(transform.position))
+			if(col.collider.bounds.Contains(transform.position) && !psm.inWall)
 			{
-				inWall = true;
+				psm.inWall = true;
 				currentWallDamageCooldown = 0;
 				psm.stunned = true;
 				rb.constraints = RigidbodyConstraints2D.FreezeAll;
 			}
 		}
+	}
 
+	void OnCollisionEnter2D(Collision2D col)
+	{
 		if(col.gameObject.tag == "Enemy")
 		{
 			Vector2 direction = col.GetContact(0).normal;
