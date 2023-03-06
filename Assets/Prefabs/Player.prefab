@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5302044545738814732}
   - component: {fileID: 6275507847315061193}
   - component: {fileID: 4039079646928143685}
+  - component: {fileID: 1286036964528445768}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,11 +78,11 @@ MonoBehaviour:
   speed: 45
   jumpForce: 60
   doubleJumpForce: 45
+  dashDistance: 20
   doubleJump: 1
   ground:
     serializedVersion: 2
     m_Bits: 8
-  rb: {fileID: 4039079646928143685}
   sr: {fileID: 6370605454607244324}
   groundCheck: {fileID: 7063953790892666765}
 --- !u!50 &4039079646928143685
@@ -103,8 +104,24 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1286036964528445768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3822958222244464656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5cc0401c5cae07c8f5b9fb35d49029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartPrefab: {fileID: 7399391036295153048, guid: 245195f641299c5c4a65b9d113f5daa3, type: 3}
+  stunned: 0
+  dead: 0
+  health: 3
 --- !u!1 &5118150159356176680
 GameObject:
   m_ObjectHideFlags: 0

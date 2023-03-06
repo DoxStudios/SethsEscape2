@@ -9,11 +9,14 @@ public class PlayerStatsManager : MonoBehaviour
 	public bool stunned = false;
 	public bool dead;
 	public int health = 3;
+	int startingHealth = 3;
 	GameObject canvas;
 	int prevHealth;
 	Rigidbody2D rb;
 	int heartOffset;
 	int heartOffsetIntervals = 40;
+	Transform sprite;
+	Transform lastCheckpoint;
 
 	public void Heal(int amount)
 	{
@@ -22,21 +25,33 @@ public class PlayerStatsManager : MonoBehaviour
 
 	public void Damage(int amount, Transform knockbackPosition, float knockbackAmount, float knockbackTime, float stunTime)
 	{
-		health -= amount;
-		DealKnockback(knockbackPosition, knockbackAmount, knockbackTime, stunTime);   
+		if(!dead)
+		{
+			health -= amount;
+			DealKnockback(knockbackPosition, knockbackAmount, knockbackTime, stunTime);
+		}
+	}
+
+	public void DamageWithoutKnockback(int amount)
+	{
+		if(!dead)
+		{
+			health -= amount;
+		}
 	}
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		canvas = GameObject.FindGameObjectsWithTag("Canvas")[0];
+		lastCheckpoint = GameObject.FindGameObjectsWithTag("Spawn")[0].transform;
+		sprite = transform.Find("sprite");
 	}
 
 	void Update()
 	{
 		if(health != prevHealth)
 		{
-
 			GameObject[] hearts = GameObject.FindGameObjectsWithTag("Heart");
 			heartOffset = 0;
 
@@ -48,7 +63,7 @@ public class PlayerStatsManager : MonoBehaviour
 			for(int i=0; i<health; i++)
 			{
 				GameObject heart = Instantiate(heartPrefab, canvas.transform);
-				heart.GetComponent<RectTransform>().anchoredPosition = new Vector3(-500, 200, 0);
+				heart.GetComponent<RectTransform>().anchoredPosition = new Vector3(50, -50, -1);
 				heart.GetComponent<RectTransform>().anchoredPosition += new Vector2(heartOffset, 0);
 				heartOffset += heartOffsetIntervals;
 			}
@@ -56,10 +71,30 @@ public class PlayerStatsManager : MonoBehaviour
 			if(health <= 0)
 			{
 				dead = true;
+				stunned = true;
+				rb.gravityScale = 0f;
 			}
 		}
-
 		prevHealth = health;
+
+		if(dead)
+		{
+			sprite.Rotate(Vector3.forward * 60 * Time.deltaTime);
+			sprite.localScale += new Vector3(-10, -10, 0) * Time.deltaTime;
+
+			if(sprite.localScale.x < -22)
+			{
+				Debug.Log(lastCheckpoint.position);
+				transform.position = lastCheckpoint.position;
+				sprite.rotation = Quaternion.Euler(0, 0, 0);
+				sprite.localScale = new Vector3(1, 1, 1);
+				dead = false;
+				stunned = false;
+				health = startingHealth;
+				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+				rb.gravityScale = 10f;
+			}
+		}
 	}
 
 	public void DealKnockback(Transform sender, float knockbackAmount, float knockbackTime, float stunTime)
@@ -82,6 +117,18 @@ public class PlayerStatsManager : MonoBehaviour
 	private IEnumerator ResetStun(float delay)
 	{
 		yield return new WaitForSeconds(delay);
-		stunned = false;
+		if(!dead)
+		{
+			stunned = false;
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if(col.gameObject.tag == "Checkpoint" || col.gameObject.tag == "Spawn")
+		{
+			Debug.Log(col.gameObject.transform.position);
+			lastCheckpoint = col.gameObject.transform;
+		}
 	}
 }

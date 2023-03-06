@@ -6,8 +6,10 @@ TagManager:
   tags:
   - Heart
   - Canvas
-  - Hurt
-  - Attack
+  - Enemy
+  - Wall
+  - Spawn
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
