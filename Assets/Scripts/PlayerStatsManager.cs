@@ -8,7 +8,6 @@ public class PlayerStatsManager : MonoBehaviour
 	public GameObject heartPrefab;
 	public bool stunned = false;
 	public bool dead = false;
-	public bool inWall = false;
 	public int health = 3;
 	int startingHealth = 3;
 	GameObject canvas;
@@ -80,6 +79,7 @@ public class PlayerStatsManager : MonoBehaviour
 
 		if(dead)
 		{
+			sprite.GetComponent<SpriteRenderer>().flipX = false;
 			sprite.Rotate(Vector3.forward * 60 * Time.deltaTime);
 			sprite.localScale += new Vector3(-10, -10, 0) * Time.deltaTime;
 
@@ -93,7 +93,6 @@ public class PlayerStatsManager : MonoBehaviour
 				health = startingHealth;
 				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 				rb.gravityScale = 10f;
-				inWall = false;
 			}
 		}
 	}

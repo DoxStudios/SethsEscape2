@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 	public float doubleJumpForce = 45f;
 	public float dashDistance = 10f;
 	public bool doubleJump = true;
+	public bool dashUnlocked = true;
 	public LayerMask ground;
 	public SpriteRenderer sr;
 	public GameObject groundCheck;
@@ -19,9 +20,11 @@ public class PlayerMovement : MonoBehaviour
 	Vector3 direction = new Vector3(1, 0, 0);
 	bool hasDash = true;
 	Vector3 dashTarget;
-	bool inWall;
 	float currentWallDamageCooldown;
-	float wallDamageCooldown = 1f;
+	float wallDamageCooldown = 0.5f;
+
+	float stoppedHorizontal;
+	float horizontal;
 
 	void Start()
 	{
@@ -37,8 +40,8 @@ public class PlayerMovement : MonoBehaviour
 				doubleJumpRemaining = true;
 				hasDash = true;
 		}
-		
-		float horizontal = Input.GetAxisRaw("Horizontal");
+
+		horizontal = Input.GetAxisRaw("Horizontal");
 
 		if(horizontal < 0 && !psm.stunned)
 		{
@@ -53,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
 		Vector3 move = new Vector3(horizontal, 0, 0);
 
-		if(!psm.stunned)
+		if(!psm.stunned && horizontal != stoppedHorizontal)
 		{
 			transform.position += move * speed * Time.deltaTime;
 		}
@@ -83,21 +86,10 @@ public class PlayerMovement : MonoBehaviour
 			
 		}
 
-		if(hasDash && Input.GetButtonDown("Dash") && !psm.stunned)
+		if(dashUnlocked && hasDash && Input.GetButtonDown("Dash") && !psm.stunned)
 		{
 			transform.position += direction * dashDistance;
 			hasDash = false;
-		}
-
-		if(psm.inWall && currentWallDamageCooldown > 0 && !psm.dead)
-		{
-			currentWallDamageCooldown -= Time.deltaTime;
-		}
-
-		if(psm.inWall && currentWallDamageCooldown <= 0 && !psm.dead)
-		{
-			psm.DamageWithoutKnockback(1);
-			currentWallDamageCooldown = wallDamageCooldown;
 		}
 	}
 
@@ -110,20 +102,6 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 		return false;
-	}
-
-	void OnCollisionStay2D(Collision2D col)
-	{
-		if(col.gameObject.layer == 3)
-		{
-			if(col.collider.bounds.Contains(transform.position) && !psm.inWall)
-			{
-				psm.inWall = true;
-				currentWallDamageCooldown = 0;
-				psm.stunned = true;
-				rb.constraints = RigidbodyConstraints2D.FreezeAll;
-			}
-		}
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
