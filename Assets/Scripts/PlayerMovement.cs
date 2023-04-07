@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
 	public LayerMask ground;
 	public SpriteRenderer sr;
 	public GameObject groundCheck;
+	public GameObject firstParticleGO;
+	public GameObject secondParticleGO;
 
 	Rigidbody2D rb;
 	PlayerStatsManager psm;
@@ -22,7 +24,8 @@ public class PlayerMovement : MonoBehaviour
 	Vector3 dashTarget;
 	float currentWallDamageCooldown;
 	float wallDamageCooldown = 0.5f;
-
+	ParticleSystem firstParticleSYS;
+	ParticleSystem secondParticleSYS;
 	float stoppedHorizontal;
 	float horizontal;
 
@@ -30,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		psm = GetComponent<PlayerStatsManager>();
+		firstParticleSYS = firstParticleGO.GetComponent<ParticleSystem>();
+		secondParticleSYS = secondParticleGO.GetComponent<ParticleSystem>();
 	}
 
 	void Update()
@@ -88,7 +93,11 @@ public class PlayerMovement : MonoBehaviour
 
 		if(dashUnlocked && hasDash && Input.GetButtonDown("Dash") && !psm.stunned)
 		{
+			firstParticleGO.transform.position = transform.position;
+			firstParticleSYS.Play();
 			transform.position += direction * dashDistance;
+			secondParticleGO.transform.position = transform.position;
+			secondParticleSYS.Play();
 			hasDash = false;
 		}
 	}

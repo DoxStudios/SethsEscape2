@@ -147,7 +147,6 @@ MonoBehaviour:
   heartPrefab: {fileID: 7399391036295153048, guid: 245195f641299c5c4a65b9d113f5daa3, type: 3}
   stunned: 0
   dead: 0
-  inWall: 0
   health: 3
 --- !u!1 &5118150159356176680
 GameObject:
