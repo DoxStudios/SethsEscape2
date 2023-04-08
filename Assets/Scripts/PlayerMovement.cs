@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -91,6 +94,17 @@ public class PlayerMovement : MonoBehaviour
 			
 		}
 
+		if(psm.inWall && currentWallDamageCooldown > 0 && !psm.dead)
+		{
+			currentWallDamageCooldown -= Time.deltaTime;
+		}
+
+		if(psm.inWall && currentWallDamageCooldown <= 0 && !psm.dead)
+		{
+			psm.DamageWithoutKnockback(1);
+			currentWallDamageCooldown = wallDamageCooldown;
+		}
+
 		if(dashUnlocked && hasDash && Input.GetButtonDown("Dash") && !psm.stunned)
 		{
 			firstParticleGO.transform.position = transform.position;
@@ -111,6 +125,22 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 		return false;
+	}
+
+	void OnCollisionStay2D(Collision2D col)
+	{
+		Debug.Log("Collision");
+		if(col.gameObject.layer == LayerMask.NameToLayer("Ground"))
+		{
+			Tilemap tilemap = col.gameObject.GetComponent<Tilemap>();
+			if(tilemap.HasTile(tilemap.WorldToCell(transform.position)) && !psm.inWall)
+			{
+				psm.inWall = true;
+				currentWallDamageCooldown = 0;
+				psm.stunned = true;
+				rb.constraints = RigidbodyConstraints2D.FreezeAll;
+			}
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D col)

@@ -9,6 +9,7 @@ public class PlayerStatsManager : MonoBehaviour
 	public bool stunned = false;
 	public bool dead = false;
 	public int health = 3;
+	public bool inWall = false;
 	int startingHealth = 3;
 	GameObject canvas;
 	int prevHealth;
@@ -93,6 +94,7 @@ public class PlayerStatsManager : MonoBehaviour
 				health = startingHealth;
 				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 				rb.gravityScale = 10f;
+				inWall = false;
 			}
 		}
 	}
