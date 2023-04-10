@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
 	float wallDamageCooldown = 0.5f;
 	ParticleSystem firstParticleSYS;
 	ParticleSystem secondParticleSYS;
-	float stoppedHorizontal;
 	float horizontal;
 
 	void Start()
@@ -62,11 +61,9 @@ public class PlayerMovement : MonoBehaviour
 			direction = new Vector3(1, 0, 0);
 		}
 
-		Vector3 move = new Vector3(horizontal, 0, 0);
-
-		if(!psm.stunned && horizontal != stoppedHorizontal)
+		if(!psm.stunned)
 		{
-			transform.position += move * speed * Time.deltaTime;
+			rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 		}
 
 		if(Input.GetKeyDown(KeyCode.P))
@@ -129,7 +126,6 @@ public class PlayerMovement : MonoBehaviour
 
 	void OnCollisionStay2D(Collision2D col)
 	{
-		Debug.Log("Collision");
 		if(col.gameObject.layer == LayerMask.NameToLayer("Ground"))
 		{
 			Tilemap tilemap = col.gameObject.GetComponent<Tilemap>();
