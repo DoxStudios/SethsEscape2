@@ -132,9 +132,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   damage: 1
-  outgoingKnockbackAmount: 0
-  outgoingKnockbackTime: 0
-  outgoingStunTime: 0
+  outgoingKnockbackAmount: 0.5
+  outgoingKnockbackTime: 0.15
+  outgoingStunTime: 0.2
 --- !u!61 &5940062601322015933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,6 +145,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

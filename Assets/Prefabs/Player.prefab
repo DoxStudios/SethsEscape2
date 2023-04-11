@@ -105,6 +105,9 @@ MonoBehaviour:
     m_Bits: 8
   sr: {fileID: 6370605454607244324}
   groundCheck: {fileID: 7063953790892666765}
+  firstParticleGO: {fileID: 0}
+  secondParticleGO: {fileID: 0}
+  coyoteTime: 0.1
 --- !u!50 &4039079646928143685
 Rigidbody2D:
   serializedVersion: 4
@@ -148,6 +151,7 @@ MonoBehaviour:
   stunned: 0
   dead: 0
   health: 3
+  inWall: 0
 --- !u!1 &5118150159356176680
 GameObject:
   m_ObjectHideFlags: 0

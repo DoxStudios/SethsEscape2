@@ -10287,22 +10287,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5549068192276358892, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
-      propertyPath: health
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5549068192276358892, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
-      propertyPath: outgoingStunTime
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5549068192276358892, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
-      propertyPath: outgoingKnockbackTime
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5549068192276358892, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
-      propertyPath: outgoingKnockbackAmount
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7461102481258243548, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
       propertyPath: m_Name
       value: TestEnemy
@@ -10424,6 +10408,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: d1c8f50df6de522138aad96028251cb2, type: 2}
+    - target: {fileID: 6275507847315061193, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
+      propertyPath: coyoteTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6275507847315061193, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
       propertyPath: firstParticleGO
       value: 

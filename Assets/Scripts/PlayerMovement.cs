@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject groundCheck;
 	public GameObject firstParticleGO;
 	public GameObject secondParticleGO;
+	public float coyoteTime = 0.1f;
+
 
 	Rigidbody2D rb;
 	PlayerStatsManager psm;
@@ -30,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
 	ParticleSystem firstParticleSYS;
 	ParticleSystem secondParticleSYS;
 	float horizontal;
+	bool inCoyotetime = false;
+	float currentCoyotetime;
 
 	void Start()
 	{
@@ -71,9 +75,9 @@ public class PlayerMovement : MonoBehaviour
 			psm.Heal(1);
 		}
 
-		if((isGrounded || doubleJumpRemaining) && Input.GetButtonDown("Jump") && !psm.stunned)
+		if(((isGrounded || inCoyotetime) || doubleJumpRemaining) && Input.GetButtonDown("Jump") && !psm.stunned)
 		{
-			if(!isGrounded)
+			if(!isGrounded && !inCoyotetime)
 			{
 				if(doubleJump)
 				{
@@ -111,6 +115,15 @@ public class PlayerMovement : MonoBehaviour
 			secondParticleSYS.Play();
 			hasDash = false;
 		}
+
+		if(inCoyotetime)
+		{
+			currentCoyotetime -= Time.deltaTime;
+			if(currentCoyotetime <= 0)
+			{
+				inCoyotetime = false;
+			}
+		}
 	}
 
 	bool checkGrounded()
@@ -122,6 +135,15 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 		return false;
+	}
+
+	void OnCollisionExit2D(Collision2D col)
+	{
+		if(col.gameObject.layer == LayerMask.NameToLayer("Ground"))
+		{
+			inCoyotetime = true;
+			currentCoyotetime = coyoteTime;
+		}
 	}
 
 	void OnCollisionStay2D(Collision2D col)
