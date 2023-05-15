@@ -17,7 +17,10 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject firstParticleGO;
 	public GameObject secondParticleGO;
 	public float coyoteTime = 0.1f;
-
+	public float bashThreshold;
+	public float standardDashTime;
+	public float standardDashMultiplier;
+	public string dashType;
 
 	Rigidbody2D rb;
 	PlayerStatsManager psm;
@@ -34,6 +37,10 @@ public class PlayerMovement : MonoBehaviour
 	float horizontal;
 	bool inCoyotetime = false;
 	float currentCoyotetime;
+	bool inDash = false;
+	bool dashRemoveControl = false;
+	float dashTimer;
+	bool meetsBashReqs = false;
 
 	void Start()
 	{
@@ -48,26 +55,82 @@ public class PlayerMovement : MonoBehaviour
 		isGrounded = checkGrounded();
 		if(isGrounded)
 		{
-				doubleJumpRemaining = true;
-				hasDash = true;
+			doubleJumpRemaining = true;
+			hasDash = true;
 		}
 
-		horizontal = Input.GetAxisRaw("Horizontal");
+		if(!dashRemoveControl)
+		{
+			horizontal = Input.GetAxisRaw("Horizontal");
+		}
 
 		if(horizontal < 0 && !psm.stunned)
 		{
+			if(!psm.movingLeft)
+			{
+				psm.setLeft();
+			}
 			sr.flipX = true;
 			direction = new Vector3(-1, 0, 0);
 		}
 		else if(horizontal > 0 && !psm.stunned)
 		{
+			if(psm.movingLeft)
+			{
+				psm.setRight();
+			}
 			sr.flipX = false;
 			direction = new Vector3(1, 0, 0);
 		}
 
-		if(!psm.stunned)
+		if(!psm.stunned && !dashRemoveControl)
 		{
 			rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+		}
+
+		if(dashUnlocked && hasDash && Input.GetButtonDown("Dash") && !psm.stunned)
+		{
+			if(dashType == "teleport")
+			{
+				firstParticleGO.transform.position = transform.position;
+				firstParticleSYS.Play();
+				transform.position += direction * dashDistance;
+				secondParticleGO.transform.position = transform.position;
+				secondParticleSYS.Play();
+				hasDash = false;
+			}
+			else if(dashType == "standard")
+			{
+				inDash = true;
+				dashRemoveControl = true;
+				dashTimer = standardDashTime;
+				rb.gravityScale = 0;
+				hasDash = false;
+			}
+		}
+
+		if(inDash)
+		{
+			if(dashType == "standard")
+			{
+				if(psm.movingLeft)
+				{
+					rb.velocity = new Vector2(-1 * (speed * standardDashMultiplier), rb.velocity.y);
+				}
+				else
+				{
+					rb.velocity = new Vector2(1 * (speed * standardDashMultiplier), rb.velocity.y);
+				}
+
+				dashTimer -= Time.deltaTime;
+
+				if(dashTimer <= 0)
+				{
+					inDash = false;
+					dashRemoveControl = false;
+					rb.gravityScale = 10;
+				}
+			}
 		}
 
 		if(Input.GetKeyDown(KeyCode.P))
@@ -106,16 +169,6 @@ public class PlayerMovement : MonoBehaviour
 			currentWallDamageCooldown = wallDamageCooldown;
 		}
 
-		if(dashUnlocked && hasDash && Input.GetButtonDown("Dash") && !psm.stunned)
-		{
-			firstParticleGO.transform.position = transform.position;
-			firstParticleSYS.Play();
-			transform.position += direction * dashDistance;
-			secondParticleGO.transform.position = transform.position;
-			secondParticleSYS.Play();
-			hasDash = false;
-		}
-
 		if(inCoyotetime)
 		{
 			currentCoyotetime -= Time.deltaTime;
@@ -124,6 +177,8 @@ public class PlayerMovement : MonoBehaviour
 				inCoyotetime = false;
 			}
 		}
+
+		meetsBashReqs = rb.velocity.magnitude > bashThreshold;
 	}
 
 	bool checkGrounded()
@@ -172,8 +227,15 @@ public class PlayerMovement : MonoBehaviour
 			}
 			else
 			{
-				EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
-				psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+				if(meetsBashReqs)
+				{
+					col.gameObject.GetComponent<EnemyStatsManager>().Damage(1);
+				}
+				else
+				{
+					EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
+					psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+				}
 			}
 		}
 	}

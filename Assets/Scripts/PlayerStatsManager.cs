@@ -5,6 +5,13 @@ using UnityEngine.Events;
 
 public class PlayerStatsManager : MonoBehaviour
 {
+	public GameObject headCannon;
+	public Vector3 headCannonLeftPos;
+	public Vector3 headCannonRightPos;
+	public GameObject mouthCannon;
+	public GameObject laserEyes;
+	GameObject currentWeapon;
+	public bool movingLeft = false;
 	public GameObject heartPrefab;
 	public bool stunned = false;
 	public bool dead = false;
@@ -43,6 +50,7 @@ public class PlayerStatsManager : MonoBehaviour
 
 	void Start()
 	{
+		currentWeapon = headCannon;
 		rb = GetComponent<Rigidbody2D>();
 		canvas = GameObject.FindGameObjectsWithTag("Canvas")[0];
 		lastCheckpoint = GameObject.FindGameObjectsWithTag("Spawn")[0].transform;
@@ -50,6 +58,70 @@ public class PlayerStatsManager : MonoBehaviour
 	}
 
 	void Update()
+	{
+
+		SelectWeapon();
+		AimWeapon();
+
+		if(Input.GetButtonDown("Fire1"))
+		{
+			FireWeapon();
+		}
+
+		UpdateHealth();
+	}
+
+	void SelectWeapon()
+	{
+		if(Input.GetButtonDown("headCannon"))
+		{
+			Debug.Log("Head Cannon");
+			currentWeapon.SetActive(false);
+			currentWeapon = headCannon;
+			currentWeapon.SetActive(true);
+		}
+		if(Input.GetButtonDown("mouthCannon"))
+		{
+			Debug.Log("Mouth Cannon");
+			currentWeapon.SetActive(false);
+			currentWeapon = mouthCannon;
+			currentWeapon.SetActive(true);
+		}
+		if(Input.GetButtonDown("laserEyes"))
+		{
+			Debug.Log("Laser Eyes");
+			currentWeapon.SetActive(false);
+			currentWeapon = laserEyes;
+			currentWeapon.SetActive(true);
+		}
+	}
+
+	void AimWeapon()
+	{
+		if(currentWeapon = headCannon)
+		{
+			Vector3 mousePos = Input.mousePosition;
+			mousePos.z = Camera.main.nearClipPlane;
+			Vector3 Worldpos = Camera.main.ScreenToWorldPoint(mousePos);
+			Vector2 Worldpos2D = new Vector2(Worldpos.x, Worldpos.y);
+			Vector2 direction = (Worldpos2D - new Vector2(transform.position.x, transform.position.y)).normalized;
+
+			currentWeapon.transform.GetChild(1).gameObject.transform.rotation = Quaternion.LookRotation(direction);
+		}
+	}
+
+	void FireWeapon()
+	{
+		Vector3 mousePos = Input.mousePosition;
+		mousePos.z = Camera.main.nearClipPlane;
+		Vector3 Worldpos = Camera.main.ScreenToWorldPoint(mousePos);
+		Vector2 Worldpos2D = new Vector2(Worldpos.x, Worldpos.y);
+		Vector2 direction = (Worldpos2D - new Vector2(transform.position.x, transform.position.y)).normalized;
+
+		
+	}
+
+	void UpdateHealth()
 	{
 		if(health != prevHealth)
 		{
@@ -83,6 +155,7 @@ public class PlayerStatsManager : MonoBehaviour
 			sprite.GetComponent<SpriteRenderer>().flipX = false;
 			sprite.Rotate(Vector3.forward * 60 * Time.deltaTime);
 			sprite.localScale += new Vector3(-10, -10, 0) * Time.deltaTime;
+			currentWeapon.SetActive(false);
 
 			if(sprite.localScale.x < -22)
 			{
@@ -95,8 +168,21 @@ public class PlayerStatsManager : MonoBehaviour
 				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 				rb.gravityScale = 10f;
 				inWall = false;
+				currentWeapon.SetActive(true);
 			}
 		}
+	}
+
+	public void setLeft()
+	{
+		movingLeft = true;
+		headCannon.transform.localPosition = headCannonLeftPos;
+	}
+
+	public void setRight()
+	{
+		movingLeft = false;
+		headCannon.transform.localPosition = headCannonRightPos;
 	}
 
 	public void DealKnockback(Transform sender, float knockbackAmount, float knockbackTime, float stunTime)
