@@ -5,18 +5,18 @@ using UnityEngine.Events;
 
 public class PlayerStatsManager : MonoBehaviour
 {
-	public GameObject headCannon;
-	public Vector3 headCannonLeftPos;
-	public Vector3 headCannonRightPos;
-	public GameObject mouthCannon;
-	public GameObject laserEyes;
-	GameObject currentWeapon;
+	
 	public bool movingLeft = false;
 	public GameObject heartPrefab;
 	public bool stunned = false;
 	public bool dead = false;
 	public int health = 3;
 	public bool inWall = false;
+	public GameObject handGun;
+	public GameObject headCannon;
+
+	GameObject currentPrimary;
+	GameObject currentSecondary;
 	int startingHealth = 3;
 	GameObject canvas;
 	int prevHealth;
@@ -50,7 +50,7 @@ public class PlayerStatsManager : MonoBehaviour
 
 	void Start()
 	{
-		currentWeapon = headCannon;
+		//currentWeapon = headCannon;
 		rb = GetComponent<Rigidbody2D>();
 		canvas = GameObject.FindGameObjectsWithTag("Canvas")[0];
 		lastCheckpoint = GameObject.FindGameObjectsWithTag("Spawn")[0].transform;
@@ -60,7 +60,8 @@ public class PlayerStatsManager : MonoBehaviour
 	void Update()
 	{
 
-		SelectWeapon();
+		SelectPrimaryWeapon();
+		SelectSecondaryWeapon();
 		AimWeapon();
 
 		if(Input.GetButtonDown("Fire1"))
@@ -71,43 +72,45 @@ public class PlayerStatsManager : MonoBehaviour
 		UpdateHealth();
 	}
 
-	void SelectWeapon()
+	void SelectPrimaryWeapon()
 	{
-		if(Input.GetButtonDown("headCannon"))
+		if(Input.GetButtonDown("handGun"))
 		{
-			Debug.Log("Head Cannon");
-			currentWeapon.SetActive(false);
-			currentWeapon = headCannon;
-			currentWeapon.SetActive(true);
+			Debug.Log("Hand Gun");
+			currentPrimary.SetActive(false);
+			currentPrimary = handGun;
+			currentPrimary.SetActive(true);
 		}
 		if(Input.GetButtonDown("mouthCannon"))
 		{
 			Debug.Log("Mouth Cannon");
-			currentWeapon.SetActive(false);
-			currentWeapon = mouthCannon;
-			currentWeapon.SetActive(true);
+			currentPrimary.SetActive(false);
+			//currentPrimary = mouthCannon;
+			currentPrimary.SetActive(true);
+		}
+	}
+
+	void SelectSecondaryWeapon()
+	{
+		if(Input.GetButtonDown("headCannon"))
+		{
+			Debug.Log("Head Cannon");
+			currentSecondary.SetActive(false);
+			//currentSecondary = headCannon;
+			currentSecondary.SetActive(true);
 		}
 		if(Input.GetButtonDown("laserEyes"))
 		{
 			Debug.Log("Laser Eyes");
-			currentWeapon.SetActive(false);
-			currentWeapon = laserEyes;
-			currentWeapon.SetActive(true);
+			currentSecondary.SetActive(false);
+			//currentSecondary = laserEyes;
+			currentSecondary.SetActive(true);
 		}
 	}
 
 	void AimWeapon()
 	{
-		if(currentWeapon = headCannon)
-		{
-			Vector3 mousePos = Input.mousePosition;
-			mousePos.z = Camera.main.nearClipPlane;
-			Vector3 Worldpos = Camera.main.ScreenToWorldPoint(mousePos);
-			Vector2 Worldpos2D = new Vector2(Worldpos.x, Worldpos.y);
-			Vector2 direction = (Worldpos2D - new Vector2(transform.position.x, transform.position.y)).normalized;
-
-			currentWeapon.transform.GetChild(1).gameObject.transform.rotation = Quaternion.LookRotation(direction);
-		}
+		//TODO: Acutally make it
 	}
 
 	void FireWeapon()
