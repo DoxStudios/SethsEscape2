@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 	bool inDash = false;
 	bool dashRemoveControl = false;
 	float dashTimer;
-	bool meetsBashReqs = false;
+	float velocityMagnitude = 0;
 
 	void Start()
 	{
@@ -126,9 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
 				if(dashTimer <= 0)
 				{
-					inDash = false;
-					dashRemoveControl = false;
-					rb.gravityScale = 10;
+					stopDash();
 				}
 			}
 		}
@@ -178,7 +176,14 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
-		meetsBashReqs = rb.velocity.magnitude > bashThreshold;
+		velocityMagnitude = rb.velocity.magnitude;
+	}
+
+	void stopDash()
+    {
+		inDash = false;
+		dashRemoveControl = false;
+		rb.gravityScale = 10;
 	}
 
 	bool checkGrounded()
@@ -223,17 +228,21 @@ public class PlayerMovement : MonoBehaviour
 			Vector2 direction = col.GetContact(0).normal;
 			if(direction.y == -1)
 			{
-				col.gameObject.GetComponent<EnemyStatsManager>().Damage(1);
+				col.gameObject.GetComponent<EnemyStatsManager>().Damage(transform, 100, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
 			}
 			else
 			{
-				if(meetsBashReqs)
+				Debug.Log(velocityMagnitude);
+				EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
+				if (velocityMagnitude > bashThreshold)
 				{
-					col.gameObject.GetComponent<EnemyStatsManager>().Damage(1);
-				}
-				else
+					dashTimer = 0;
+					stopDash();
+                    psm.DealKnockback(col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+					col.gameObject.GetComponent<EnemyStatsManager>().Damage(transform, velocityMagnitude * 0, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+                }
+                else
 				{
-					EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
 					psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
 				}
 			}

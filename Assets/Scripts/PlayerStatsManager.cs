@@ -5,7 +5,12 @@ using UnityEngine.Events;
 
 public class PlayerStatsManager : MonoBehaviour
 {
-	
+	public float damage;
+	public float outgoingKnockbackAmount;
+	public float outgoingKnockbackTime;
+	public float outgoingStunTime;
+
+
 	public bool movingLeft = false;
 	public GameObject heartPrefab;
 	public bool stunned = false;
@@ -50,7 +55,8 @@ public class PlayerStatsManager : MonoBehaviour
 
 	void Start()
 	{
-		//currentWeapon = headCannon;
+		currentPrimary = handGun;
+		currentSecondary = headCannon;
 		rb = GetComponent<Rigidbody2D>();
 		canvas = GameObject.FindGameObjectsWithTag("Canvas")[0];
 		lastCheckpoint = GameObject.FindGameObjectsWithTag("Spawn")[0].transform;
@@ -158,7 +164,8 @@ public class PlayerStatsManager : MonoBehaviour
 			sprite.GetComponent<SpriteRenderer>().flipX = false;
 			sprite.Rotate(Vector3.forward * 60 * Time.deltaTime);
 			sprite.localScale += new Vector3(-10, -10, 0) * Time.deltaTime;
-			currentWeapon.SetActive(false);
+			currentPrimary.SetActive(false);
+			currentSecondary.SetActive(false);
 
 			if(sprite.localScale.x < -22)
 			{
@@ -171,7 +178,8 @@ public class PlayerStatsManager : MonoBehaviour
 				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 				rb.gravityScale = 10f;
 				inWall = false;
-				currentWeapon.SetActive(true);
+				currentPrimary.SetActive(true);
+				currentSecondary.SetActive(true);
 			}
 		}
 	}
@@ -179,13 +187,11 @@ public class PlayerStatsManager : MonoBehaviour
 	public void setLeft()
 	{
 		movingLeft = true;
-		headCannon.transform.localPosition = headCannonLeftPos;
 	}
 
 	public void setRight()
 	{
 		movingLeft = false;
-		headCannon.transform.localPosition = headCannonRightPos;
 	}
 
 	public void DealKnockback(Transform sender, float knockbackAmount, float knockbackTime, float stunTime)
