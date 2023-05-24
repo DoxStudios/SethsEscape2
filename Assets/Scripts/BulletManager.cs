@@ -7,14 +7,29 @@ public class BulletManager : MonoBehaviour
     public float damage;
     public PlayerStatsManager psm;
     public int pierceLevel;
+    public float survivalTime;
 
-
-    void OnCollisionEnter2D(Collision2D col)
+    void Update()
     {
+        survivalTime -= Time.deltaTime;
+
+        if(survivalTime <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log("Hit");
         if(col.gameObject.tag == "Enemy")
         {
             EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
             esm.Damage(transform, damage, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+        }
+        else if(col.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
         }
 
         pierceLevel -= 1;

@@ -7,6 +7,7 @@ public class WeaponManager : MonoBehaviour
 
     public float damage;
     public float speed;
+    public float bulletSurvivalTime;
     public int pierceLevel;
     public GameObject bullet;
     public Transform firePosition;
@@ -27,17 +28,15 @@ public class WeaponManager : MonoBehaviour
         Vector3 direction = worldMousePos - firePosition.position;
         direction.Normalize();
 
-        Debug.Log(worldMousePos);
-        Debug.Log(firePosition.position);
-        Debug.Log(direction);
-
         float finalDamage = damage * damageMultiplier;
         int finalPierce = pierceLevel + addedPierce;
+        
         GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
         firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
         BulletManager bm = firedBullet.GetComponent<BulletManager>();
         bm.damage = finalDamage;
         bm.pierceLevel = finalPierce;
         bm.psm = psm;
+        bm.survivalTime = bulletSurvivalTime;
     }
 }

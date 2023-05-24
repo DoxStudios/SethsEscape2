@@ -12,6 +12,7 @@ TagManager:
   - Checkpoint
   - Stopped
   - Bullet
+  - Ground
   layers:
   - Default
   - TransparentFX
