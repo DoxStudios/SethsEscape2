@@ -73,7 +73,7 @@ public class PlayerStatsManager : MonoBehaviour
 
 		if(Input.GetButtonDown("Fire1"))
 		{
-			FireWeapon();
+			currentPrimary.GetComponent<WeaponManager>().Fire(damage, addedPierce);
 		}
 
 		UpdateHealth();
@@ -118,17 +118,6 @@ public class PlayerStatsManager : MonoBehaviour
 	void AimWeapon()
 	{
 		//TODO: Acutally make it
-	}
-
-	void FireWeapon()
-	{
-		Vector3 mousePos = Input.mousePosition;
-		mousePos.z = Camera.main.nearClipPlane;
-		Vector3 Worldpos = Camera.main.ScreenToWorldPoint(mousePos);
-		Vector2 Worldpos2D = new Vector2(Worldpos.x, Worldpos.y);
-		Vector2 direction = (Worldpos2D - new Vector2(transform.position.x, transform.position.y)).normalized;
-
-		currentPrimary.GetComponent<WeaponManager>().Fire(direction, damage, addedPierce);
 	}
 
 	void UpdateHealth()

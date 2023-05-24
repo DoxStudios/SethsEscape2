@@ -9,22 +9,31 @@ public class WeaponManager : MonoBehaviour
     public float speed;
     public int pierceLevel;
     public GameObject bullet;
-    public GameObject firePosition;
+    public Transform firePosition;
 
     PlayerStatsManager psm;
 
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         psm = player.GetComponent<PlayerStatsManager>();
     }
 
-    public void Fire(Vector2 direction, float damageMultiplier, int addedPierce)
+    public void Fire(float damageMultiplier, int addedPierce)
     {
+        Vector3 mousePos = Input.mousePosition;
+		mousePos.z = mousePos.z - (Camera.main.transform.position.z);
+        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 direction = worldMousePos - firePosition.position;
+        direction.Normalize();
+
+        Debug.Log(worldMousePos);
+        Debug.Log(firePosition.position);
+        Debug.Log(direction);
+
         float finalDamage = damage * damageMultiplier;
         int finalPierce = pierceLevel + addedPierce;
-        GameObject firedBullet = Instantiate(bullet, firePosition.transform.position, Quaternion.identity);
-        Debug.Log(direction * speed);
+        GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
         firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
         BulletManager bm = firedBullet.GetComponent<BulletManager>();
         bm.damage = finalDamage;
