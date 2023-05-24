@@ -12,16 +12,39 @@ public class WeaponManager : MonoBehaviour
     public GameObject bullet;
     public Transform firePosition;
 
+    public float maxShotsPerSecond;
+
+    bool canShoot = true;
+    float cooldown;
+
     PlayerStatsManager psm;
 
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         psm = player.GetComponent<PlayerStatsManager>();
+        cooldown = 1 / maxShotsPerSecond;
+    }
+
+    void Update()
+    {
+        if(!canShoot)
+        {
+            cooldown -= Time.deltaTime;
+            if(cooldown <= 0)
+            {
+                canShoot = true;
+            }
+        }
     }
 
     public void Fire(float damageMultiplier, int addedPierce)
     {
+
+        if(!canShoot) return;
+        canShoot = false;
+        cooldown = 1 / maxShotsPerSecond;
+
         Vector3 mousePos = Input.mousePosition;
 		mousePos.z = mousePos.z - (Camera.main.transform.position.z);
         Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -30,7 +53,7 @@ public class WeaponManager : MonoBehaviour
 
         float finalDamage = damage * damageMultiplier;
         int finalPierce = pierceLevel + addedPierce;
-        
+
         GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
         firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
         BulletManager bm = firedBullet.GetComponent<BulletManager>();

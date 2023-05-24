@@ -10470,8 +10470,20 @@ PrefabInstance:
       value: RotationPoint
       objectReference: {fileID: 0}
     - target: {fileID: 2384174981222072922, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
+      propertyPath: speed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384174981222072922, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
+      propertyPath: damage
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384174981222072922, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
       propertyPath: pierceLevel
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384174981222072922, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
+      propertyPath: maxShotsPerSecond
+      value: 2.15
       objectReference: {fileID: 0}
     - target: {fileID: 2384174981222072922, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
       propertyPath: bulletSurvivalTime

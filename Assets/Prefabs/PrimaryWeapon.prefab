@@ -130,12 +130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc56f05faab350bfb3d7e4f800e8482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  speed: 100
-  bulletSurvivalTime: 1
-  pierceLevel: 1
+  damage: 0
+  speed: 0
+  bulletSurvivalTime: 0
+  pierceLevel: 0
   bullet: {fileID: 1218464838308763304, guid: fdf0b0e8cc3dfaf419edcbb56c2c1878, type: 3}
   firePosition: {fileID: 1791780433621602964}
+  maxShotsPerSecond: 0
 --- !u!1 &8943012305986389029
 GameObject:
   m_ObjectHideFlags: 0
