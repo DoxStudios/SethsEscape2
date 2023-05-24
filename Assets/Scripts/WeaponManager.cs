@@ -11,10 +11,11 @@ public class WeaponManager : MonoBehaviour
     public int pierceLevel;
     public GameObject bullet;
     public Transform firePosition;
-
     public float maxShotsPerSecond;
 
-    bool canShoot = true;
+    public bool canShoot = true;
+    public bool isActive = false;
+
     float cooldown;
 
     PlayerStatsManager psm;
@@ -41,7 +42,7 @@ public class WeaponManager : MonoBehaviour
     public void Fire(float damageMultiplier, int addedPierce)
     {
 
-        if(!canShoot) return;
+        if(!canShoot || !isActive) return;
         canShoot = false;
         cooldown = 1 / maxShotsPerSecond;
 

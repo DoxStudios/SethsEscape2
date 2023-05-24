@@ -79,21 +79,25 @@ public class PlayerStatsManager : MonoBehaviour
 		UpdateHealth();
 	}
 
+	void ActivateWeapon(GameObject weapon)
+	{
+		currentPrimary.GetComponent<WeaponManager>().isActive = false;
+		currentPrimary.SetActive(false);
+		currentPrimary = weapon;
+		currentPrimary.SetActive(true);
+		currentPrimary.GetComponent<WeaponManager>().isActive = true;
+	}
+
 	void SelectPrimaryWeapon()
 	{
 		if(Input.GetButtonDown("handGun"))
 		{
-			Debug.Log("Hand Gun");
-			currentPrimary.SetActive(false);
-			currentPrimary = handGun;
-			currentPrimary.SetActive(true);
+			ActivateWeapon(handGun);
 		}
-		if(Input.GetButtonDown("mouthCannon"))
+		if(Input.GetButtonDown("unequip"))
 		{
-			Debug.Log("Mouth Cannon");
+			currentPrimary.GetComponent<WeaponManager>().canShoot = false;
 			currentPrimary.SetActive(false);
-			//currentPrimary = mouthCannon;
-			currentPrimary.SetActive(true);
 		}
 	}
 
@@ -154,8 +158,12 @@ public class PlayerStatsManager : MonoBehaviour
 			sprite.GetComponent<SpriteRenderer>().flipX = false;
 			sprite.Rotate(Vector3.forward * 60 * Time.deltaTime);
 			sprite.localScale += new Vector3(-10, -10, 0) * Time.deltaTime;
-			currentPrimary.SetActive(false);
-			currentSecondary.SetActive(false);
+			if(currentPrimary.GetComponent<WeaponManager>().isActive)
+			{
+				currentPrimary.SetActive(false);
+				currentPrimary.GetComponent<WeaponManager>().canShoot = false;
+			}
+			//currentSecondary.SetActive(false);
 
 			if(sprite.localScale.x < -22)
 			{
@@ -168,8 +176,12 @@ public class PlayerStatsManager : MonoBehaviour
 				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 				rb.gravityScale = 10f;
 				inWall = false;
-				currentPrimary.SetActive(true);
-				currentSecondary.SetActive(true);
+				if(currentPrimary.GetComponent<WeaponManager>().isActive)
+				{
+					currentPrimary.SetActive(true);
+					currentPrimary.GetComponent<WeaponManager>().canShoot = true;
+				}
+				//currentSecondary.SetActive(true);
 			}
 		}
 	}
