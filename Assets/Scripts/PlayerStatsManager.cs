@@ -17,6 +17,7 @@ public class PlayerStatsManager : MonoBehaviour
 	public bool dead = false;
 	public int health = 3;
 	public bool inWall = false;
+	public int addedPierce = 0;
 	public GameObject handGun;
 	public GameObject headCannon;
 
@@ -127,7 +128,7 @@ public class PlayerStatsManager : MonoBehaviour
 		Vector2 Worldpos2D = new Vector2(Worldpos.x, Worldpos.y);
 		Vector2 direction = (Worldpos2D - new Vector2(transform.position.x, transform.position.y)).normalized;
 
-		
+		currentPrimary.GetComponent<WeaponManager>().Fire(direction, damage, addedPierce);
 	}
 
 	void UpdateHealth()

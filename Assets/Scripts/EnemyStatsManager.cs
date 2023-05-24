@@ -12,6 +12,7 @@ public class EnemyStatsManager : MonoBehaviour
 	public SpriteRenderer sr;
 
 
+	Color defaultColor;
 	Rigidbody2D rb;
     bool stunned = false;
 
@@ -35,6 +36,7 @@ public class EnemyStatsManager : MonoBehaviour
     private void Start()
     {
 		rb = GetComponent<Rigidbody2D>();
+		defaultColor = sr.color;
     }
 
     void Update()
@@ -47,11 +49,11 @@ public class EnemyStatsManager : MonoBehaviour
 
 	void StartColorFlash(Color tempColor, float flashLength)
     {
-		StartCoroutine(ResetColor(sr.color, flashLength));
+		StartCoroutine(ResetColor(flashLength));
 		sr.color = tempColor;
     }
 
-	private IEnumerator ResetColor(Color defaultColor, float delay)
+	private IEnumerator ResetColor(float delay)
     {
 		yield return new WaitForSeconds(delay);
 		sr.color = defaultColor;

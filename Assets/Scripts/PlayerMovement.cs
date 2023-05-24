@@ -239,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
 					dashTimer = 0;
 					stopDash();
                     psm.DealKnockback(col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
-					col.gameObject.GetComponent<EnemyStatsManager>().Damage(transform, velocityMagnitude * 0, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+					esm.Damage(transform, velocityMagnitude, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
                 }
                 else
 				{
