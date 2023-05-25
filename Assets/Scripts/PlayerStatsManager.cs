@@ -20,8 +20,8 @@ public class PlayerStatsManager : MonoBehaviour
 	public int addedPierce = 0;
 	public GameObject handGun;
 	public GameObject headCannon;
+	public GameObject currentPrimary;
 
-	GameObject currentPrimary;
 	GameObject currentSecondary;
 	int startingHealth = 3;
 	GameObject canvas;
@@ -96,7 +96,9 @@ public class PlayerStatsManager : MonoBehaviour
 		}
 		if(Input.GetButtonDown("unequip"))
 		{
-			currentPrimary.GetComponent<WeaponManager>().canShoot = false;
+			WeaponManager wm = currentPrimary.GetComponent<WeaponManager>();
+			wm.canShoot = false;
+			wm.isActive = false;
 			currentPrimary.SetActive(false);
 		}
 	}

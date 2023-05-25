@@ -21,7 +21,6 @@ public class BulletManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Hit");
         if(col.gameObject.tag == "Enemy")
         {
             EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();

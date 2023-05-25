@@ -13,6 +13,11 @@ public class WeaponManager : MonoBehaviour
     public Transform firePosition;
     public float maxShotsPerSecond;
 
+    public int maxAmmo;
+    public int currentAmmo;
+    public bool loadOneAtATime;
+    public float reloadTime;
+
     public bool canShoot = true;
     public bool isActive = false;
 
@@ -22,6 +27,7 @@ public class WeaponManager : MonoBehaviour
 
     void Start()
     {
+        currentAmmo = maxAmmo;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         psm = player.GetComponent<PlayerStatsManager>();
         cooldown = 1 / maxShotsPerSecond;
@@ -42,8 +48,9 @@ public class WeaponManager : MonoBehaviour
     public void Fire(float damageMultiplier, int addedPierce)
     {
 
-        if(!canShoot || !isActive) return;
+        if(!canShoot || !isActive || currentAmmo == 0) return;
         canShoot = false;
+        currentAmmo -= 1;
         cooldown = 1 / maxShotsPerSecond;
 
         Vector3 mousePos = Input.mousePosition;
