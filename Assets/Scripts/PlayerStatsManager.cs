@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class PlayerStatsManager : MonoBehaviour
 	Transform sprite;
 	Transform lastCheckpoint;
 
+	public TextMeshProUGUI equippedWeapon;
+	public TextMeshProUGUI remainingAmmo;
+
+	string currentWeapon = "No";
+
 	public void Heal(int amount)
 	{
 		health += amount;
@@ -61,6 +67,7 @@ public class PlayerStatsManager : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		canvas = GameObject.FindGameObjectsWithTag("Canvas")[0];
 		lastCheckpoint = GameObject.FindGameObjectsWithTag("Spawn")[0].transform;
+		transform.position = lastCheckpoint.position;
 		sprite = transform.Find("sprite");
 	}
 
@@ -76,6 +83,9 @@ public class PlayerStatsManager : MonoBehaviour
 			currentPrimary.GetComponent<WeaponManager>().Fire(damage, addedPierce);
 		}
 
+		equippedWeapon.text = currentWeapon;
+		remainingAmmo.text = currentPrimary.GetComponent<WeaponManager>().currentAmmo.ToString();
+
 		UpdateHealth();
 	}
 
@@ -90,15 +100,18 @@ public class PlayerStatsManager : MonoBehaviour
 
 	void SelectPrimaryWeapon()
 	{
-		if(Input.GetButtonDown("handGun"))
+		if(Input.GetButtonDown("handGun") && handGun.GetComponent<WeaponManager>().unlocked)
 		{
+			currentWeapon = "Yes";
 			ActivateWeapon(handGun);
 		}
 		if(Input.GetButtonDown("unequip"))
 		{
+			currentWeapon = "No";
 			WeaponManager wm = currentPrimary.GetComponent<WeaponManager>();
 			wm.canShoot = false;
 			wm.isActive = false;
+			wm.reload = false;
 			currentPrimary.SetActive(false);
 		}
 	}

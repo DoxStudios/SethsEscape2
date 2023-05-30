@@ -170,6 +170,7 @@ MonoBehaviour:
   addedPierce: 0
   handGun: {fileID: 5708378456687624033}
   headCannon: {fileID: 0}
+  currentPrimary: {fileID: 0}
 --- !u!50 &4039079646928143685
 Rigidbody2D:
   serializedVersion: 4
@@ -320,13 +321,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5267659862717425697}
     m_Modifications:
+    - target: {fileID: 270855493440535832, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.1459222
+      objectReference: {fileID: 0}
+    - target: {fileID: 270855493440535832, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6849
+      objectReference: {fileID: 0}
+    - target: {fileID: 270855493440535832, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.012
+      objectReference: {fileID: 0}
+    - target: {fileID: 270855493440535832, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2056
+      objectReference: {fileID: 0}
     - target: {fileID: 1791780433621602964, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 1791780433621602964, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.14
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: speed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: damage
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: maxAmmo
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: reloadTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: pierceLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: maxShotsPerSecond
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: bulletSurvivalTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5074610416212955889, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: m_RootOrder

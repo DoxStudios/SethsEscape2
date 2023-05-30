@@ -5,6 +5,9 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour
 {
     public float damage;
+    public float knockbackMultiplier;
+    public float knockbackTimeMultiplier;
+    public float stunTimeMultiplier;
     public PlayerStatsManager psm;
     public int pierceLevel;
     public float survivalTime;
@@ -24,7 +27,7 @@ public class BulletManager : MonoBehaviour
         if(col.gameObject.tag == "Enemy")
         {
             EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
-            esm.Damage(transform, damage, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+            esm.Damage(transform, damage, psm.outgoingKnockbackAmount * knockbackMultiplier, psm.outgoingKnockbackTime * knockbackTimeMultiplier, psm.outgoingStunTime * stunTimeMultiplier);
         }
         else if(col.gameObject.tag == "Ground")
         {

@@ -5,8 +5,13 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
 
+    public bool unlocked;
+
     public float damage;
     public float speed;
+    public float knockbackMultiplier;
+    public float knockbackTimeMultiplier;
+    public float stunTimeMultiplier;
     public float bulletSurvivalTime;
     public int pierceLevel;
     public GameObject bullet;
@@ -20,6 +25,10 @@ public class WeaponManager : MonoBehaviour
 
     public bool canShoot = true;
     public bool isActive = false;
+    public bool reloadWhileActive = false;
+    
+    public bool reload = false;
+    float currentReloadTime;
 
     float cooldown;
 
@@ -38,16 +47,34 @@ public class WeaponManager : MonoBehaviour
         if(!canShoot)
         {
             cooldown -= Time.deltaTime;
-            if(cooldown <= 0)
+            if(cooldown <= 0 && !reload)
             {
                 canShoot = true;
+            }
+        }
+
+        if(reloadWhileActive && Input.GetButtonDown("ReloadHandgun"))
+        {
+            Debug.Log("Reload");
+            reload = true;
+            canShoot = false;
+            currentReloadTime = reloadTime;
+        }
+
+        if(reload)
+        {
+            currentReloadTime -= Time.deltaTime;
+
+            if(currentReloadTime <= 0)
+            {
+                reload = false;
+                currentAmmo = maxAmmo;
             }
         }
     }
 
     public void Fire(float damageMultiplier, int addedPierce)
     {
-
         if(!canShoot || !isActive || currentAmmo == 0) return;
         canShoot = false;
         currentAmmo -= 1;
@@ -66,6 +93,9 @@ public class WeaponManager : MonoBehaviour
         firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
         BulletManager bm = firedBullet.GetComponent<BulletManager>();
         bm.damage = finalDamage;
+        bm.knockbackTimeMultiplier = knockbackTimeMultiplier;
+        bm.knockbackMultiplier = knockbackMultiplier;
+        bm.stunTimeMultiplier = stunTimeMultiplier;
         bm.pierceLevel = finalPierce;
         bm.psm = psm;
         bm.survivalTime = bulletSurvivalTime;
