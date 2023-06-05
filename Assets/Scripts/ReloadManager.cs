@@ -6,6 +6,7 @@ public class ReloadManager : MonoBehaviour
 {
 
     public WeaponManager handGun;
+    public WeaponManager spasm;
 
     PlayerStatsManager psm;
     public float loadTime;
@@ -24,28 +25,32 @@ public class ReloadManager : MonoBehaviour
     void Update()
     {
         currentWeapon = weaponToLoad();
-        WeaponManager wm = psm.currentPrimary.GetComponent<WeaponManager>();
+        
         if(currentWeapon != previousWeapon)
         {
-            updateWeapon(wm);
+            updateWeapon(currentWeapon);
         }
-        if(!wm.isActive)
-        {
-            loadTime -= Time.deltaTime;
 
-            if(wm.loadOneAtATime)
+        if(currentWeapon != null)
+        {
+            if(!currentWeapon.isActive)
             {
-                if(wm.currentAmmo < wm.maxAmmo && loadTime <= 0)
+                loadTime -= Time.deltaTime;
+
+                if(currentWeapon.loadOneAtATime)
                 {
-                    wm.currentAmmo += 1;
-                    loadTime = wm.reloadTime / wm.maxAmmo;
+                    if(currentWeapon.currentAmmo < currentWeapon.maxAmmo && loadTime <= 0)
+                    {
+                        currentWeapon.currentAmmo += 1;
+                        loadTime = currentWeapon.reloadTime / currentWeapon.maxAmmo;
+                    }
                 }
-            }
-            else
-            {
-                if(loadTime <= 0)
+                else
                 {
-                    wm.currentAmmo = wm.maxAmmo;
+                    if(loadTime <= 0)
+                    {
+                        currentWeapon.currentAmmo = currentWeapon.maxAmmo;
+                    }
                 }
             }
         }
@@ -54,7 +59,11 @@ public class ReloadManager : MonoBehaviour
 
     void updateWeapon(WeaponManager wm)
     {
-        if(wm.loadOneAtATime)
+        if(wm == null)
+        {
+            loadTime = 0;
+        }
+        else if(wm.loadOneAtATime)
         {
             loadTime = wm.reloadTime / wm.maxAmmo;
         }
@@ -66,13 +75,19 @@ public class ReloadManager : MonoBehaviour
 
     WeaponManager weaponToLoad()
     {
-        if(psm.currentPrimary.GetComponent<WeaponManager>().isActive)
+        int priority = 0;
+
+        while(true)
         {
-            return handGun;
-        }
-        else
-        {
-            return null;
+            if(spasm.priority == priority && spasm.currentAmmo < spasm.maxAmmo)
+            {
+                return spasm;
+            }
+            if(handGun.priority == priority && handGun.currentAmmo < handGun.maxAmmo)
+            {
+                return handGun;
+            }
+            priority += 1;
         }
     }
 }

@@ -7,6 +7,7 @@ using TMPro;
 public class PlayerStatsManager : MonoBehaviour
 {
 	public float damage;
+	public float rangedDamage;
 	public float outgoingKnockbackAmount;
 	public float outgoingKnockbackTime;
 	public float outgoingStunTime;
@@ -20,6 +21,7 @@ public class PlayerStatsManager : MonoBehaviour
 	public bool inWall = false;
 	public int addedPierce = 0;
 	public GameObject handGun;
+	public GameObject spasm;
 	public GameObject headCannon;
 	public GameObject currentPrimary;
 
@@ -80,11 +82,11 @@ public class PlayerStatsManager : MonoBehaviour
 
 		if(Input.GetButtonDown("Fire1"))
 		{
-			currentPrimary.GetComponent<WeaponManager>().Fire(damage, addedPierce);
+			currentPrimary.GetComponent<WeaponManager>().Fire(rangedDamage, addedPierce);
 		}
 
 		equippedWeapon.text = currentWeapon;
-		remainingAmmo.text = currentPrimary.GetComponent<WeaponManager>().currentAmmo.ToString();
+		remainingAmmo.text = handGun.GetComponent<WeaponManager>().currentAmmo.ToString();
 
 		UpdateHealth();
 	}
@@ -104,6 +106,10 @@ public class PlayerStatsManager : MonoBehaviour
 		{
 			currentWeapon = "Yes";
 			ActivateWeapon(handGun);
+		}
+		if(Input.GetButtonDown("spasm") && spasm.GetComponent<WeaponManager>().unlocked)
+		{
+			ActivateWeapon(spasm);
 		}
 		if(Input.GetButtonDown("unequip"))
 		{

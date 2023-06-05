@@ -8,6 +8,8 @@ public class WeaponManager : MonoBehaviour
     public bool unlocked;
 
     public float damage;
+    public int burstCount;
+    public float burstOffset;
     public float speed;
     public float knockbackMultiplier;
     public float knockbackTimeMultiplier;
@@ -26,6 +28,7 @@ public class WeaponManager : MonoBehaviour
     public bool canShoot = true;
     public bool isActive = false;
     public bool reloadWhileActive = false;
+    public int priority;
     
     public bool reload = false;
     float currentReloadTime;
@@ -80,24 +83,32 @@ public class WeaponManager : MonoBehaviour
         currentAmmo -= 1;
         cooldown = 1 / maxShotsPerSecond;
 
-        Vector3 mousePos = Input.mousePosition;
-		mousePos.z = mousePos.z - (Camera.main.transform.position.z);
-        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        Vector3 direction = worldMousePos - firePosition.position;
-        direction.Normalize();
+        int bulletsFired = 0;
 
-        float finalDamage = damage * damageMultiplier;
-        int finalPierce = pierceLevel + addedPierce;
+        while(bulletsFired < burstCount)
+        {
+            bulletsFired += 1;
 
-        GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
-        firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
-        BulletManager bm = firedBullet.GetComponent<BulletManager>();
-        bm.damage = finalDamage;
-        bm.knockbackTimeMultiplier = knockbackTimeMultiplier;
-        bm.knockbackMultiplier = knockbackMultiplier;
-        bm.stunTimeMultiplier = stunTimeMultiplier;
-        bm.pierceLevel = finalPierce;
-        bm.psm = psm;
-        bm.survivalTime = bulletSurvivalTime;
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = mousePos.z - (Camera.main.transform.position.z);
+            Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            Vector3 direction = worldMousePos - firePosition.position;
+            direction = new Vector3(direction.x + Random.Range(-burstOffset, burstOffset), direction.y + Random.Range(-burstOffset, burstOffset), direction.z);
+            direction.Normalize();
+
+            float finalDamage = damage * damageMultiplier;
+            int finalPierce = pierceLevel + addedPierce;
+
+            GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
+            firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
+            BulletManager bm = firedBullet.GetComponent<BulletManager>();
+            bm.damage = finalDamage;
+            bm.knockbackTimeMultiplier = knockbackTimeMultiplier;
+            bm.knockbackMultiplier = knockbackMultiplier;
+            bm.stunTimeMultiplier = stunTimeMultiplier;
+            bm.pierceLevel = finalPierce;
+            bm.psm = psm;
+            bm.survivalTime = bulletSurvivalTime;
+        }
     }
 }

@@ -228,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
 			Vector2 direction = col.GetContact(0).normal;
 			if(direction.y == -1)
 			{
-				col.gameObject.GetComponent<EnemyStatsManager>().Damage(transform, 100, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+				col.gameObject.GetComponent<EnemyStatsManager>().Damage(transform, psm.damage, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
 			}
 			else
 			{
@@ -244,6 +244,7 @@ public class PlayerMovement : MonoBehaviour
                 else
 				{
 					psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+					esm.Damage(transform, psm.damage/3, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
 				}
 			}
 		}
