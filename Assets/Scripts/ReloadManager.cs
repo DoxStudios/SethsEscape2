@@ -77,7 +77,7 @@ public class ReloadManager : MonoBehaviour
     {
         int priority = 0;
 
-        while(true)
+        while(priority < 20)
         {
             if(spasm.priority == priority && spasm.currentAmmo < spasm.maxAmmo)
             {
@@ -89,5 +89,6 @@ public class ReloadManager : MonoBehaviour
             }
             priority += 1;
         }
+        return null;
     }
 }

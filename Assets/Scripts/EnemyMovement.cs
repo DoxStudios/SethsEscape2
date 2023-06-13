@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject player;
+    public Rigidbody2D rb;
 
     public bool straightLine;
     public bool ranged;
@@ -33,14 +34,6 @@ public class EnemyMovement : MonoBehaviour
         {
 
         }
-        else if(isaacNewton && !ranged)
-        {
-
-        }
-        else if(isaacNewton && ranged)
-        {
-
-        }
         else if(cloaker && !ranged)
         {
 
@@ -49,11 +42,20 @@ public class EnemyMovement : MonoBehaviour
         {
 
         }
+
+        if(isaacNewton)
+        {
+            rb.gravityScale = 1;
+        }
+        else
+        {
+            rb.gravityScale = 0;
+        }
     }
 
-    void detectPlayer()
+    bool detectPlayer()
     {
-        if((player.position - transform.position).magnitude < detectRadius)
+        if((player.transform.position - transform.position).magnitude < detectRadius)
         {
             return true;
         }

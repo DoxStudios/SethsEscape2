@@ -10555,6 +10555,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846109566}
   m_CullTransparentMesh: 1
+--- !u!1 &1044428632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7461102481258243548, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
+  m_PrefabInstance: {fileID: 1423383265}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1044428637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044428632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 941d32368d40bff46840ae27a91e085d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1735488428}
+  rb: {fileID: 0}
+  straightLine: 0
+  ranged: 0
+  isaacNewton: 0
+  cloaker: 0
+  followRadius: 0
+  detectRadius: 100
+  playerDetected: 0
 --- !u!1001 &1066695230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11026,7 +11052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8417453939626306780, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -72.17
+      value: -53.84
       objectReference: {fileID: 0}
     - target: {fileID: 8417453939626306780, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11067,7 +11093,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7461102481258243548, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1044428637}
   m_SourcePrefab: {fileID: 100100000, guid: ecc10e9e7f8cf110293725913fee72e0, type: 3}
 --- !u!1001 &1538480840
 PrefabInstance:
@@ -11489,6 +11518,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711809761}
   m_CullTransparentMesh: 1
+--- !u!1 &1735488428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3822958222244464656, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
+  m_PrefabInstance: {fileID: 1538480840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1786923081
 PrefabInstance:
   m_ObjectHideFlags: 0
