@@ -1,33 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject player;
-    public Rigidbody2D rb;
 
     public bool isaacNewton;
 
     public float followRadius;
-    public float detectRadius;
+    public float speed = 3500;
+    public float nextWaypointDistance = 3f;
 
+    public float detectRadius;
     public bool playerDetected;
+
+    Transform target;
+
+    Path path;
+    int currentWaypoint = 0;
+    bool reachedEndOfPath = false;
+    float groundedRadius = 1f;
+    Seeker seeker;
+    Rigidbody2D rb;
 
     void Start()
     {
+        target = player.transform;
+        seeker = GetComponent<Seeker>();
+        rb = GetComponent<Rigidbody2D>();
 
-    }
-
-    void Update()
-    {
-        playerDetected = detectPlayer();
-
-        
+        InvokeRepeating("UpdatePath", 0f, 0.5f);
 
         if(isaacNewton)
         {
-            rb.gravityScale = 1;
+            rb.gravityScale = 10;
         }
         else
         {
@@ -35,15 +43,54 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    bool detectPlayer()
+    void UpdatePath()
     {
-        if((player.transform.position - transform.position).magnitude < detectRadius)
+        if(seeker.IsDone() && playerDetected)
+        seeker.StartPath(rb.position, target.position, OnPathComplete);
+    }
+
+    void FixedUpdate()
+    {
+        playerDetected = ((player.transform.position - transform.position).magnitude < detectRadius);
+        if(path != null)
         {
-            return true;
+            if(currentWaypoint >= path.vectorPath.Count)
+            {
+                reachedEndOfPath = true;
+            }
+            else
+            {
+                reachedEndOfPath = false;
+            }
+
+            if(playerDetected && path != null && !reachedEndOfPath)
+            {
+                Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+                Vector2 force = direction * speed * Time.deltaTime;
+
+                float distanceToPlayer = Vector2.Distance(rb.position, target.position);
+
+                if(distanceToPlayer > followRadius)
+                {
+                    rb.AddForce(force);
+                }
+
+                float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+
+                if(distance < nextWaypointDistance)
+                {
+                    currentWaypoint++;
+                }
+            }
         }
-        else
+    }
+
+    void OnPathComplete(Path p)
+    {
+        if(!p.error)
         {
-            return false;
+            path = p;
+            currentWaypoint = 0;
         }
     }
 }
