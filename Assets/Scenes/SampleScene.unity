@@ -10857,7 +10857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3822958222244464656, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: :)
       objectReference: {fileID: 0}
     - target: {fileID: 5040055875069390676, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
       propertyPath: m_RootOrder
@@ -14901,7 +14901,7 @@ GameObject:
   - component: {fileID: 1044428637}
   - component: {fileID: 1044428642}
   m_Layer: 8
-  m_Name: TestEnemy
+  m_Name: :(
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
