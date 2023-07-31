@@ -23,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
     bool reachedEndOfPath = false;
     float groundedRadius = 1f;
     Seeker seeker;
+    EnemyStatsManager esm;
     Rigidbody2D rb;
 
     void Start()
@@ -30,6 +31,7 @@ public class EnemyMovement : MonoBehaviour
         target = player.transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        esm = GetComponent<EnemyStatsManager>();
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
 
@@ -63,7 +65,7 @@ public class EnemyMovement : MonoBehaviour
                 reachedEndOfPath = false;
             }
 
-            if(playerDetected && path != null && !reachedEndOfPath)
+            if(playerDetected && path != null && !reachedEndOfPath && esm.state == 0)
             {
                 Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
                 Vector2 force = direction * speed * Time.deltaTime;

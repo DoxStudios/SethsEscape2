@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: eead292642b685e4d858fcc27c0a709c
+=======
+guid: b0eb40aa109cac3b3ac332ecaeb8d8be
+>>>>>>> 6ed5a70 (Worked on enemy weapon)
 PrefabImporter:
   externalObjects: {}
   userData: 

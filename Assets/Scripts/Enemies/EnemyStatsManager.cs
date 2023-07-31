@@ -10,7 +10,7 @@ public class EnemyStatsManager : MonoBehaviour
     public float outgoingKnockbackTime;
     public float outgoingStunTime;
 	public SpriteRenderer sr;
-
+	public int state = 0;
 
 	Color defaultColor;
 	Rigidbody2D rb;
@@ -27,7 +27,7 @@ public class EnemyStatsManager : MonoBehaviour
 		StopAllCoroutines();
 		Vector2 direction = (transform.position - sender.position).normalized;
 		rb.AddForce(direction * knockbackAmount * 100, ForceMode2D.Impulse);
-		stunned = true;
+		state = 1;
 		StartCoroutine(ResetKnockback(knockbackTime));
 		StartCoroutine(ResetStun(stunTime));
 		StartColorFlash(new Color(1, 0, 0), 0.1f);
@@ -69,6 +69,6 @@ public class EnemyStatsManager : MonoBehaviour
 	private IEnumerator ResetStun(float delay)
 	{
 		yield return new WaitForSeconds(delay);
-		stunned = false;
+		state = 0;
 	}
 }
