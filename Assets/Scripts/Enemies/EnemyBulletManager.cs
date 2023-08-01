@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBulletManager : MonoBehaviour
 {
-    public float damage;
+    public int damage;
     public float knockbackMultiplier;
     public float knockbackTimeMultiplier;
     public float stunTimeMultiplier;

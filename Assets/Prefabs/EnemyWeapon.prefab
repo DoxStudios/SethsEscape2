@@ -93,7 +93,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5074610416212955889}
-  - component: {fileID: 2994080027695167991}
   - component: {fileID: 8703120469597295913}
   m_Layer: 0
   m_Name: EnemyWeapon
@@ -119,39 +118,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2994080027695167991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5162086828015781068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bc56f05faab350bfb3d7e4f800e8482, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  burstCount: 0
-  burstOffset: 0
-  speed: 0
-  knockbackMultiplier: 0
-  knockbackTimeMultiplier: 0
-  stunTimeMultiplier: 0
-  bulletSurvivalTime: 0
-  pierceLevel: 0
-  bullet: {fileID: 1218464838308763304, guid: b0eb40aa109cac3b3ac332ecaeb8d8be, type: 3}
-  firePosition: {fileID: 1791780433621602964}
-  maxShotsPerSecond: 0
-  fireFrames: 0
-  maxAmmo: 0
-  currentAmmo: 0
-  loadOneAtATime: 0
-  reloadTime: 0
-  reloadWhileActive: 0
-  priority: 0
-  state: 0
-  GFX: {fileID: 0}
 --- !u!114 &8703120469597295913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +139,8 @@ MonoBehaviour:
   stunTimeMultiplier: 0
   bulletSurvivalTime: 0
   pierceLevel: 0
-  bullet: {fileID: 0}
-  firePosition: {fileID: 0}
+  bullet: {fileID: 1218464838308763304, guid: eead292642b685e4d858fcc27c0a709c, type: 3}
+  firePosition: {fileID: 1791780433621602964}
   maxShotsPerSecond: 0
   fireFrames: 0
   loadOneAtATime: 0

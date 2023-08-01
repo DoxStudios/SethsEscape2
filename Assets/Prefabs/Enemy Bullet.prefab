@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5723559027081197058}
   - component: {fileID: 8146852300606578280}
   - component: {fileID: 632970947655507153}
+  - component: {fileID: 143448975150748990}
   m_Layer: 9
   m_Name: Enemy Bullet
   m_TagString: Bullet
@@ -108,6 +109,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b00fe84f59e8246b95bbfc3b193944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  knockbackMultiplier: 0
+  knockbackTimeMultiplier: 0
+  stunTimeMultiplier: 0
+  esm: {fileID: 0}
+  pierceLevel: 0
+  survivalTime: 0
 --- !u!1 &3429294174042298212
 GameObject:
   m_ObjectHideFlags: 0

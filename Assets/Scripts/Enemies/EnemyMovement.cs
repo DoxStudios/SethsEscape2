@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
 
     public float detectRadius;
     public bool playerDetected;
+    public EnemyWeapon ew;
 
     Transform target;
 
@@ -65,12 +66,13 @@ public class EnemyMovement : MonoBehaviour
                 reachedEndOfPath = false;
             }
 
+            float distanceToPlayer = Vector2.Distance(rb.position, target.position);
+
             if(playerDetected && path != null && !reachedEndOfPath && esm.state == 0)
             {
                 Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
                 Vector2 force = direction * speed * Time.deltaTime;
 
-                float distanceToPlayer = Vector2.Distance(rb.position, target.position);
 
                 if(distanceToPlayer > followRadius)
                 {
@@ -83,6 +85,11 @@ public class EnemyMovement : MonoBehaviour
                 {
                     currentWaypoint++;
                 }
+            }
+
+            if(distanceToPlayer <= followRadius)
+            {
+                ew.Fire();
             }
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyWeapon : MonoBehaviour
 {
 
-    public float damage;
+    public int damage;
     public int burstCount;
     public float burstOffset;
     public float speed;
@@ -24,20 +24,20 @@ public class EnemyWeapon : MonoBehaviour
     public bool reloadWhileActive = false;
     public int priority;
 
-    public int state = 0;
+    public int state = 1;
 
     float currentReloadTime;
 
     float cooldown;
     float currentFireTime;
 
-    PlayerStatsManager psm;
+    public PlayerStatsManager psm;
+    public EnemyStatsManager esm;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -64,7 +64,9 @@ public class EnemyWeapon : MonoBehaviour
 
     public void Fire()
     {
+        Debug.Log("Fire Attempt");
         if(state != 1) return;
+        Debug.Log("Fire");
         state = 2;
         currentFireTime = fireFrames;
         cooldown = 1 / maxShotsPerSecond;
@@ -81,13 +83,13 @@ public class EnemyWeapon : MonoBehaviour
 
             GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
             firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
-            BulletManager bm = firedBullet.GetComponent<BulletManager>();
+            EnemyBulletManager bm = firedBullet.GetComponent<EnemyBulletManager>();
             bm.damage = damage;
             bm.knockbackTimeMultiplier = knockbackTimeMultiplier;
             bm.knockbackMultiplier = knockbackMultiplier;
             bm.stunTimeMultiplier = stunTimeMultiplier;
             bm.pierceLevel = pierceLevel;
-            bm.psm = psm;
+            bm.esm = esm;
             bm.survivalTime = bulletSurvivalTime;
         }
     }
