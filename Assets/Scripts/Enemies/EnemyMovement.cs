@@ -8,7 +8,7 @@ public class EnemyMovement : MonoBehaviour
     public GameObject player;
 
     public bool isaacNewton;
-
+    public bool ranged = false;
     public float followRadius;
     public float speed = 3500;
     public float nextWaypointDistance = 3f;
@@ -87,7 +87,7 @@ public class EnemyMovement : MonoBehaviour
                 }
             }
 
-            if(distanceToPlayer <= followRadius)
+            if(distanceToPlayer <= followRadius && ranged)
             {
                 ew.Fire();
             }

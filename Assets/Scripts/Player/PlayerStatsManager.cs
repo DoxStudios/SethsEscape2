@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using TMPro;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -35,8 +34,6 @@ public class PlayerStatsManager : MonoBehaviour
 	Transform sprite;
 	Transform lastCheckpoint;
 
-	public TextMeshProUGUI equippedWeapon;
-	public TextMeshProUGUI remainingAmmo;
 
 	string currentWeapon = "No";
 
@@ -84,9 +81,6 @@ public class PlayerStatsManager : MonoBehaviour
 		{
 			currentPrimary.GetComponent<WeaponManager>().Fire(rangedDamage, addedPierce);
 		}
-
-		equippedWeapon.text = currentWeapon;
-		remainingAmmo.text = handGun.GetComponent<WeaponManager>().currentAmmo.ToString();
 
 		UpdateHealth();
 	}
@@ -153,22 +147,6 @@ public class PlayerStatsManager : MonoBehaviour
 	{
 		if(health != prevHealth)
 		{
-			GameObject[] hearts = GameObject.FindGameObjectsWithTag("Heart");
-			heartOffset = 0;
-
-			for(int i=0; i<hearts.Length; i++)
-			{
-				Destroy(hearts[i]);
-			}
-
-			for(int i=0; i<health; i++)
-			{
-				GameObject heart = Instantiate(heartPrefab, canvas.transform);
-				heart.GetComponent<RectTransform>().anchoredPosition = new Vector3(50, -50, -1);
-				heart.GetComponent<RectTransform>().anchoredPosition += new Vector2(heartOffset, 0);
-				heartOffset += heartOffsetIntervals;
-			}
-
 			if(health <= 0)
 			{
 				dead = true;

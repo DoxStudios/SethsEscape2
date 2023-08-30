@@ -64,9 +64,7 @@ public class EnemyWeapon : MonoBehaviour
 
     public void Fire()
     {
-        Debug.Log("Fire Attempt");
         if(state != 1) return;
-        Debug.Log("Fire");
         state = 2;
         currentFireTime = fireFrames;
         cooldown = 1 / maxShotsPerSecond;
