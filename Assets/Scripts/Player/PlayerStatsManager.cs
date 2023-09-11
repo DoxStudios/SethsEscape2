@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -23,9 +24,10 @@ public class PlayerStatsManager : MonoBehaviour
 	public GameObject spasm;
 	public GameObject headCannon;
 	public GameObject currentPrimary;
+	public Slider slider;
 
 	GameObject currentSecondary;
-	int startingHealth = 3;
+	int maxHealth = 100;
 	GameObject canvas;
 	int prevHealth;
 	Rigidbody2D rb;
@@ -153,6 +155,8 @@ public class PlayerStatsManager : MonoBehaviour
 				stunned = true;
 				rb.gravityScale = 0f;
 			}
+
+			slider.value = health;
 		}
 		prevHealth = health;
 
@@ -174,7 +178,7 @@ public class PlayerStatsManager : MonoBehaviour
 				sprite.localScale = new Vector3(1, 1, 1);
 				dead = false;
 				stunned = false;
-				health = startingHealth;
+				health = maxHealth;
 				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 				rb.gravityScale = 10f;
 				inWall = false;

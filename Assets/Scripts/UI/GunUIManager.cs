@@ -8,9 +8,12 @@ public class GunUIManager : MonoBehaviour
 {
     public TextMeshProUGUI ammoCount; 
     public WeaponManager wm;
+    public GameObject activeDisplay;
 
     int prevAmmo = 0;
     int maxAmmo;
+
+    bool equipped = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +26,11 @@ public class GunUIManager : MonoBehaviour
     {
         int ammo = wm.currentAmmo;
 
-
+        activeDisplay.SetActive(!(wm.state == 0 || wm.state == 6));
 
         if(ammo != prevAmmo)
         {
-            ammoCount.text = ammo.ToString() + "/" + maxAmmo.ToString();
+            ammoCount.text = ammo.ToString();
         }
 
         prevAmmo = ammo;

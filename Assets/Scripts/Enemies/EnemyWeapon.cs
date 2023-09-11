@@ -18,15 +18,8 @@ public class EnemyWeapon : MonoBehaviour
     public Transform firePosition;
     public float maxShotsPerSecond;
     public float fireFrames;
-    public bool loadOneAtATime;
-    public float reloadTime;
-
-    public bool reloadWhileActive = false;
-    public int priority;
 
     public int state = 1;
-
-    float currentReloadTime;
 
     float cooldown;
     float currentFireTime;
@@ -64,7 +57,9 @@ public class EnemyWeapon : MonoBehaviour
 
     public void Fire()
     {
+        Debug.Log("Fire 1");
         if(state != 1) return;
+        Debug.Log("Fire 2");
         state = 2;
         currentFireTime = fireFrames;
         cooldown = 1 / maxShotsPerSecond;

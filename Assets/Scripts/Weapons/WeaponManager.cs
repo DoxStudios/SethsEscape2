@@ -29,6 +29,11 @@ public class WeaponManager : MonoBehaviour
     
     public GameObject GFX;
 
+    public Vector3 secondaryPosition;
+    public Vector3 secondaryFirePosition;
+
+    Vector3 primaryPosition;
+    Vector3 primaryFirePosition;
     float currentReloadTime;
 
     float cooldown;
@@ -42,10 +47,27 @@ public class WeaponManager : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         psm = player.GetComponent<PlayerStatsManager>();
         cooldown = 1 / maxShotsPerSecond;
+
+        primaryPosition = GFX.transform.localPosition;
+        primaryFirePosition = firePosition.localPosition;
     }
 
     void Update()
     {
+
+        if (psm.movingLeft)
+        {
+            GFX.GetComponent<SpriteRenderer>().flipX = true;
+            GFX.transform.localPosition = secondaryPosition;
+            firePosition.localPosition = secondaryFirePosition;
+        }
+        else
+        {
+            GFX.GetComponent<SpriteRenderer>().flipX = false;
+            GFX.transform.localPosition = primaryPosition;
+            firePosition.localPosition = primaryFirePosition;
+        }
+
         if(state == 0 || state == 6)
         {
             GFX.SetActive(false);
