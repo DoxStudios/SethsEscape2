@@ -73,7 +73,7 @@ public class WeaponManager : MonoBehaviour
             GFX.SetActive(false);
         }
 
-        if(state == 1)
+        if(state == 1 || state == 4)
         {
             GFX.SetActive(true);
         }
@@ -103,7 +103,7 @@ public class WeaponManager : MonoBehaviour
             }
         }
 
-        if(reloadWhileActive && Input.GetButtonDown("ReloadHandgun"))
+        if(reloadWhileActive && Input.GetButtonDown("ReloadHandgun") && state != 0 && state != 6)
         {
             Debug.Log("Reload");
             state = 5;

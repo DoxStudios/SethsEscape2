@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 	public float standardDashTime;
 	public float standardDashMultiplier;
 	public string dashType;
+	public timer playTimer;
 
 	Rigidbody2D rb;
 	PlayerStatsManager psm;
@@ -62,6 +63,11 @@ public class PlayerMovement : MonoBehaviour
 		if(!dashRemoveControl)
 		{
 			horizontal = Input.GetAxisRaw("Horizontal");
+		}
+
+		if(rb.velocity.x > 0.1f || rb.velocity.x < -0.1f)
+		{
+			playTimer.started = true;
 		}
 
 		if(horizontal < 0 && !psm.stunned)
@@ -163,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
 
 		if(psm.inWall && currentWallDamageCooldown <= 0 && !psm.dead)
 		{
-			psm.DamageWithoutKnockback(1);
+			psm.DamageWithoutKnockback(33);
 			currentWallDamageCooldown = wallDamageCooldown;
 		}
 
@@ -232,7 +238,6 @@ public class PlayerMovement : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log(velocityMagnitude);
 				EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
 				if (velocityMagnitude > bashThreshold)
 				{

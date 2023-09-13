@@ -25,6 +25,7 @@ public class PlayerStatsManager : MonoBehaviour
 	public GameObject headCannon;
 	public GameObject currentPrimary;
 	public Slider slider;
+	public timer playTimer;
 
 	GameObject currentSecondary;
 	int maxHealth = 100;
@@ -94,7 +95,14 @@ public class PlayerStatsManager : MonoBehaviour
 		{
 			currentPrimary.GetComponent<WeaponManager>().state = 0;
 			currentPrimary = weapon;
-			currentPrimary.GetComponent<WeaponManager>().state = 1;
+			if(currentPrimary.GetComponent<WeaponManager>().currentAmmo <= 0)
+			{
+				currentPrimary.GetComponent<WeaponManager>().state = 4;
+			}
+			else
+			{
+				currentPrimary.GetComponent<WeaponManager>().state = 1;
+			}
 		}
 	}
 
@@ -228,6 +236,11 @@ public class PlayerStatsManager : MonoBehaviour
 		if(col.gameObject.tag == "Checkpoint" || col.gameObject.tag == "Spawn")
 		{
 			lastCheckpoint = col.gameObject.transform;
+		}
+
+		if(col.gameObject.tag == "Endpoint")
+		{
+			playTimer.ended = true;
 		}
 	}
 }

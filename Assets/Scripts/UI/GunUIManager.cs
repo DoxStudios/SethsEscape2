@@ -9,6 +9,8 @@ public class GunUIManager : MonoBehaviour
     public TextMeshProUGUI ammoCount; 
     public WeaponManager wm;
     public GameObject activeDisplay;
+    public GameObject lockedDisplay;
+    public GameObject gunImage;
 
     int prevAmmo = 0;
     int maxAmmo;
@@ -27,6 +29,10 @@ public class GunUIManager : MonoBehaviour
         int ammo = wm.currentAmmo;
 
         activeDisplay.SetActive(!(wm.state == 0 || wm.state == 6));
+
+        lockedDisplay.SetActive(wm.state == 6);
+        gunImage.SetActive(wm.state != 6);
+        ammoCount.gameObject.SetActive(wm.state != 6);
 
         if(ammo != prevAmmo)
         {

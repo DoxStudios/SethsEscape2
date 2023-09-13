@@ -13,6 +13,7 @@ TagManager:
   - Stopped
   - Bullet
   - Ground
+  - Endpoint
   layers:
   - Default
   - TransparentFX
