@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  knockbackMultiplier: 0
+  knockbackTimeMultiplier: 0
+  stunTimeMultiplier: 0
   psm: {fileID: 0}
   pierceLevel: 0
   survivalTime: 0
@@ -76,7 +79,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &632970947655507153
 CircleCollider2D:

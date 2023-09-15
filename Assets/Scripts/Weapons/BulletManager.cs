@@ -40,4 +40,23 @@ public class BulletManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Enemy")
+        {
+            EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
+            esm.Damage(transform, damage, psm.outgoingKnockbackAmount * knockbackMultiplier, psm.outgoingKnockbackTime * knockbackTimeMultiplier, psm.outgoingStunTime * stunTimeMultiplier);
+        }
+        else if(col.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
+
+        pierceLevel -= 1;
+        if(pierceLevel == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

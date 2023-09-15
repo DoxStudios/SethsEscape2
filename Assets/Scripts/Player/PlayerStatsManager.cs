@@ -91,9 +91,12 @@ public class PlayerStatsManager : MonoBehaviour
 	void ActivateWeapon(GameObject weapon)
 	{
 		WeaponManager cpwm = currentPrimary.GetComponent<WeaponManager>();
-		if((cpwm.state == 1 || cpwm.state == 4 || cpwm.state == 0) && weapon.GetComponent<WeaponManager>().state != 6)
+		if((cpwm.state == 1 || cpwm.state == 4 || cpwm.state == 0 || cpwm.state == 6) && weapon.GetComponent<WeaponManager>().state != 6)
 		{
-			currentPrimary.GetComponent<WeaponManager>().state = 0;
+			if(cpwm.state != 6)
+			{
+				currentPrimary.GetComponent<WeaponManager>().state = 0;
+			}
 			currentPrimary = weapon;
 			if(currentPrimary.GetComponent<WeaponManager>().currentAmmo <= 0)
 			{
