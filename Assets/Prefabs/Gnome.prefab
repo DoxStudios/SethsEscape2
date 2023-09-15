@@ -375,7 +375,7 @@ MonoBehaviour:
   isaacNewton: 1
   ranged: 1
   followRadius: 50
-  speed: 5631
+  speed: 4500
   nextWaypointDistance: 3
   detectRadius: 200
   playerDetected: 0

@@ -89,11 +89,6 @@ public class PlayerMovement : MonoBehaviour
 			direction = new Vector3(1, 0, 0);
 		}
 
-		if(!psm.stunned && !dashRemoveControl)
-		{
-			rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-		}
-
 		if(dashUnlocked && hasDash && Input.GetButtonDown("Dash") && !psm.stunned)
 		{
 			if(dashType == "teleport")
@@ -183,6 +178,14 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		velocityMagnitude = rb.velocity.magnitude;
+	}
+
+	void FixedUpdate()
+	{
+		if(!psm.stunned && !dashRemoveControl)
+		{
+			rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+		}
 	}
 
 	void stopDash()
