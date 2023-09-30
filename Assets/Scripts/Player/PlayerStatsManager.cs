@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatsManager : MonoBehaviour
 {
 	public float damage;
+	public float defense;
 	public float rangedDamage;
 	public float outgoingKnockbackAmount;
 	public float outgoingKnockbackTime;
@@ -14,42 +16,111 @@ public class PlayerStatsManager : MonoBehaviour
 
 
 	public bool movingLeft = false;
-	public GameObject heartPrefab;
 	public bool stunned = false;
 	public bool dead = false;
-	public int health = 3;
+	public float health = 100;
 	public bool inWall = false;
 	public int addedPierce = 0;
-	public GameObject handGun;
-	public GameObject spasm;
+	public GameObject primary;
+	public GameObject secondary;
 	public GameObject headCannon;
 	public GameObject currentPrimary;
 	public Slider slider;
 	public timer playTimer;
+	public GameObject pickupTarget = null;
 
 	GameObject currentSecondary;
-	int maxHealth = 100;
+	float maxHealth = 100;
 	GameObject canvas;
-	int prevHealth;
+	float prevHealth;
 	Rigidbody2D rb;
-	int heartOffset;
-	int heartOffsetIntervals = 40;
 	Transform sprite;
 	Transform lastCheckpoint;
+	bool skipAnimation = false;
+	int dropChance = 50;
 
 
 	string currentWeapon = "No";
+
+	public bool dropWeapon()
+	{
+		int percent = Random.Range(1, 101);
+		
+		if(percent <= dropChance)
+		{
+			dropChance = 50;
+			return true;
+		}
+		else
+		{
+			dropChance += 10;
+			return false;
+		}
+	}
+
+	public void AddWeapon(WeaponManager weapon)
+	{
+		GameObject slot = GetSlot();
+
+		WeaponManager weaponSlot = slot.GetComponent<WeaponManager>();
+
+		weaponSlot.damage = weapon.damage;
+		weaponSlot.burstCount = weapon.burstCount;
+		weaponSlot.burstOffset = weapon.burstOffset;
+		weaponSlot.speed = weapon.speed;
+		weaponSlot.knockbackMultiplier = weapon.knockbackMultiplier;
+		weaponSlot.knockbackTimeMultiplier = weapon.knockbackTimeMultiplier;
+		weaponSlot.stunTimeMultiplier = weapon.stunTimeMultiplier;
+		weaponSlot.bulletSurvivalTime = weapon.bulletSurvivalTime;
+		weaponSlot.pierceLevel = weapon.pierceLevel;
+		weaponSlot.bullet = weapon.bullet;
+		weaponSlot.firePosition = weapon.firePosition;
+		weaponSlot.maxShotsPerSecond = weapon.maxShotsPerSecond;
+		weaponSlot.fireFrames = weapon.fireFrames;
+		weaponSlot.currentAmmo = weapon.currentAmmo;
+		weaponSlot.loadOneAtATime = weapon.loadOneAtATime;
+		weaponSlot.reloadTime = weapon.reloadTime;
+		weaponSlot.reloadWhileActive = weapon.reloadWhileActive;
+		weaponSlot.priority = weapon.priority;
+		weaponSlot.secondaryPosition = weapon.secondaryPosition;
+		weaponSlot.secondaryFirePosition = weapon.secondaryFirePosition;
+		weaponSlot.primaryPosition = weapon.primaryPosition;
+		weaponSlot.primaryFirePosition = weapon.primaryFirePosition;
+		weaponSlot.gunSprite = weapon.gunSprite;
+		weaponSlot.GFXScale = weapon.GFXScale;
+		weaponSlot.gunTexture = weapon.gunTexture;
+		weaponSlot.UIScale = weapon.UIScale;
+
+		weaponSlot.state = 0;
+	}
+
+	public GameObject GetSlot()
+	{
+		if(primary.GetComponent<WeaponManager>().currentAmmo == 0)
+		{
+
+			return primary;
+		}
+		
+		if(secondary.GetComponent<WeaponManager>().currentAmmo == 0)
+		{
+			return secondary;
+		}
+
+		return currentPrimary;
+	}
 
 	public void Heal(int amount)
 	{
 		health += amount;
 	}
 
-	public void Damage(int amount, Transform knockbackPosition, float knockbackAmount, float knockbackTime, float stunTime)
+
+	public void Damage(float amount, Transform knockbackPosition, float knockbackAmount, float knockbackTime, float stunTime)
 	{
 		if(!dead)
 		{
-			health -= amount;
+			health -= (amount) * defense;
 			DealKnockback(knockbackPosition, knockbackAmount, knockbackTime, stunTime);
 		}
 	}
@@ -64,7 +135,7 @@ public class PlayerStatsManager : MonoBehaviour
 
 	void Start()
 	{
-		currentPrimary = handGun;
+		currentPrimary = primary;
 		currentSecondary = headCannon;
 		rb = GetComponent<Rigidbody2D>();
 		canvas = GameObject.FindGameObjectsWithTag("Canvas")[0];
@@ -75,6 +146,12 @@ public class PlayerStatsManager : MonoBehaviour
 
 	void Update()
 	{
+
+		if(Input.GetKeyDown("k"))
+		{
+			health = 0;
+			skipAnimation = true;
+		}
 
 		SelectPrimaryWeapon();
 		SelectSecondaryWeapon();
@@ -111,15 +188,15 @@ public class PlayerStatsManager : MonoBehaviour
 
 	void SelectPrimaryWeapon()
 	{
-		if(Input.GetButtonDown("handGun"))
+		if(Input.GetButtonDown("primary"))
 		{
 			currentWeapon = "Yes";
-			ActivateWeapon(handGun);
+			ActivateWeapon(primary);
 		}
-		if(Input.GetButtonDown("spasm"))
+		if(Input.GetButtonDown("secondary"))
 		{
 			currentWeapon = "No";
-			ActivateWeapon(spasm);
+			ActivateWeapon(secondary);
 		}
 		if(Input.GetButtonDown("unequip"))
 		{
@@ -182,7 +259,7 @@ public class PlayerStatsManager : MonoBehaviour
 			}
 			//currentSecondary.SetActive(false);
 
-			if(sprite.localScale.x < -22)
+			if(sprite.localScale.x < -22 || skipAnimation)
 			{
 				transform.position = lastCheckpoint.position;
 				sprite.rotation = Quaternion.Euler(0, 0, 0);
@@ -193,6 +270,7 @@ public class PlayerStatsManager : MonoBehaviour
 				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 				rb.gravityScale = 10f;
 				inWall = false;
+				skipAnimation = false;
 				//currentSecondary.SetActive(true);
 			}
 		}

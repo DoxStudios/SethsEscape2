@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 
@@ -13,18 +14,17 @@ public class GunUIManager : MonoBehaviour
     public GameObject gunImage;
 
     int prevAmmo = 0;
-    int maxAmmo;
 
     bool equipped = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        maxAmmo = wm.maxAmmo;
+
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         int ammo = wm.currentAmmo;
 
@@ -32,6 +32,9 @@ public class GunUIManager : MonoBehaviour
 
         lockedDisplay.SetActive(wm.state == 6);
         gunImage.SetActive(wm.state != 6);
+        gunImage.GetComponent<RawImage>().texture = wm.gunTexture;
+        gunImage.GetComponent<RawImage>().SetNativeSize();
+        gunImage.transform.localScale = wm.UIScale;
         ammoCount.gameObject.SetActive(wm.state != 6);
 
         if(ammo != prevAmmo)

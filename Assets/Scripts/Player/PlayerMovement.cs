@@ -132,11 +132,6 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
-		if(Input.GetKeyDown(KeyCode.P))
-		{
-			psm.Heal(1);
-		}
-
 		if(((isGrounded || inCoyotetime) || doubleJumpRemaining) && Input.GetButtonDown("Jump") && !psm.stunned)
 		{
 			if(!isGrounded && !inCoyotetime)

@@ -4,31 +4,39 @@ using UnityEngine;
 
 public class gunpickup : MonoBehaviour
 {
-
-    public WeaponManager weapon;
+    GameObject player;
+    PlayerStatsManager psm;
+    WeaponManager weapon;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
+        psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
+        weapon = GetComponent<WeaponManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if(col.gameObject.tag == "Player")
+        if((player.transform.position - transform.position).magnitude <= 20)
         {
-            if(weapon.state == 6)
+            if(psm.pickupTarget == null)
             {
-                weapon.state = 0;
+                psm.pickupTarget = gameObject;
             }
 
-            Destroy(gameObject);
+
+            if (Input.GetKeyDown(KeyCode.E) && psm.pickupTarget == gameObject)
+            {
+                psm.pickupTarget = null;
+                psm.AddWeapon(weapon);
+                Destroy(gameObject);
+            }
+        }
+        else if(psm.pickupTarget == gameObject)
+        {
+            psm.pickupTarget = null;
         }
     }
 }

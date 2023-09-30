@@ -162,6 +162,7 @@ MonoBehaviour:
   standardDashTime: 0.2
   standardDashMultiplier: 3
   dashType: standard
+  playTimer: {fileID: 0}
 --- !u!114 &1286036964528445768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,21 +176,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
+  defense: 0
   rangedDamage: 1
   outgoingKnockbackAmount: 0.5
   outgoingKnockbackTime: 0.2
   outgoingStunTime: 0.2
   movingLeft: 0
-  heartPrefab: {fileID: 7399391036295153048, guid: 245195f641299c5c4a65b9d113f5daa3, type: 3}
   stunned: 0
   dead: 0
   health: 100
   inWall: 0
   addedPierce: 0
-  handGun: {fileID: 5708378456687624033}
-  spasm: {fileID: 5823234024024291263}
+  primary: {fileID: 0}
+  secondary: {fileID: 5823234024024291263}
   headCannon: {fileID: 0}
   currentPrimary: {fileID: 0}
+  slider: {fileID: 0}
+  playTimer: {fileID: 0}
+  pickupTarget: {fileID: 0}
 --- !u!50 &4039079646928143685
 Rigidbody2D:
   serializedVersion: 4
@@ -390,71 +394,83 @@ PrefabInstance:
       objectReference: {fileID: 824559833546957217}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: speed
-      value: 100
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: state
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: bullet
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: damage
-      value: 85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: maxAmmo
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: priority
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: burstCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: reloadTime
-      value: 0.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: pierceLevel
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+      propertyPath: firePosition
+      value: 
+      objectReference: {fileID: 1172905846443862329}
+    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: maxShotsPerSecond
-      value: 2.15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: reloadWhileActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: bulletSurvivalTime
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: stunTimeMultiplier
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: knockbackMultiplier
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: secondaryPosition.x
-      value: -4.27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: secondaryPosition.y
-      value: 0.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: knockbackTimeMultiplier
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: secondaryFirePosition.x
-      value: -5.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: secondaryFirePosition.y
-      value: 1.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074610416212955889, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: m_RootOrder
@@ -514,12 +530,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 282105702579575308, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
   m_PrefabInstance: {fileID: 620178883123166125}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1172905846443862329 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1791780433621602964, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
+  m_PrefabInstance: {fileID: 620178883123166125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2384174981222072922 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
   m_PrefabInstance: {fileID: 620178883123166125}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5708378456687624033}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bc56f05faab350bfb3d7e4f800e8482, type: 3}
@@ -528,11 +549,6 @@ MonoBehaviour:
 --- !u!4 &5690282881883040092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5074610416212955889, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-  m_PrefabInstance: {fileID: 620178883123166125}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5708378456687624033 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5162086828015781068, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
   m_PrefabInstance: {fileID: 620178883123166125}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1689732644460639091
@@ -648,80 +664,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: GFX
-      value: 
-      objectReference: {fileID: 1484251944031299967}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: speed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: maxAmmo
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: unlocked
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: burstCount
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: reloadTime
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: burstOffset
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: pierceLevel
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: loadOneAtATime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: maxShotsPerSecond
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: bulletSurvivalTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: stunTimeMultiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: knockbackMultiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: secondaryPosition.x
-      value: -5.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: secondaryPosition.y
-      value: -0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: knockbackTimeMultiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: secondaryFirePosition.x
-      value: -8.59
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-      propertyPath: secondaryFirePosition.y
-      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 5074610416212955889, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
       propertyPath: m_RootOrder
@@ -780,11 +724,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
---- !u!1 &1484251944031299967 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 282105702579575308, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}
-  m_PrefabInstance: {fileID: 1689732644460639091}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4539128184341891716 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2994080027695167991, guid: 9a79909d90a5ac3b8a72c4d006e2d8b4, type: 3}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class WeaponManager : MonoBehaviour
     public Transform firePosition;
     public float maxShotsPerSecond;
     public float fireFrames;
-    public int maxAmmo;
     public int currentAmmo;
     public bool loadOneAtATime;
     public float reloadTime;
@@ -28,12 +28,16 @@ public class WeaponManager : MonoBehaviour
     public int state = 0;
     
     public GameObject GFX;
+    public Sprite gunSprite;
+    public Texture gunTexture;
 
     public Vector3 secondaryPosition;
     public Vector3 secondaryFirePosition;
 
-    Vector3 primaryPosition;
-    Vector3 primaryFirePosition;
+    public Vector3 primaryPosition;
+    public Vector3 primaryFirePosition;
+    public Vector3 GFXScale;
+    public Vector3 UIScale;
     float currentReloadTime;
 
     float cooldown;
@@ -43,17 +47,16 @@ public class WeaponManager : MonoBehaviour
 
     void Start()
     {
-        currentAmmo = maxAmmo;
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        psm = player.GetComponent<PlayerStatsManager>();
-        cooldown = 1 / maxShotsPerSecond;
-
-        primaryPosition = GFX.transform.localPosition;
-        primaryFirePosition = firePosition.localPosition;
+        psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
     }
 
     void Update()
     {
+        
+        if(state == 7)
+        {
+            return;
+        }
 
         if (psm.movingLeft)
         {
@@ -77,6 +80,9 @@ public class WeaponManager : MonoBehaviour
         {
             GFX.SetActive(true);
         }
+
+        GFX.GetComponent<SpriteRenderer>().sprite = gunSprite;
+        GFX.transform.localScale = GFXScale;
         
         if(state == 3)
         {
@@ -108,17 +114,6 @@ public class WeaponManager : MonoBehaviour
             Debug.Log("Reload");
             state = 5;
             currentReloadTime = reloadTime;
-        }
-
-        if(state == 5)
-        {
-            currentReloadTime -= Time.deltaTime;
-
-            if(currentReloadTime <= 0)
-            {
-                state = 1;
-                currentAmmo = maxAmmo;
-            }
         }
     }
 

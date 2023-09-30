@@ -15,6 +15,7 @@ public class EnemyStatsManager : MonoBehaviour
 	Color defaultColor;
 	Rigidbody2D rb;
     bool stunned = false;
+	PlayerStatsManager psm;
 
     public void Heal(float amount)
 	{
@@ -36,6 +37,7 @@ public class EnemyStatsManager : MonoBehaviour
     private void Start()
     {
 		rb = GetComponent<Rigidbody2D>();
+		psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
 		defaultColor = sr.color;
     }
 
@@ -43,6 +45,11 @@ public class EnemyStatsManager : MonoBehaviour
 	{
 		if(health <= 0)
 		{
+			bool shouldDrop = psm.dropWeapon();
+			if(shouldDrop)
+			{
+				Debug.Log("Dropping weapon");
+			}
 			Destroy(gameObject);
 		}
 	}

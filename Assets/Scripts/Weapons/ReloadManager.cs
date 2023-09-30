@@ -39,17 +39,12 @@ public class ReloadManager : MonoBehaviour
 
                 if(currentWeapon.loadOneAtATime)
                 {
-                    if(currentWeapon.currentAmmo < currentWeapon.maxAmmo && loadTime <= 0)
-                    {
-                        currentWeapon.currentAmmo += 1;
-                        loadTime = currentWeapon.reloadTime / currentWeapon.maxAmmo;
-                    }
+                    
                 }
                 else
                 {
                     if(loadTime <= 0)
                     {
-                        currentWeapon.currentAmmo = currentWeapon.maxAmmo;
                     }
                 }
             }
@@ -65,7 +60,7 @@ public class ReloadManager : MonoBehaviour
         }
         else if(wm.loadOneAtATime)
         {
-            loadTime = wm.reloadTime / wm.maxAmmo;
+            
         }
         else
         {
@@ -79,14 +74,7 @@ public class ReloadManager : MonoBehaviour
 
         while(priority < 20)
         {
-            if(spasm.priority == priority && spasm.currentAmmo < spasm.maxAmmo)
-            {
-                return spasm;
-            }
-            if(handGun.priority == priority && handGun.currentAmmo < handGun.maxAmmo)
-            {
-                return handGun;
-            }
+            
             priority += 1;
         }
         return null;

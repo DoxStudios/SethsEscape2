@@ -131,12 +131,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  burstCount: 0
+  burstOffset: 0
   speed: 0
+  knockbackMultiplier: 0
+  knockbackTimeMultiplier: 0
+  stunTimeMultiplier: 0
   bulletSurvivalTime: 0
   pierceLevel: 0
-  bullet: {fileID: 1218464838308763304, guid: fdf0b0e8cc3dfaf419edcbb56c2c1878, type: 3}
+  bullet: {fileID: 0}
   firePosition: {fileID: 1791780433621602964}
   maxShotsPerSecond: 0
+  fireFrames: 0
+  maxAmmo: 0
+  currentAmmo: 0
+  loadOneAtATime: 0
+  reloadTime: 0
+  reloadWhileActive: 0
+  priority: 0
+  state: 6
+  GFX: {fileID: 282105702579575308}
+  secondaryPosition: {x: 0, y: 0, z: 0}
+  secondaryFirePosition: {x: 0, y: 0, z: 0}
 --- !u!1 &8943012305986389029
 GameObject:
   m_ObjectHideFlags: 0
