@@ -187,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
     {
 		inDash = false;
 		dashRemoveControl = false;
-		rb.gravityScale = 10;
+		rb.gravityScale = 15;
 	}
 
 	bool checkGrounded()

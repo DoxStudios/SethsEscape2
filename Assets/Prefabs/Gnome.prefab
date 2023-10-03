@@ -243,6 +243,8 @@ GameObject:
   - component: {fileID: 2539815302615199318}
   - component: {fileID: 3855625040257269667}
   - component: {fileID: 5227333060968085980}
+  - component: {fileID: 353399187781952481}
+  - component: {fileID: -5054564621664951045}
   m_Layer: 8
   m_Name: Gnome
   m_TagString: Enemy
@@ -408,6 +410,31 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &353399187781952481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461102481258243548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a101e4fdf8c1d87ff8fbfd955eeb8109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 3012089163380374145, guid: b2dc10aca0c3052cf9fad5993e9fe966, type: 3}
+--- !u!114 &-5054564621664951045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461102481258243548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35461cf597e8f237ca48e2142bab2a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8233169292980911508
 GameObject:
   m_ObjectHideFlags: 0

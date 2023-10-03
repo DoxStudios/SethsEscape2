@@ -8,6 +8,7 @@ using TMPro;
 public class GunUIManager : MonoBehaviour
 {
     public TextMeshProUGUI ammoCount; 
+    public TextMeshProUGUI gunName;
     public WeaponManager wm;
     public GameObject activeDisplay;
     public GameObject lockedDisplay;
@@ -35,6 +36,7 @@ public class GunUIManager : MonoBehaviour
         gunImage.GetComponent<RawImage>().texture = wm.gunTexture;
         gunImage.GetComponent<RawImage>().SetNativeSize();
         gunImage.transform.localScale = wm.UIScale;
+        gunName.text = wm.title + " " + wm.name;
         ammoCount.gameObject.SetActive(wm.state != 6);
 
         if(ammo != prevAmmo)

@@ -48,7 +48,11 @@ public class EnemyStatsManager : MonoBehaviour
 			bool shouldDrop = psm.dropWeapon();
 			if(shouldDrop)
 			{
-				Debug.Log("Dropping weapon");
+				if(GetComponent<EnemyMovement>().ranged)
+				{
+					GetComponent<WeaponDrop>().DropWeapon();
+				}
+
 			}
 			Destroy(gameObject);
 		}

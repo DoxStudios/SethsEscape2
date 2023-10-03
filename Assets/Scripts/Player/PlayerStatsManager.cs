@@ -37,7 +37,7 @@ public class PlayerStatsManager : MonoBehaviour
 	Transform sprite;
 	Transform lastCheckpoint;
 	bool skipAnimation = false;
-	int dropChance = 50;
+	int dropChance = 30;
 
 
 	string currentWeapon = "No";
@@ -48,7 +48,7 @@ public class PlayerStatsManager : MonoBehaviour
 		
 		if(percent <= dropChance)
 		{
-			dropChance = 50;
+			dropChance = 30;
 			return true;
 		}
 		else
@@ -74,7 +74,6 @@ public class PlayerStatsManager : MonoBehaviour
 		weaponSlot.bulletSurvivalTime = weapon.bulletSurvivalTime;
 		weaponSlot.pierceLevel = weapon.pierceLevel;
 		weaponSlot.bullet = weapon.bullet;
-		weaponSlot.firePosition = weapon.firePosition;
 		weaponSlot.maxShotsPerSecond = weapon.maxShotsPerSecond;
 		weaponSlot.fireFrames = weapon.fireFrames;
 		weaponSlot.currentAmmo = weapon.currentAmmo;
@@ -90,6 +89,8 @@ public class PlayerStatsManager : MonoBehaviour
 		weaponSlot.GFXScale = weapon.GFXScale;
 		weaponSlot.gunTexture = weapon.gunTexture;
 		weaponSlot.UIScale = weapon.UIScale;
+		weaponSlot.title = weapon.title;
+		weaponSlot.name = weapon.name;
 
 		weaponSlot.state = 0;
 	}

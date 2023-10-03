@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 2539815302615199318}
   - component: {fileID: 9155392242349399802}
   - component: {fileID: 1941087102877569787}
+  - component: {fileID: -6259406610038276305}
   m_Layer: 8
   m_Name: Bee
   m_TagString: Enemy
@@ -408,6 +409,19 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &-6259406610038276305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461102481258243548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a101e4fdf8c1d87ff8fbfd955eeb8109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 8324601155105596927, guid: 393fad0f6d4d04b578ab3bd4130dbc39, type: 3}
 --- !u!1 &8233169292980911508
 GameObject:
   m_ObjectHideFlags: 0

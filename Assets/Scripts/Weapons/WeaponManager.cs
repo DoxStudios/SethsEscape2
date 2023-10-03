@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour
 {
+    public string title;
+    public string name;
     public float damage;
     public int burstCount;
     public float burstOffset;
@@ -38,12 +40,25 @@ public class WeaponManager : MonoBehaviour
     public Vector3 primaryFirePosition;
     public Vector3 GFXScale;
     public Vector3 UIScale;
+
+    public WeaponType type;
+
     float currentReloadTime;
 
     float cooldown;
     float currentFireTime;
 
     PlayerStatsManager psm;
+
+
+    public enum WeaponType
+    {
+        Pistol,
+        Shotgun,
+        Rifle,
+        Explosive,
+        DoubleShotgun
+    };
 
     void Start()
     {
