@@ -17,6 +17,7 @@ public class EnemyMovement : MonoBehaviour
     public bool playerDetected;
     public bool inRange;
     public EnemyWeapon ew;
+    public bool stopInRange;
 
     Transform target;
 
@@ -94,7 +95,10 @@ public class EnemyMovement : MonoBehaviour
 
             if(inRange && ranged)
             {
-                rb.velocity = new Vector2(0, rb.velocity.y);
+                if(stopInRange)
+                {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                }
                 ew.Fire();
             }
         }

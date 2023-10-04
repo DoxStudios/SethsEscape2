@@ -331,6 +331,7 @@ MonoBehaviour:
   playerDetected: 0
   inRange: 0
   ew: {fileID: 208892385273561955}
+  stopInRange: 1
 --- !u!114 &5227333060968085980
 MonoBehaviour:
   m_ObjectHideFlags: 0

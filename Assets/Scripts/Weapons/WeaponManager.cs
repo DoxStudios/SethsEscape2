@@ -135,6 +135,7 @@ public class WeaponManager : MonoBehaviour
     public void Fire(float damageMultiplier, int addedPierce)
     {
         if(state != 1) return;
+        if(Time.timeScale == 0) return;
         state = 2;
         currentFireTime = fireFrames;
         currentAmmo -= 1;

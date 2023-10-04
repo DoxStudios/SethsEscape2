@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
-
-
     public bool paused = false;
     public bool controls = false;
     public GameObject standardView;
@@ -32,6 +30,7 @@ public class PauseManager : MonoBehaviour
             {
                 Time.timeScale = 1;
                 paused = false;
+                controls = false;
             }
             else
             {
@@ -71,6 +70,12 @@ public class PauseManager : MonoBehaviour
         playTimer.time = 0f;
         playTimer.started = false;
         playTimer.ended = false;
+        playerStatsManager.primary.GetComponent<WeaponManager>().state = 6;
+        playerStatsManager.secondary.GetComponent<WeaponManager>().state = 6;
+        playerStatsManager.primary.GetComponent<WeaponManager>().title = "";
+        playerStatsManager.primary.GetComponent<WeaponManager>().name = "";
+        playerStatsManager.secondary.GetComponent<WeaponManager>().title = "";
+        playerStatsManager.secondary.GetComponent<WeaponManager>().name = "";
     }
 
     public void MainMenu()
