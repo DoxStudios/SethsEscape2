@@ -77,7 +77,7 @@ MonoBehaviour:
   primaryPosition: {x: 1.03, y: 0, z: 0}
   primaryFirePosition: {x: 3.87, y: 0.51, z: 0}
   GFXScale: {x: 1, y: 1, z: 1}
-  UIScale: {x: 0.1, y: 0.1, z: 0.1}
+  UIScale: {x: 0.15, y: 0.15, z: 0.15}
   type: 2
 --- !u!50 &-7580630414456461223
 Rigidbody2D:

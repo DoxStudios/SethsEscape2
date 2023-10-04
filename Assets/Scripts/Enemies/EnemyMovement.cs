@@ -5,7 +5,7 @@ using Pathfinding;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public GameObject player;
+    GameObject player;
 
     public bool isaacNewton;
     public bool ranged = false;
@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
 
     public float detectRadius;
     public bool playerDetected;
+    public bool inRange;
     public EnemyWeapon ew;
 
     Transform target;
@@ -26,9 +27,11 @@ public class EnemyMovement : MonoBehaviour
     Seeker seeker;
     EnemyStatsManager esm;
     Rigidbody2D rb;
+    float distanceToPlayer;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         target = player.transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -66,7 +69,7 @@ public class EnemyMovement : MonoBehaviour
                 reachedEndOfPath = false;
             }
 
-            float distanceToPlayer = Vector2.Distance(rb.position, target.position);
+            distanceToPlayer = Vector2.Distance(rb.position, target.position);
 
             if(playerDetected && path != null && !reachedEndOfPath && esm.state == 0)
             {
@@ -87,8 +90,11 @@ public class EnemyMovement : MonoBehaviour
                 }
             }
 
-            if(distanceToPlayer <= followRadius && ranged)
+            inRange = distanceToPlayer <= followRadius;
+
+            if(inRange && ranged)
             {
+                rb.velocity = new Vector2(0, 0);
                 ew.Fire();
             }
         }

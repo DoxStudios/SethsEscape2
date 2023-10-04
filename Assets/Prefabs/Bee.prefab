@@ -227,8 +227,10 @@ MonoBehaviour:
   maxShotsPerSecond: 4
   fireFrames: 0.25
   state: 1
-  psm: {fileID: 0}
-  esm: {fileID: 5549068192276358892}
+  ready: 0
+  primaryFirePosition: {x: 0, y: 0, z: 0}
+  secondaryFirePosition: {x: 0, y: 0, z: 0}
+  spriteRenderer: {fileID: 2781006514827180578}
 --- !u!1 &7461102481258243548
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +382,7 @@ MonoBehaviour:
   nextWaypointDistance: 3
   detectRadius: 250
   playerDetected: 0
+  inRange: 0
   ew: {fileID: 208892385273561955}
 --- !u!114 &1941087102877569787
 MonoBehaviour:

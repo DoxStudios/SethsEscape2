@@ -24,13 +24,22 @@ public class EnemyWeapon : MonoBehaviour
     float cooldown;
     float currentFireTime;
 
-    public PlayerStatsManager psm;
-    public EnemyStatsManager esm;
+    PlayerStatsManager psm;
+    EnemyStatsManager esm;
+
+    public bool ready = false;
+
+    public Vector3 primaryFirePosition;
+    public Vector3 secondaryFirePosition;
+
+    public SpriteRenderer spriteRenderer;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
+        esm = GetComponentInParent<EnemyStatsManager>();
     }
 
     // Update is called once per frame
@@ -53,12 +62,22 @@ public class EnemyWeapon : MonoBehaviour
                 state = 3;
             }
         }
+
+        if(spriteRenderer.flipX)
+        {
+            firePosition.localPosition = secondaryFirePosition;
+        }
+        else
+        {
+            firePosition.localPosition = primaryFirePosition;
+        }
     }
 
     public void Fire()
     {
         Debug.Log("Fire 1");
         if(state != 1) return;
+        if (ready) return;
         Debug.Log("Fire 2");
         state = 2;
         currentFireTime = fireFrames;

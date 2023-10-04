@@ -143,6 +143,24 @@ public class PlayerStatsManager : MonoBehaviour
 		lastCheckpoint = GameObject.FindGameObjectsWithTag("Spawn")[0].transform;
 		transform.position = lastCheckpoint.position;
 		sprite = transform.Find("sprite");
+
+		Spawn();
+	}
+
+	void Spawn()
+	{
+
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		foreach(GameObject enemy in enemies)
+		{
+			Destroy(enemy);
+		}
+
+		GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+		foreach(GameObject spawner in spawners)
+		{
+			spawner.GetComponent<Spawner>().Spawn();
+		}
 	}
 
 	void Update()
@@ -273,6 +291,7 @@ public class PlayerStatsManager : MonoBehaviour
 				inWall = false;
 				skipAnimation = false;
 				//currentSecondary.SetActive(true);
+				Spawn();
 			}
 		}
 	}

@@ -11,7 +11,6 @@ public class GunUIManager : MonoBehaviour
     public TextMeshProUGUI gunName;
     public WeaponManager wm;
     public GameObject activeDisplay;
-    public GameObject lockedDisplay;
     public GameObject gunImage;
 
     int prevAmmo = 0;
@@ -31,7 +30,6 @@ public class GunUIManager : MonoBehaviour
 
         activeDisplay.SetActive(!(wm.state == 0 || wm.state == 6));
 
-        lockedDisplay.SetActive(wm.state == 6);
         gunImage.SetActive(wm.state != 6);
         gunImage.GetComponent<RawImage>().texture = wm.gunTexture;
         gunImage.GetComponent<RawImage>().SetNativeSize();
@@ -41,7 +39,7 @@ public class GunUIManager : MonoBehaviour
 
         if(ammo != prevAmmo)
         {
-            ammoCount.text = ammo.ToString();
+            ammoCount.text = ammo.ToString() + " Ammo";
         }
 
         prevAmmo = ammo;

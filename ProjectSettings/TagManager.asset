@@ -14,6 +14,7 @@ TagManager:
   - Bullet
   - Ground
   - Endpoint
+  - Spawner
   layers:
   - Default
   - TransparentFX
