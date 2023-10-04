@@ -27,7 +27,7 @@ public class EnemyWeapon : MonoBehaviour
     PlayerStatsManager psm;
     EnemyStatsManager esm;
 
-    public bool ready = false;
+    public bool ready = true;
 
     public Vector3 primaryFirePosition;
     public Vector3 secondaryFirePosition;
@@ -77,7 +77,7 @@ public class EnemyWeapon : MonoBehaviour
     {
         Debug.Log("Fire 1");
         if(state != 1) return;
-        if (ready) return;
+        if (!ready) return;
         Debug.Log("Fire 2");
         state = 2;
         currentFireTime = fireFrames;

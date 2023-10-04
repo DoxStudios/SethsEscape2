@@ -42,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 	bool dashRemoveControl = false;
 	float dashTimer;
 	float velocityMagnitude = 0;
+	public float maxDashCooldown;
+	float currentCooldown;
 
 	void Start()
 	{
@@ -89,7 +91,19 @@ public class PlayerMovement : MonoBehaviour
 			direction = new Vector3(1, 0, 0);
 		}
 
-		if(dashUnlocked && hasDash && Input.GetButtonDown("Dash") && !psm.stunned)
+		if(!Input.GetButton("Dash"))
+		{
+			Debug.Log("Dash button not pressed");
+			currentCooldown = 0;
+		}
+
+		if(currentCooldown > 0 && !inDash)
+		{
+			currentCooldown -= Time.deltaTime;
+		}
+
+
+		if(dashUnlocked && hasDash && Input.GetButton("Dash") && !psm.stunned && currentCooldown <= 0)
 		{
 			if(dashType == "teleport")
 			{
@@ -104,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
 			{
 				inDash = true;
 				dashRemoveControl = true;
+				currentCooldown = maxDashCooldown;
 				dashTimer = standardDashTime;
 				rb.gravityScale = 0;
 				hasDash = false;

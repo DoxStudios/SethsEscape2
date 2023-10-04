@@ -28,6 +28,7 @@ public class GnomeAnimator : MonoBehaviour
 
     public float walkInterval = 0.1f;
     public float readyTime = 0.2f;
+    public float trueReadyTime = 0.5f;
     float timer = 0f;
 
 
@@ -120,20 +121,30 @@ public class GnomeAnimator : MonoBehaviour
             {
                 timer = 0f;
             }
+
+            enemyWeapon.ready = false;
         }
 
         if(state == State.ready)
         {
-            CURRENT = READY;
-            enemyWeapon.ready = true;
-
-            timer += Time.deltaTime;
+            enemyWeapon.ready = false;
 
             if(timer > readyTime)
+            {
+                CURRENT = ATTACK_1;
+            }
+            else
+            {
+                CURRENT = READY;
+            }
+            timer += Time.deltaTime;
+
+            if(timer > trueReadyTime)
             {
                 if(enemyMovement.inRange)
                 {
                     state = State.attacking;
+                    enemyWeapon.ready = true;
                 }
                 else
                 {
@@ -141,7 +152,6 @@ public class GnomeAnimator : MonoBehaviour
                 }
                 
                 timer = 0f;
-                enemyWeapon.ready = false;
             }
         }
 

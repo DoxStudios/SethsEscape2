@@ -111,9 +111,13 @@ public class PlayerStatsManager : MonoBehaviour
 		return currentPrimary;
 	}
 
-	public void Heal(int amount)
+	public void Heal(float amount)
 	{
 		health += amount;
+		if(health > maxHealth)
+		{
+			health = maxHealth;
+		}
 	}
 
 

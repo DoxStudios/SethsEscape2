@@ -322,7 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941d32368d40bff46840ae27a91e085d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   isaacNewton: 1
   ranged: 1
   followRadius: 50
@@ -396,6 +395,7 @@ MonoBehaviour:
   enemyWeapon: {fileID: 208892385273561955}
   walkInterval: 0.1
   readyTime: 0.2
+  trueReadyTime: 0.5
 --- !u!1 &8233169292980911508
 GameObject:
   m_ObjectHideFlags: 0

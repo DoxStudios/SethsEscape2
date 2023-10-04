@@ -13,6 +13,9 @@ public class GunUIManager : MonoBehaviour
     public GameObject activeDisplay;
     public GameObject gunImage;
 
+    public Color activeColor;
+    public Color inactiveColor;
+
     int prevAmmo = 0;
 
     bool equipped = false;
@@ -36,6 +39,9 @@ public class GunUIManager : MonoBehaviour
         gunImage.transform.localScale = wm.UIScale;
         gunName.text = wm.title + " " + wm.name;
         ammoCount.gameObject.SetActive(wm.state != 6);
+
+        gunName.color = wm.state == 0 ? inactiveColor : activeColor;
+        ammoCount.color = wm.state == 0 ? inactiveColor : activeColor;
 
         if(ammo != prevAmmo)
         {

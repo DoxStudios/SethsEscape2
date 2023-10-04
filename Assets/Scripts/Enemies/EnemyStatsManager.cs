@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyStatsManager : MonoBehaviour
 {
     public float health = 1;
+	float maxHealth;
     public int damage = 1;
     public float outgoingKnockbackAmount;
     public float outgoingKnockbackTime;
@@ -39,6 +40,7 @@ public class EnemyStatsManager : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
 		defaultColor = sr.color;
+		maxHealth = health;
     }
 
     void Update()
@@ -54,6 +56,7 @@ public class EnemyStatsManager : MonoBehaviour
 				}
 
 			}
+			psm.Heal(maxHealth * 0.1f);
 			Destroy(gameObject);
 		}
 	}
