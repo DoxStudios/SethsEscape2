@@ -35,8 +35,8 @@ public class PlayerStatsManager : MonoBehaviour
 	float prevHealth;
 	Rigidbody2D rb;
 	Transform sprite;
-	Transform lastCheckpoint;
-	bool skipAnimation = false;
+	public Transform lastCheckpoint;
+	public bool skipAnimation = false;
 	int dropChance = 30;
 
 
@@ -140,7 +140,7 @@ public class PlayerStatsManager : MonoBehaviour
 		currentSecondary = headCannon;
 		rb = GetComponent<Rigidbody2D>();
 		canvas = GameObject.FindGameObjectsWithTag("Canvas")[0];
-		lastCheckpoint = GameObject.FindGameObjectsWithTag("Spawn")[0].transform;
+		lastCheckpoint = GameObject.FindGameObjectWithTag("Spawn").transform;
 		transform.position = lastCheckpoint.position;
 		sprite = transform.Find("sprite");
 

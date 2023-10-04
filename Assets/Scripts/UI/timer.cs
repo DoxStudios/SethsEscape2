@@ -15,6 +15,7 @@ public class timer : MonoBehaviour
 
     public Color running;
     public Color stopped;
+    public Color Default;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,11 @@ public class timer : MonoBehaviour
         if(ended)
         {
             timerText.color = stopped;
+        }
+
+        if(!started)
+        {
+            timerText.color = Default;
         }
     }
 }

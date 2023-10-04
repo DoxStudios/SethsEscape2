@@ -94,7 +94,7 @@ public class EnemyMovement : MonoBehaviour
 
             if(inRange && ranged)
             {
-                rb.velocity = new Vector2(0, 0);
+                rb.velocity = new Vector2(0, rb.velocity.y);
                 ew.Fire();
             }
         }

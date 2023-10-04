@@ -15,6 +15,7 @@ TagManager:
   - Ground
   - Endpoint
   - Spawner
+  - Timer
   layers:
   - Default
   - TransparentFX
