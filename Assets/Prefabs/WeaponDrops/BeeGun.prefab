@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3734264345490728823}
   m_Layer: 10
   m_Name: BeeGun
-  m_TagString: Untagged
+  m_TagString: WeaponDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

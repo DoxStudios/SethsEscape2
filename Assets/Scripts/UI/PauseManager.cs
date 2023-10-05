@@ -11,6 +11,12 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseView;
     public GameObject controlView;
 
+    public GameObject handgunPickup;
+    public GameObject spasmPickup;
+
+    public Vector3 handgun;
+    public Vector3 spasm;
+
     PlayerStatsManager playerStatsManager;
     timer playTimer;
 
@@ -19,6 +25,9 @@ public class PauseManager : MonoBehaviour
     {
         playerStatsManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         playTimer = GameObject.FindGameObjectWithTag("Timer").GetComponent<timer>();
+
+        handgun = GameObject.FindGameObjectWithTag("Handgun").transform.position;
+        spasm = GameObject.FindGameObjectWithTag("Spasm").transform.position;
     }
 
     // Update is called once per frame
@@ -71,11 +80,22 @@ public class PauseManager : MonoBehaviour
         playTimer.started = false;
         playTimer.ended = false;
         playerStatsManager.primary.GetComponent<WeaponManager>().state = 6;
-        playerStatsManager.secondary.GetComponent<WeaponManager>().state = 6;
         playerStatsManager.primary.GetComponent<WeaponManager>().title = "";
         playerStatsManager.primary.GetComponent<WeaponManager>().name = "";
+        playerStatsManager.primary.GetComponent<WeaponManager>().currentAmmo = 0;
+        playerStatsManager.secondary.GetComponent<WeaponManager>().state = 6;
         playerStatsManager.secondary.GetComponent<WeaponManager>().title = "";
         playerStatsManager.secondary.GetComponent<WeaponManager>().name = "";
+        playerStatsManager.secondary.GetComponent<WeaponManager>().currentAmmo = 0;
+
+        GameObject[] weaponDrops = GameObject.FindGameObjectsWithTag("WeaponDrop");
+        foreach(GameObject weaponDrop in weaponDrops)
+        {
+            Destroy(weaponDrop);
+        }
+
+        Instantiate(handgunPickup, handgun, transform.rotation);
+        Instantiate(spasmPickup, spasm, transform.rotation);
     }
 
     public void MainMenu()

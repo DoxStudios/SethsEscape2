@@ -16,6 +16,9 @@ TagManager:
   - Endpoint
   - Spawner
   - Timer
+  - Handgun
+  - Spasm
+  - WeaponDrop
   layers:
   - Default
   - TransparentFX
@@ -52,4 +55,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Pause
+    uniqueID: 912023599
     locked: 0

@@ -30,7 +30,9 @@ public class WeaponManager : MonoBehaviour
     public int state = 0;
     
     public GameObject GFX;
-    public Sprite gunSprite;
+    public Sprite CURRENT;
+    public Sprite IMAGE_1;
+    public Sprite IMAGE_2;
     public Texture gunTexture;
 
     public Vector3 secondaryPosition;
@@ -63,6 +65,7 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
+        CURRENT = IMAGE_1;
     }
 
     void Update()
@@ -96,7 +99,7 @@ public class WeaponManager : MonoBehaviour
             GFX.SetActive(true);
         }
 
-        GFX.GetComponent<SpriteRenderer>().sprite = gunSprite;
+        GFX.GetComponent<SpriteRenderer>().sprite = CURRENT;
         GFX.transform.localScale = GFXScale;
         
         if(state == 3)

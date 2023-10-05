@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5606739264774605916}
   m_Layer: 10
   m_Name: Gnorman Hunting RIfle
-  m_TagString: Untagged
+  m_TagString: WeaponDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,8 +61,8 @@ MonoBehaviour:
   pierceLevel: 1
   bullet: {fileID: 1218464838308763304, guid: fdf0b0e8cc3dfaf419edcbb56c2c1878, type: 3}
   firePosition: {fileID: 0}
-  maxShotsPerSecond: 1.5
-  fireFrames: 0.5
+  maxShotsPerSecond: 1
+  fireFrames: 0.2
   currentAmmo: 10
   loadOneAtATime: 0
   reloadTime: 0
@@ -70,7 +70,9 @@ MonoBehaviour:
   priority: 0
   state: 7
   GFX: {fileID: 0}
-  gunSprite: {fileID: 21300000, guid: 7f72aad3b96f824ee8c2b53b62fa1002, type: 3}
+  CURRENT: {fileID: 21300000, guid: 7903184b0e569759d9025e53c04e18dd, type: 3}
+  IMAGE_1: {fileID: 21300000, guid: 7903184b0e569759d9025e53c04e18dd, type: 3}
+  IMAGE_2: {fileID: 21300000, guid: 7f72aad3b96f824ee8c2b53b62fa1002, type: 3}
   gunTexture: {fileID: 2800000, guid: 7f72aad3b96f824ee8c2b53b62fa1002, type: 3}
   secondaryPosition: {x: -6.13, y: 0, z: 0}
   secondaryFirePosition: {x: -8.85, y: 0.46, z: 0}

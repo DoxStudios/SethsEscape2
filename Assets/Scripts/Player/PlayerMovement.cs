@@ -55,6 +55,12 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
+
+		if(Time.timeScale == 0)
+		{
+			return;
+		}
+
 		isGrounded = checkGrounded();
 		if(isGrounded)
 		{
