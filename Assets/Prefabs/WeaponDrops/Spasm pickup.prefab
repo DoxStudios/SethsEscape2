@@ -117,8 +117,8 @@ MonoBehaviour:
   pierceLevel: 1
   bullet: {fileID: 1218464838308763304, guid: fdf0b0e8cc3dfaf419edcbb56c2c1878, type: 3}
   firePosition: {fileID: 0}
-  maxShotsPerSecond: 1.5
-  fireFrames: 0
+  maxShotsPerSecond: 1.7
+  fireFrames: 0.2
   currentAmmo: 8
   loadOneAtATime: 1
   reloadTime: 8
@@ -126,15 +126,20 @@ MonoBehaviour:
   priority: 0
   state: 7
   GFX: {fileID: 0}
-  gunSprite: {fileID: 21300000, guid: b0308f80d5cc7aafe84a863daa2c6b30, type: 3}
+  CURRENT: {fileID: 21300000, guid: b0308f80d5cc7aafe84a863daa2c6b30, type: 3}
+  IMAGE_1: {fileID: 21300000, guid: b0308f80d5cc7aafe84a863daa2c6b30, type: 3}
+  IMAGE_2: {fileID: 21300000, guid: 0c050457749b3a8569a2c3fa259006ec, type: 3}
+  IMAGE_3: {fileID: 21300000, guid: b05da1b3f01d38280b199e566749f95a, type: 3}
   gunTexture: {fileID: 2800000, guid: b0308f80d5cc7aafe84a863daa2c6b30, type: 3}
-  secondaryPosition: {x: -6.676, y: 0, z: 0}
-  secondaryFirePosition: {x: -9.32, y: 0, z: 0}
-  primaryPosition: {x: 2.12, y: 0, z: 0}
-  primaryFirePosition: {x: 4.758, y: 0, z: 0}
+  tripleImage: 1
+  secondaryPosition: {x: -5.77, y: -0.45, z: 0}
+  secondaryFirePosition: {x: -7.84, y: 0, z: 0}
+  primaryPosition: {x: 1.31, y: -0.38, z: 0}
+  primaryFirePosition: {x: 3.48, y: 0, z: 0}
   GFXScale: {x: 0.7552, y: 0.7552, z: 0.7552}
   UIScale: {x: 0.15, y: 0.15, z: 0.15}
   type: 1
+  currentFireTime: 0
 --- !u!1 &8387315587849544659
 GameObject:
   m_ObjectHideFlags: 0

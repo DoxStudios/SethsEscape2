@@ -87,11 +87,13 @@ public class PlayerStatsManager : MonoBehaviour
 		weaponSlot.primaryFirePosition = weapon.primaryFirePosition;
 		weaponSlot.IMAGE_1 = weapon.IMAGE_1;
 		weaponSlot.IMAGE_2 = weapon.IMAGE_2;
+		weaponSlot.IMAGE_3 = weapon.IMAGE_3;
 		weaponSlot.GFXScale = weapon.GFXScale;
 		weaponSlot.gunTexture = weapon.gunTexture;
 		weaponSlot.UIScale = weapon.UIScale;
 		weaponSlot.title = weapon.title;
 		weaponSlot.name = weapon.name;
+		weaponSlot.tripleImage = weapon.tripleImage;
 
 		weaponSlot.state = 0;
 	}

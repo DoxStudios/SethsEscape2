@@ -15,13 +15,31 @@ public class PlayerWeaponAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(wm.state == 2)
+        if(wm.tripleImage)
         {
-            wm.CURRENT = wm.IMAGE_2;
+            if(wm.state == 2 && wm.currentFireTime > (wm.fireFrames * 0.5))
+            {
+                wm.CURRENT = wm.IMAGE_2;
+            }
+            else if(wm.state == 2 && wm.currentFireTime < (wm.fireFrames *0.5))
+            {
+                wm.CURRENT = wm.IMAGE_3;
+            }
+            else
+            {
+                wm.CURRENT = wm.IMAGE_1;
+            }
         }
         else
         {
-            wm.CURRENT = wm.IMAGE_1;
+            if(wm.state == 2)
+            {
+                wm.CURRENT = wm.IMAGE_2;
+            }
+            else
+            {
+                wm.CURRENT = wm.IMAGE_1;
+            }
         }
     }
 }

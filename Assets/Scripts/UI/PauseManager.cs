@@ -94,6 +94,9 @@ public class PauseManager : MonoBehaviour
             Destroy(weaponDrop);
         }
 
+        Destroy(GameObject.FindGameObjectWithTag("Handgun"));
+        Destroy(GameObject.FindGameObjectWithTag("Spasm"));
+
         Instantiate(handgunPickup, handgun, transform.rotation);
         Instantiate(spasmPickup, spasm, transform.rotation);
     }

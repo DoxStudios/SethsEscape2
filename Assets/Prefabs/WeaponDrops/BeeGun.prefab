@@ -82,8 +82,12 @@ MonoBehaviour:
   priority: 0
   state: 7
   GFX: {fileID: 0}
-  gunSprite: {fileID: 21300000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
+  CURRENT: {fileID: 0}
+  IMAGE_1: {fileID: 21300000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
+  IMAGE_2: {fileID: 21300000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
+  IMAGE_3: {fileID: 0}
   gunTexture: {fileID: 2800000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
+  tripleImage: 0
   secondaryPosition: {x: -5.27, y: 0, z: 0}
   secondaryFirePosition: {x: -6.28, y: 0.34, z: 0}
   primaryPosition: {x: 0.92, y: 0, z: 0}
@@ -91,6 +95,7 @@ MonoBehaviour:
   GFXScale: {x: 0.5, y: 0.5, z: 0.5}
   UIScale: {x: 0.15, y: 0.15, z: 0.15}
   type: 0
+  currentFireTime: 0
 --- !u!50 &1163155266634818194
 Rigidbody2D:
   serializedVersion: 4

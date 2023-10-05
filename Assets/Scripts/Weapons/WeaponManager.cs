@@ -33,7 +33,10 @@ public class WeaponManager : MonoBehaviour
     public Sprite CURRENT;
     public Sprite IMAGE_1;
     public Sprite IMAGE_2;
+    public Sprite IMAGE_3;
     public Texture gunTexture;
+
+    public bool tripleImage = false;
 
     public Vector3 secondaryPosition;
     public Vector3 secondaryFirePosition;
@@ -48,7 +51,7 @@ public class WeaponManager : MonoBehaviour
     float currentReloadTime;
 
     float cooldown;
-    float currentFireTime;
+    public float currentFireTime;
 
     PlayerStatsManager psm;
 
