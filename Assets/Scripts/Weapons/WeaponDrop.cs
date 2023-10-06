@@ -34,7 +34,14 @@ public class WeaponDrop : MonoBehaviour
 
         wm.speed += Random.Range(-10, 21);
         wm.maxShotsPerSecond += Random.Range(0, 2);
-        wm.currentAmmo += Random.Range(-2, 10);
+        if(wm.type == WeaponManager.WeaponType.Revolver)
+        {
+            wm.currentAmmo += Random.Range(0, 3);
+        }   
+        else
+        {
+            wm.currentAmmo += Random.Range(-2, 10);
+        }
 
         Title title = new Title();
         Title.titles t = title.GenerateTitle();
@@ -75,16 +82,15 @@ public class Title
 
     public titles GenerateTitle()
     {
-        int title = Random.Range(0, 4);
+        int title = Random.Range(0, 3);
         switch (title)
         {
+
             case 0:
-                return titles.Loaded;
-            case 1:
                 return titles.Strengthened;
-            case 2:
+            case 1:
                 return titles.Rapid;
-            case 3:
+            case 2:
                 return titles.Lucky;
             default:
                 return titles.None;
@@ -95,28 +101,13 @@ public class Title
     {
         switch (title)
         {
-            case titles.Loaded:
-                switch (wm.type)
-                {
-                    case WeaponManager.WeaponType.Pistol:
-                        wm.currentAmmo += Random.Range(10, 16);
-                        break;
-                    case WeaponManager.WeaponType.Shotgun:
-                        wm.currentAmmo += Random.Range(2,7);
-                        break;
-                    case WeaponManager.WeaponType.Rifle:
-                        wm.currentAmmo += Random.Range(5, 11);
-                        break;
-                    case WeaponManager.WeaponType.Explosive:
-                        wm.currentAmmo += Random.Range(1, 4);
-                        break;
-                }
-
-                break;
             case titles.Strengthened:
                 switch (wm.type)
                 {
                     case WeaponManager.WeaponType.Pistol:
+                        wm.damage += Random.Range(15, 26);
+                        break;
+                    case WeaponManager.WeaponType.Revolver:
                         wm.damage += Random.Range(15, 26);
                         break;
                     case WeaponManager.WeaponType.Shotgun:
@@ -141,6 +132,9 @@ public class Title
                         wm.maxShotsPerSecond += Random.Range(3, 6);
                         wm.currentAmmo += Random.Range(5, 11);
                         break;
+                    case WeaponManager.WeaponType.Revolver:
+                        wm.maxShotsPerSecond += Random.Range(3, 6);
+                        break;
                     case WeaponManager.WeaponType.Shotgun:
                         wm.maxShotsPerSecond += Random.Range(2,4);
                        wm.currentAmmo += Random.Range(2,6);
@@ -164,6 +158,10 @@ public class Title
                 switch (wm.type)
                 {
                     case WeaponManager.WeaponType.Pistol:
+                        wm.damage += Random.Range(10, 16);
+                        wm.maxShotsPerSecond += 2;
+                        break;
+                    case WeaponManager.WeaponType.Revolver:
                         wm.damage += Random.Range(10, 16);
                         wm.maxShotsPerSecond += 2;
                         break;

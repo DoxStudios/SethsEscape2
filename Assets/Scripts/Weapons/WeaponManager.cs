@@ -62,7 +62,8 @@ public class WeaponManager : MonoBehaviour
         Shotgun,
         Rifle,
         Explosive,
-        DoubleShotgun
+        DoubleShotgun,
+        Revolver,
     };
 
     void Start()
