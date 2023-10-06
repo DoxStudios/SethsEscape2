@@ -272,5 +272,10 @@ public class PlayerMovement : MonoBehaviour
 				}
 			}
 		}
+
+		if(col.gameObject.tag == "killbox")
+		{
+			psm.health = 0;
+		}
 	}
 }
