@@ -287,6 +287,7 @@ public class PlayerStatsManager : MonoBehaviour
 
 			if(sprite.localScale.x < -22 || skipAnimation)
 			{
+				setRight();
 				transform.position = lastCheckpoint.position;
 				sprite.rotation = Quaternion.Euler(0, 0, 0);
 				sprite.localScale = new Vector3(1, 1, 1);
@@ -294,7 +295,7 @@ public class PlayerStatsManager : MonoBehaviour
 				stunned = false;
 				health = maxHealth;
 				rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-				rb.gravityScale = 10f;
+				rb.gravityScale = 15f;
 				inWall = false;
 				skipAnimation = false;
 				//currentSecondary.SetActive(true);

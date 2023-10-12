@@ -34,10 +34,13 @@ public class EnemyWeapon : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
+    Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponentInParent<Animator>();
         psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         esm = GetComponentInParent<EnemyStatsManager>();
     }
@@ -77,7 +80,7 @@ public class EnemyWeapon : MonoBehaviour
     {
         Debug.Log("Fire 1");
         if(state != 1) return;
-        if (!ready) return;
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_1")) return;
         Debug.Log("Fire 2");
         state = 2;
         currentFireTime = fireFrames;

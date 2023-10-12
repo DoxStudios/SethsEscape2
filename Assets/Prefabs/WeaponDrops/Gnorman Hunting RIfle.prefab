@@ -61,7 +61,7 @@ MonoBehaviour:
   pierceLevel: 1
   bullet: {fileID: 1218464838308763304, guid: fdf0b0e8cc3dfaf419edcbb56c2c1878, type: 3}
   firePosition: {fileID: 0}
-  maxShotsPerSecond: 1
+  maxShotsPerSecond: 1.5
   fireFrames: 0.2
   currentAmmo: 10
   loadOneAtATime: 0
@@ -73,7 +73,9 @@ MonoBehaviour:
   CURRENT: {fileID: 21300000, guid: 7903184b0e569759d9025e53c04e18dd, type: 3}
   IMAGE_1: {fileID: 21300000, guid: 7903184b0e569759d9025e53c04e18dd, type: 3}
   IMAGE_2: {fileID: 21300000, guid: 7f72aad3b96f824ee8c2b53b62fa1002, type: 3}
+  IMAGE_3: {fileID: 0}
   gunTexture: {fileID: 2800000, guid: 7f72aad3b96f824ee8c2b53b62fa1002, type: 3}
+  tripleImage: 0
   secondaryPosition: {x: -6.13, y: 0, z: 0}
   secondaryFirePosition: {x: -8.85, y: 0.46, z: 0}
   primaryPosition: {x: 1.03, y: 0, z: 0}
@@ -81,6 +83,7 @@ MonoBehaviour:
   GFXScale: {x: 1, y: 1, z: 1}
   UIScale: {x: 0.15, y: 0.15, z: 0.15}
   type: 2
+  currentFireTime: 0
 --- !u!50 &-7580630414456461223
 Rigidbody2D:
   serializedVersion: 4

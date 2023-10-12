@@ -74,7 +74,7 @@ MonoBehaviour:
   bullet: {fileID: 1218464838308763304, guid: fdf0b0e8cc3dfaf419edcbb56c2c1878, type: 3}
   firePosition: {fileID: 0}
   maxShotsPerSecond: 20
-  fireFrames: 0.2
+  fireFrames: 0.1
   currentAmmo: 20
   loadOneAtATime: 0
   reloadTime: 0
@@ -84,16 +84,16 @@ MonoBehaviour:
   GFX: {fileID: 0}
   CURRENT: {fileID: 0}
   IMAGE_1: {fileID: 21300000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
-  IMAGE_2: {fileID: 21300000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
+  IMAGE_2: {fileID: 21300000, guid: 68171d073a3f3e845872310913fe9660, type: 3}
   IMAGE_3: {fileID: 0}
   gunTexture: {fileID: 2800000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
   tripleImage: 0
   secondaryPosition: {x: -5.27, y: 0, z: 0}
-  secondaryFirePosition: {x: -6.28, y: 0.34, z: 0}
+  secondaryFirePosition: {x: -6.28, y: 0.67, z: 0}
   primaryPosition: {x: 0.92, y: 0, z: 0}
-  primaryFirePosition: {x: 2, y: 0.34, z: 0}
-  GFXScale: {x: 0.5, y: 0.5, z: 0.5}
-  UIScale: {x: 0.15, y: 0.15, z: 0.15}
+  primaryFirePosition: {x: 2, y: 0.67, z: 0}
+  GFXScale: {x: 0.6, y: 0.6, z: 0.6}
+  UIScale: {x: 0.1, y: 0.1, z: 0.1}
   type: 0
   currentFireTime: 0
 --- !u!50 &1163155266634818194
@@ -155,7 +155,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.13069081, y: -0.2577775}
+  m_Offset: {x: 0.09739733, y: -0.070117235}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -166,7 +166,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.617563, y: 3.05238}
+  m_Size: {x: 6.073739, y: 3.4277005}
   m_EdgeRadius: 0
 --- !u!1 &8563040834602526804
 GameObject:

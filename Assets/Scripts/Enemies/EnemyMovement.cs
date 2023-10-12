@@ -29,9 +29,14 @@ public class EnemyMovement : MonoBehaviour
     EnemyStatsManager esm;
     Rigidbody2D rb;
     float distanceToPlayer;
+    SpriteRenderer spriteRenderer;
+
+    Animator animator;
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         target = player.transform;
         seeker = GetComponent<Seeker>();
@@ -58,6 +63,16 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if(player.transform.position.x < transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+
         playerDetected = ((player.transform.position - transform.position).magnitude < detectRadius);
         if(path != null)
         {
@@ -78,7 +93,7 @@ public class EnemyMovement : MonoBehaviour
                 Vector2 force = direction * speed * Time.deltaTime;
 
 
-                if(distanceToPlayer > followRadius)
+                if(distanceToPlayer > followRadius && animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
                 {
                     rb.AddForce(force);
                 }

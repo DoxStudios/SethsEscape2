@@ -18,6 +18,7 @@ public class PauseManager : MonoBehaviour
     public Vector3 spasm;
 
     PlayerStatsManager playerStatsManager;
+    Rigidbody2D rb;
     timer playTimer;
 
     // Start is called before the first frame update
@@ -25,7 +26,7 @@ public class PauseManager : MonoBehaviour
     {
         playerStatsManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         playTimer = GameObject.FindGameObjectWithTag("Timer").GetComponent<timer>();
-
+        rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         handgun = GameObject.FindGameObjectWithTag("Handgun").transform.position;
         spasm = GameObject.FindGameObjectWithTag("Spasm").transform.position;
     }
@@ -73,6 +74,8 @@ public class PauseManager : MonoBehaviour
     public void Restart()
     {
         Resume();
+        rb.velocity = Vector3.zero;
+        playerStatsManager.setRight();
         playerStatsManager.lastCheckpoint = GameObject.FindGameObjectWithTag("Spawn").transform;
         playerStatsManager.health = 0;
         playerStatsManager.skipAnimation = true;

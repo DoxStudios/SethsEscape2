@@ -248,6 +248,13 @@ public class PlayerMovement : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
+		if(col.gameObject.tag == "Destroyable")
+		{
+			if(velocityMagnitude > bashThreshold)
+			{
+				Destroy(col.gameObject);
+			}
+		}
 		if(col.gameObject.tag == "Enemy")
 		{
 			Vector2 direction = col.GetContact(0).normal;

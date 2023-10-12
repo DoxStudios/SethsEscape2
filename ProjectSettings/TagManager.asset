@@ -19,6 +19,8 @@ TagManager:
   - Handgun
   - Spasm
   - WeaponDrop
+  - killbox
+  - Destroyable
   layers:
   - Default
   - TransparentFX
