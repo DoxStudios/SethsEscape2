@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Playtest Level.unity
     guid: 11289a1e33cdea7a8abb8dd75df078cc
+  - enabled: 1
+    path: Assets/Scenes/tutorial.unity
+    guid: 0526a85ba17390241b8dc43f31f258ab
+  - enabled: 1
+    path: Assets/Scenes/Garden level.unity
+    guid: e3885a5e60f0c034d8fd276915c3517b
   m_configObjects: {}

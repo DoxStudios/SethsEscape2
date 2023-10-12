@@ -37,10 +37,6 @@ public class PauseManager : MonoBehaviour
 
     void DestroySpawners()
     {
-        if(destroySpawns == null)
-        {
-            Debug.Log("No destroy spawns");
-        }
         GameObject[] destroyables = GameObject.FindGameObjectsWithTag("Destroyable");
         foreach(GameObject destroyable in destroyables)
         {

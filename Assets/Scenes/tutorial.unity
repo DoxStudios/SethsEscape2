@@ -6869,7 +6869,7 @@ GameObject:
   - component: {fileID: 569726652}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12073,7 +12073,7 @@ GameObject:
   - component: {fileID: 777477274}
   m_Layer: 0
   m_Name: Destroyable
-  m_TagString: Destroyable
+  m_TagString: DestroySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
