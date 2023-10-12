@@ -21,6 +21,8 @@ TagManager:
   - WeaponDrop
   - killbox
   - Destroyable
+  - DestroySpawn
+  - Grid
   layers:
   - Default
   - TransparentFX

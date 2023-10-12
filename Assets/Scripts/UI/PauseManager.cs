@@ -21,14 +21,41 @@ public class PauseManager : MonoBehaviour
     Rigidbody2D rb;
     timer playTimer;
 
+    GameObject[] destroySpawns;
+
     // Start is called before the first frame update
     void Start()
     {
+        destroySpawns = GameObject.FindGameObjectsWithTag("DestroySpawn");
+        DestroySpawners();
         playerStatsManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         playTimer = GameObject.FindGameObjectWithTag("Timer").GetComponent<timer>();
         rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         handgun = GameObject.FindGameObjectWithTag("Handgun").transform.position;
         spasm = GameObject.FindGameObjectWithTag("Spasm").transform.position;
+    }
+
+    void DestroySpawners()
+    {
+        if(destroySpawns == null)
+        {
+            Debug.Log("No destroy spawns");
+        }
+        GameObject[] destroyables = GameObject.FindGameObjectsWithTag("Destroyable");
+        foreach(GameObject destroyable in destroyables)
+        {
+            Destroy(destroyable);
+        }
+
+        foreach(GameObject destroySpawn in destroySpawns)
+        {
+            destroySpawn.SetActive(false);
+            GameObject destroyable = Instantiate(destroySpawn, destroySpawn.transform.position, destroySpawn.transform.rotation);
+            destroyable.tag = "Destroyable";
+            destroyable.transform.SetParent(GameObject.FindGameObjectWithTag("Grid").transform, true);
+            destroyable.transform.localScale = new Vector3(1, 1, 1);
+            destroyable.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -48,7 +75,6 @@ public class PauseManager : MonoBehaviour
                 paused = true;
             }
         }
-
 
         standardView.SetActive(!paused);
         pauseView.SetActive(paused && !controls);
@@ -74,6 +100,7 @@ public class PauseManager : MonoBehaviour
     public void Restart()
     {
         Resume();
+        DestroySpawners();
         rb.velocity = Vector3.zero;
         playerStatsManager.setRight();
         playerStatsManager.lastCheckpoint = GameObject.FindGameObjectWithTag("Spawn").transform;
