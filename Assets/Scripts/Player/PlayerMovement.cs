@@ -97,9 +97,14 @@ public class PlayerMovement : MonoBehaviour
 			direction = new Vector3(1, 0, 0);
 		}
 
+
+		if(horizontal != 0)
+		{
+			psm.explosiveStun = false;
+		}
+
 		if(!Input.GetButton("Dash"))
 		{
-			Debug.Log("Dash button not pressed");
 			currentCooldown = 0;
 		}
 
@@ -198,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if(!psm.stunned && !dashRemoveControl)
+		if(!psm.stunned && !psm.explosiveStun && !dashRemoveControl)
 		{
 			rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 		}

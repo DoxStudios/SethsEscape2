@@ -17,6 +17,7 @@ public class PlayerStatsManager : MonoBehaviour
 
 	public bool movingLeft = false;
 	public bool stunned = false;
+	public bool explosiveStun;
 	public bool dead = false;
 	public float health = 100;
 	public bool inWall = false;
@@ -94,6 +95,9 @@ public class PlayerStatsManager : MonoBehaviour
 		weaponSlot.title = weapon.title;
 		weaponSlot.name = weapon.name;
 		weaponSlot.tripleImage = weapon.tripleImage;
+		weaponSlot.type = weapon.type;
+		weaponSlot.explosivePower = weapon.explosivePower;
+		weaponSlot.explosiveRange = weapon.explosiveRange;
 
 		weaponSlot.state = 0;
 	}
@@ -130,6 +134,15 @@ public class PlayerStatsManager : MonoBehaviour
 		{
 			health -= (amount) * defense;
 			DealKnockback(knockbackPosition, knockbackAmount, knockbackTime, stunTime);
+		}
+	}
+
+	public void PlayerExplosive(float amount, Transform knockbackPosition, float knockbackAmount)
+	{
+		if(!dead)
+		{
+			health -= (amount) * defense;
+			DealExplosiveKnockback(knockbackPosition, knockbackAmount);
 		}
 	}
 
@@ -322,6 +335,16 @@ public class PlayerStatsManager : MonoBehaviour
 		stunned = true;
 		StartCoroutine(ResetKnockback(knockbackTime));
 		StartCoroutine(ResetStun(stunTime));
+	}
+
+	public void DealExplosiveKnockback(Transform sender, float knockbackAmount)
+	{
+		StopAllCoroutines();
+		Vector2 direction = (transform.position-sender.position).normalized;
+		rb.AddForce(direction*knockbackAmount*100, ForceMode2D.Impulse);
+		explosiveStun = true;
+		stunned = true;
+		StartCoroutine(ResetStun(0.3f));
 	}
 
 	private IEnumerator ResetKnockback(float delay)

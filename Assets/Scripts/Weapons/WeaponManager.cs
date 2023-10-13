@@ -52,6 +52,8 @@ public class WeaponManager : MonoBehaviour
 
     float cooldown;
     public float currentFireTime;
+    public float explosivePower;
+    public float explosiveRange;
 
     PlayerStatsManager psm;
 
@@ -166,14 +168,31 @@ public class WeaponManager : MonoBehaviour
 
             GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
             firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
-            BulletManager bm = firedBullet.GetComponent<BulletManager>();
-            bm.damage = finalDamage;
-            bm.knockbackTimeMultiplier = knockbackTimeMultiplier;
-            bm.knockbackMultiplier = knockbackMultiplier;
-            bm.stunTimeMultiplier = stunTimeMultiplier;
-            bm.pierceLevel = finalPierce;
-            bm.psm = psm;
-            bm.survivalTime = bulletSurvivalTime;
+            if(firedBullet.GetComponent<BulletManager>() == null)
+            {
+                ExplosivesManager em = firedBullet.GetComponent<ExplosivesManager>();
+                em.damage = finalDamage;
+                em.knockbackTimeMultiplier = knockbackTimeMultiplier;
+                em.knockbackMultiplier = knockbackMultiplier;
+                em.stunTimeMultiplier = stunTimeMultiplier;
+                em.pierceLevel = finalPierce;
+                em.psm = psm;
+                em.survivalTime = bulletSurvivalTime;
+                em.explosivePower = explosivePower;
+                em.explosiveRange = explosiveRange;
+            }
+            else
+            {
+                BulletManager bm = firedBullet.GetComponent<BulletManager>();
+                bm.damage = finalDamage;
+                bm.knockbackTimeMultiplier = knockbackTimeMultiplier;
+                bm.knockbackMultiplier = knockbackMultiplier;
+                bm.stunTimeMultiplier = stunTimeMultiplier;
+                bm.pierceLevel = finalPierce;
+                bm.psm = psm;
+                bm.survivalTime = bulletSurvivalTime;
+            }
+            
         }
     }
 }

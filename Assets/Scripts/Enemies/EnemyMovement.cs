@@ -14,7 +14,9 @@ public class EnemyMovement : MonoBehaviour
     public float nextWaypointDistance = 3f;
 
     public float detectRadius;
+    public float initialRadius;
     public bool playerDetected;
+    public bool initialDetected;
     public bool inRange;
     public EnemyWeapon ew;
     public bool stopInRange;
@@ -74,6 +76,11 @@ public class EnemyMovement : MonoBehaviour
         }
 
         playerDetected = ((player.transform.position - transform.position).magnitude < detectRadius);
+        if((player.transform.position - transform.position).magnitude < 300)
+        {
+            Debug.Log((player.transform.position - transform.position).magnitude);
+        }
+        initialDetected = ((player.transform.position - transform.position).magnitude < initialRadius);
         if(path != null)
         {
             if(currentWaypoint >= path.vectorPath.Count)

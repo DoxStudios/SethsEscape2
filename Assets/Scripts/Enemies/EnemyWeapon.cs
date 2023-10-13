@@ -78,10 +78,8 @@ public class EnemyWeapon : MonoBehaviour
 
     public void Fire()
     {
-        Debug.Log("Fire 1");
         if(state != 1) return;
         if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_1")) return;
-        Debug.Log("Fire 2");
         state = 2;
         currentFireTime = fireFrames;
         cooldown = 1 / maxShotsPerSecond;
