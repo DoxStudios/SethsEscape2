@@ -245,7 +245,7 @@ MonoBehaviour:
   speed: 3500
   nextWaypointDistance: 3
   detectRadius: 250
-  initialRadius: 70
+  initialRadius: 90
   playerDetected: 0
   initialDetected: 0
   inRange: 0

@@ -38,7 +38,8 @@ public class GunUIManager : MonoBehaviour
         gunImage.GetComponent<RawImage>().SetNativeSize();
         gunImage.transform.localScale = wm.UIScale;
         gunName.text = wm.title + " " + wm.name;
-        ammoCount.gameObject.SetActive(wm.state != 6);
+        gunName.gameObject.SetActive(wm.state != 6);
+        ammoCount.gameObject.SetActive(wm.state != 6 && wm.type != WeaponManager.WeaponType.Chainsaw);
 
         gunName.color = wm.state == 0 ? inactiveColor : activeColor;
         ammoCount.color = wm.state == 0 ? inactiveColor : activeColor;

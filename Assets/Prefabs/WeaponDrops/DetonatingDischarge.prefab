@@ -94,7 +94,7 @@ MonoBehaviour:
   primaryFirePosition: {x: 2, y: 0.67, z: 0}
   GFXScale: {x: 0.6, y: 0.6, z: 0.6}
   UIScale: {x: 0.1, y: 0.1, z: 0.1}
-  type: 0
+  type: 3
   currentFireTime: 0
   explosivePower: 1
   explosiveRange: 20

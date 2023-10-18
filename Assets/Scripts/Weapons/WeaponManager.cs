@@ -66,6 +66,7 @@ public class WeaponManager : MonoBehaviour
         Explosive,
         DoubleShotgun,
         Revolver,
+        Chainsaw,
     };
 
     void Start()
@@ -119,7 +120,14 @@ public class WeaponManager : MonoBehaviour
                 }
                 else
                 {
-                    state = 4;
+                    if(type == WeaponType.Chainsaw)
+                    {
+                        state = 6;
+                    }
+                    else
+                    {
+                        state = 4;
+                    }
                 }
             }
         }
@@ -168,7 +176,7 @@ public class WeaponManager : MonoBehaviour
 
             GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
             firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
-            if(firedBullet.GetComponent<BulletManager>() == null)
+            if(type == WeaponType.Explosive)
             {
                 ExplosivesManager em = firedBullet.GetComponent<ExplosivesManager>();
                 em.damage = finalDamage;
@@ -180,6 +188,14 @@ public class WeaponManager : MonoBehaviour
                 em.survivalTime = bulletSurvivalTime;
                 em.explosivePower = explosivePower;
                 em.explosiveRange = explosiveRange;
+            }
+            else if(type == WeaponType.Chainsaw)
+            {
+                ChainsawManager cm = firedBullet.GetComponent<ChainsawManager>();
+                cm.damage = finalDamage;
+                cm.speed = speed;
+                cm.psm = psm;
+                state = 6;
             }
             else
             {
