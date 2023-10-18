@@ -191,10 +191,12 @@ public class WeaponManager : MonoBehaviour
             }
             else if(type == WeaponType.Chainsaw)
             {
-                ChainsawManager cm = firedBullet.GetComponent<ChainsawManager>();
-                cm.damage = finalDamage;
+                ChainsawMovement cm = firedBullet.GetComponentInChildren<ChainsawMovement>();
+                ChainsawDamage cd = firedBullet.GetComponent<ChainsawDamage>();
                 cm.speed = speed;
-                cm.psm = psm;
+                cd.damage = finalDamage;
+                cd.psm = psm;
+
                 state = 6;
             }
             else
