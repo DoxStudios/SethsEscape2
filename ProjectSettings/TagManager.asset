@@ -23,6 +23,7 @@ TagManager:
   - Destroyable
   - DestroySpawn
   - Grid
+  - ChainsawPath
   layers:
   - Default
   - TransparentFX

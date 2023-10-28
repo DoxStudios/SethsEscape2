@@ -83,10 +83,10 @@ MonoBehaviour:
   state: 7
   GFX: {fileID: 0}
   CURRENT: {fileID: 0}
-  IMAGE_1: {fileID: 21300000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
-  IMAGE_2: {fileID: 21300000, guid: 042e8d6121f4938f6b11945d08caa2c6, type: 3}
+  IMAGE_1: {fileID: 21300000, guid: 24efa4aff51e775259bd7227eb32c6e7, type: 3}
+  IMAGE_2: {fileID: 21300000, guid: 24efa4aff51e775259bd7227eb32c6e7, type: 3}
   IMAGE_3: {fileID: 0}
-  gunTexture: {fileID: 2800000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
+  gunTexture: {fileID: 2800000, guid: 24efa4aff51e775259bd7227eb32c6e7, type: 3}
   tripleImage: 0
   secondaryPosition: {x: -5.27, y: 0, z: 0}
   secondaryFirePosition: {x: -6.28, y: 0.67, z: 0}
@@ -243,7 +243,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 51e527abcb3430e21affd8877eaed87c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24efa4aff51e775259bd7227eb32c6e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

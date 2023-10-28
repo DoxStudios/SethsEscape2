@@ -237,7 +237,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	void OnCollisionStay2D(Collision2D col)
-	{
+	{	
 		if(col.gameObject.layer == LayerMask.NameToLayer("Ground"))
 		{
 			Tilemap tilemap = col.gameObject.GetComponent<Tilemap>();
