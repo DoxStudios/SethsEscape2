@@ -260,6 +260,10 @@ public class PlayerMovement : MonoBehaviour
 				Destroy(col.gameObject);
 			}
 		}
+		if(col.gameObject.tag == "Spikes")
+		{
+			psm.health = 0;
+		}
 		if(col.gameObject.tag == "Enemy")
 		{
 			Vector2 direction = col.GetContact(0).normal;

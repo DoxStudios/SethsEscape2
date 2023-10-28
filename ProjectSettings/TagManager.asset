@@ -24,6 +24,7 @@ TagManager:
   - DestroySpawn
   - Grid
   - ChainsawPath
+  - Spikes
   layers:
   - Default
   - TransparentFX
