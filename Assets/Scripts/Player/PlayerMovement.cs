@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
 	float velocityMagnitude = 0;
 	public float maxDashCooldown;
 	float currentCooldown;
+	float jumpCooldown;
+	bool inJumpCooldown = false;
 
 	void Start()
 	{
@@ -62,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		isGrounded = checkGrounded();
+
 		if(isGrounded)
 		{
 			doubleJumpRemaining = true;
@@ -158,6 +161,15 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
+		if(inJumpCooldown)
+		{
+			jumpCooldown -= Time.deltaTime;
+			if(jumpCooldown <= 0)
+			{
+				inJumpCooldown = false;
+			}
+		}
+
 		if(((isGrounded || inCoyotetime) || doubleJumpRemaining) && Input.GetButtonDown("Jump") && !psm.stunned)
 		{
 			if(!isGrounded && !inCoyotetime)
@@ -169,11 +181,12 @@ public class PlayerMovement : MonoBehaviour
 					rb.AddForce(transform.up * doubleJumpForce, ForceMode2D.Impulse);
 				}
 			}
-			else
+			else if(!inJumpCooldown)
 			{
+				jumpCooldown = 0.1f;
+				inJumpCooldown = true;
 				isGrounded = false;
 				rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-				
 			}
 			
 		}

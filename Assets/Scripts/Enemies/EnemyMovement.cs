@@ -76,10 +76,6 @@ public class EnemyMovement : MonoBehaviour
         }
 
         playerDetected = ((player.transform.position - transform.position).magnitude < detectRadius);
-        if((player.transform.position - transform.position).magnitude < 300)
-        {
-            Debug.Log((player.transform.position - transform.position).magnitude);
-        }
         initialDetected = ((player.transform.position - transform.position).magnitude < initialRadius);
         if(path != null)
         {
