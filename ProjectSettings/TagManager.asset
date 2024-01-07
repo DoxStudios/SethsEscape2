@@ -25,6 +25,7 @@ TagManager:
   - Grid
   - ChainsawPath
   - Spikes
+  - Boss
   layers:
   - Default
   - TransparentFX

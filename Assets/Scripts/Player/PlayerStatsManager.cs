@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PlayerStatsManager : MonoBehaviour
 {
@@ -30,6 +31,9 @@ public class PlayerStatsManager : MonoBehaviour
 	public timer playTimer;
 	public GameObject pickupTarget = null;
 
+	public bool useAim = false;
+	public Vector2 aim;
+
 	GameObject currentSecondary;
 	float maxHealth = 100;
 	GameObject canvas;
@@ -42,6 +46,20 @@ public class PlayerStatsManager : MonoBehaviour
 
 
 	string currentWeapon = "No";
+
+	public void Eat(InputAction.CallbackContext context)
+	{
+		if(context.performed)
+		{
+			if(pickupTarget != null)
+			{
+				AddWeapon(pickupTarget.GetComponent<gunpickup>().weapon);
+				Destroy(pickupTarget);
+				pickupTarget = null;
+			}
+		}
+	}
+	
 
 	public bool dropWeapon()
 	{
@@ -64,6 +82,7 @@ public class PlayerStatsManager : MonoBehaviour
 		GameObject slot = GetSlot();
 
 		WeaponManager weaponSlot = slot.GetComponent<WeaponManager>();
+		slot.GetComponent<AudioSource>().clip = weapon.gameObject.GetComponent<AudioSource>().clip;
 
 		weaponSlot.damage = weapon.damage;
 		weaponSlot.burstCount = weapon.burstCount;
@@ -192,14 +211,9 @@ public class PlayerStatsManager : MonoBehaviour
 			skipAnimation = true;
 		}
 
-		SelectPrimaryWeapon();
 		SelectSecondaryWeapon();
 		AimWeapon();
 
-		if(Input.GetButtonDown("Fire1"))
-		{
-			currentPrimary.GetComponent<WeaponManager>().Fire(rangedDamage, addedPierce);
-		}
 
 		UpdateHealth();
 	}
@@ -225,29 +239,75 @@ public class PlayerStatsManager : MonoBehaviour
 		}
 	}
 
-	void SelectPrimaryWeapon()
+	public void ControlsChanged(PlayerInput input)
 	{
-		if(Input.GetButtonDown("primary"))
+		if(input.currentControlScheme == "Keyboard&Mouse")
 		{
-			currentWeapon = "Yes";
-			ActivateWeapon(primary);
+			useAim = false;
 		}
-		if(Input.GetButtonDown("secondary"))
+		else
 		{
-			currentWeapon = "No";
-			ActivateWeapon(secondary);
+			useAim = true;
 		}
-		if(Input.GetButtonDown("unequip"))
+	}
+
+	public void Aim_Vertical(InputAction.CallbackContext context)
+	{
+		if(context.performed)
 		{
-			currentWeapon = "No";
-			
-			WeaponManager cpwm = currentPrimary.GetComponent<WeaponManager>();
-			if(cpwm.state == 1 || cpwm.state == 4)
+			aim.y = context.ReadValue<float>();
+		}
+	}
+
+	public void Aim_Horizontal(InputAction.CallbackContext context)
+	{
+		if(context.performed)
+		{
+			aim.x = context.ReadValue<float>();
+		}
+	}
+
+	public void Fire(InputAction.CallbackContext context)
+	{
+		if(context.performed)
+		{
+			currentPrimary.GetComponent<WeaponManager>().Fire(rangedDamage, addedPierce);
+		}
+	}
+
+	public void Primary(InputAction.CallbackContext context)
+	{
+		ActivateWeapon(primary);
+	}
+
+	public void Secondary(InputAction.CallbackContext context)
+	{
+		ActivateWeapon(secondary);
+	}
+
+	public void Cycle(InputAction.CallbackContext context)
+	{
+		if(context.performed)
+		{
+			if(currentPrimary.GetComponent<WeaponManager>().state == 0 || currentPrimary.GetComponent<WeaponManager>().state == 6)
 			{
-				cpwm.state = 0;
+				ActivateWeapon(primary);
+			}
+			else if(currentPrimary == primary)
+			{
+				ActivateWeapon(secondary);
+			}
+			else if(currentPrimary == secondary)
+			{
+				WeaponManager cpwm = currentPrimary.GetComponent<WeaponManager>();
+				if(cpwm.state == 1 || cpwm.state == 4)
+				{
+					cpwm.state = 0;
+				}
 			}
 		}
 	}
+
 
 	void SelectSecondaryWeapon()
 	{
@@ -311,6 +371,11 @@ public class PlayerStatsManager : MonoBehaviour
 				rb.gravityScale = 15f;
 				inWall = false;
 				skipAnimation = false;
+				DoorManager[] doors = FindObjectsOfType<DoorManager>();
+				foreach(DoorManager door in doors)
+				{
+					door.ResetArena();
+				}
 				//currentSecondary.SetActive(true);
 				Spawn();
 			}

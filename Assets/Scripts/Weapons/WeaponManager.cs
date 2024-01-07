@@ -158,18 +158,32 @@ public class WeaponManager : MonoBehaviour
         currentAmmo -= 1;
         cooldown = 1 / maxShotsPerSecond;
 
+        if(GetComponent<AudioSource>() !=null)
+        {
+            GetComponent<AudioSource>().Play();
+        }
+
         int bulletsFired = 0;
 
         while(bulletsFired < burstCount)
         {
             bulletsFired += 1;
-
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = mousePos.z - (Camera.main.transform.position.z);
-            Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
-            Vector3 direction = worldMousePos - firePosition.position;
-            direction = new Vector3(direction.x + Random.Range(-burstOffset, burstOffset), direction.y + Random.Range(-burstOffset, burstOffset), direction.z);
-            direction.Normalize();
+            Vector3 direction;
+            if(psm.useAim)
+            {
+                direction = psm.aim;
+                direction = new Vector3(direction.x + Random.Range(-burstOffset * 0.1f, burstOffset *0.1f), direction.y + Random.Range(-burstOffset * 0.1f, burstOffset * 0.1f), direction.z);
+                direction.Normalize();
+            }
+            else
+            {
+                Vector3 mousePos = Input.mousePosition;
+                mousePos.z = mousePos.z - (Camera.main.transform.position.z);
+                Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+                direction = worldMousePos - firePosition.position;
+                direction = new Vector3(direction.x + Random.Range(-burstOffset, burstOffset), direction.y + Random.Range(-burstOffset, burstOffset), direction.z);
+                direction.Normalize();
+            }
 
             float finalDamage = damage * damageMultiplier;
             int finalPierce = pierceLevel + addedPierce;

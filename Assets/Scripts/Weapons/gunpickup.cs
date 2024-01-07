@@ -6,7 +6,7 @@ public class gunpickup : MonoBehaviour
 {
     GameObject player;
     PlayerStatsManager psm;
-    WeaponManager weapon;
+    public WeaponManager weapon;
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +24,6 @@ public class gunpickup : MonoBehaviour
             if(psm.pickupTarget == null)
             {
                 psm.pickupTarget = gameObject;
-            }
-
-
-            if (Input.GetKeyDown(KeyCode.E) && psm.pickupTarget == gameObject)
-            {
-                psm.pickupTarget = null;
-                psm.AddWeapon(weapon);
-                Destroy(gameObject);
             }
         }
         else if(psm.pickupTarget == gameObject)

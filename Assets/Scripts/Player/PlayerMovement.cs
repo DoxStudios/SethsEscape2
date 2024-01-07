@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
 	float currentCooldown;
 	float jumpCooldown;
 	bool inJumpCooldown = false;
+	float nextHorizontal = 0;
+	bool applyNextHorizontal = false;
 
 	void Start()
 	{
@@ -55,8 +58,93 @@ public class PlayerMovement : MonoBehaviour
 		secondParticleSYS = secondParticleGO.GetComponent<ParticleSystem>();
 	}
 
+	public void OnMove(InputAction.CallbackContext context)
+	{
+		if(context.performed)
+		{
+			if(!dashRemoveControl)
+			{
+				horizontal = context.ReadValue<Vector2>().x;
+			}
+			else
+			{
+				nextHorizontal = context.ReadValue<Vector2>().x;
+				applyNextHorizontal = true;
+			}
+		}
+		else
+		{
+			if(!dashRemoveControl)
+			{
+				horizontal = 0;
+			}
+			else
+			{
+				nextHorizontal = 0;
+				applyNextHorizontal = false;
+			}
+		}
+	}
+
+	public void Jump(InputAction.CallbackContext context)
+	{
+		if(context.performed)
+		{
+			if(((isGrounded || inCoyotetime) || doubleJumpRemaining) && !psm.stunned)
+			{
+				if(!isGrounded && !inCoyotetime)
+				{
+					if(doubleJump)
+					{
+						rb.velocity = new Vector2(rb.velocity.x, 0);
+						doubleJumpRemaining = false;
+						rb.AddForce(transform.up * doubleJumpForce, ForceMode2D.Impulse);
+					}
+				}
+				else if(!inJumpCooldown)
+				{
+					jumpCooldown = 0.1f;
+					inJumpCooldown = true;
+					isGrounded = false;
+					rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+				}
+			}
+		}
+	}
+
+	public void Dash(InputAction.CallbackContext context)
+	{
+		if(dashUnlocked && hasDash && !psm.stunned && currentCooldown <= 0 && context.performed)
+		{
+			if(dashType == "teleport")
+			{
+				firstParticleGO.transform.position = transform.position;
+				firstParticleSYS.Play();
+				transform.position += direction * dashDistance;
+				secondParticleGO.transform.position = transform.position;
+				secondParticleSYS.Play();
+				hasDash = false;
+			}
+			else if(dashType == "standard")
+			{
+				inDash = true;
+				dashRemoveControl = true;
+				currentCooldown = maxDashCooldown;
+				dashTimer = standardDashTime;
+				rb.gravityScale = 0;
+				hasDash = false;
+			}
+		}
+	}
+
 	void Update()
 	{
+
+		if(applyNextHorizontal && !dashRemoveControl)
+		{
+			horizontal = nextHorizontal;
+			applyNextHorizontal = false;
+		}
 
 		if(Time.timeScale == 0)
 		{
@@ -73,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
 
 		if(!dashRemoveControl)
 		{
-			horizontal = Input.GetAxisRaw("Horizontal");
+			//horizontal = Input.GetAxisRaw("Horizontal");
 		}
 
 		if(rb.velocity.x > 0.1f || rb.velocity.x < -0.1f)
@@ -116,29 +204,6 @@ public class PlayerMovement : MonoBehaviour
 			currentCooldown -= Time.deltaTime;
 		}
 
-
-		if(dashUnlocked && hasDash && Input.GetButton("Dash") && !psm.stunned && currentCooldown <= 0)
-		{
-			if(dashType == "teleport")
-			{
-				firstParticleGO.transform.position = transform.position;
-				firstParticleSYS.Play();
-				transform.position += direction * dashDistance;
-				secondParticleGO.transform.position = transform.position;
-				secondParticleSYS.Play();
-				hasDash = false;
-			}
-			else if(dashType == "standard")
-			{
-				inDash = true;
-				dashRemoveControl = true;
-				currentCooldown = maxDashCooldown;
-				dashTimer = standardDashTime;
-				rb.gravityScale = 0;
-				hasDash = false;
-			}
-		}
-
 		if(inDash)
 		{
 			if(dashType == "standard")
@@ -170,26 +235,7 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
-		if(((isGrounded || inCoyotetime) || doubleJumpRemaining) && Input.GetButtonDown("Jump") && !psm.stunned)
-		{
-			if(!isGrounded && !inCoyotetime)
-			{
-				if(doubleJump)
-				{
-					rb.velocity = new Vector2(rb.velocity.x, 0);
-					doubleJumpRemaining = false;
-					rb.AddForce(transform.up * doubleJumpForce, ForceMode2D.Impulse);
-				}
-			}
-			else if(!inJumpCooldown)
-			{
-				jumpCooldown = 0.1f;
-				inJumpCooldown = true;
-				isGrounded = false;
-				rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-			}
-			
-		}
+		
 
 		if(psm.inWall && currentWallDamageCooldown > 0 && !psm.dead)
 		{
@@ -266,6 +312,31 @@ public class PlayerMovement : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
+		if(col.gameObject.tag == "Boss")
+		{
+			Vector2 direction = col.GetContact(0).normal;
+			if(direction.y == -1)
+			{
+				col.gameObject.GetComponent<BossStatsManager>().Damage(psm.damage, transform, psm.outgoingKnockbackAmount);
+				col.gameObject.GetComponent<BossStatsManager>().Stun(0.1f);
+			}
+			else
+			{
+				BossStatsManager esm = col.gameObject.GetComponent<BossStatsManager>();
+				if (velocityMagnitude > bashThreshold)
+				{
+					dashTimer = 0;
+					stopDash();
+                    			psm.DealKnockback(col.gameObject.transform, 0.5f, 0.15f, 0.2f);
+					esm.Damage(velocityMagnitude * 1.35f, transform, psm.outgoingKnockbackAmount);
+                		}
+				else
+				{
+					psm.Damage(esm.damage, col.gameObject.transform, 0.5f, 0.15f, 0.2f);
+					esm.Damage(psm.damage/3, transform, psm.outgoingKnockbackAmount);
+				}
+			}
+		}
 		if(col.gameObject.tag == "Destroyable")
 		{
 			if(velocityMagnitude > bashThreshold)

@@ -120,6 +120,12 @@ public class PauseManager : MonoBehaviour
             Destroy(weaponDrop);
         }
 
+        DoorManager[] doors = FindObjectsOfType<DoorManager>();
+        foreach(DoorManager door in doors)
+        {
+            door.ResetArena();
+        }
+
         Destroy(GameObject.FindGameObjectWithTag("Handgun"));
         Destroy(GameObject.FindGameObjectWithTag("Spasm"));
 
