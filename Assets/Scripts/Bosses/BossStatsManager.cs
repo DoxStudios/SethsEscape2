@@ -9,6 +9,9 @@ public class BossStatsManager : MonoBehaviour
     public float health;
     public float damage;
     public Color defaultColor;
+    public float outgoingKnockbackAmount;
+	public float outgoingKnockbackTime;
+	public float outgoingStunTime;
 
     Rigidbody2D rb;
     SpriteRenderer sr;

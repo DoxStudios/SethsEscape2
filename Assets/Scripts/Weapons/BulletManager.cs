@@ -58,5 +58,10 @@ public class BulletManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(col.gameObject.tag == "EnemyChainsaw")
+        {
+            col.gameObject.GetComponent<EnemyChainsawHealth>().Damage(damage);
+        }
     }
 }

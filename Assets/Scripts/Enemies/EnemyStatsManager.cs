@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class EnemyStatsManager : MonoBehaviour
 {
-    public float health = 1;
+    	public float health = 1;
 	float maxHealth;
-    public int damage = 1;
-    public float outgoingKnockbackAmount;
-    public float outgoingKnockbackTime;
-    public float outgoingStunTime;
+	public int damage = 1;
+	public float outgoingKnockbackAmount;
+	public float outgoingKnockbackTime;
+	public float outgoingStunTime;
 	public SpriteRenderer sr;
 	public int state = 0;
 
 	Color defaultColor;
 	Rigidbody2D rb;
-    bool stunned = false;
+    	bool stunned = false;
 	PlayerStatsManager psm;
 
-    public void Heal(float amount)
+    	public void Heal(float amount)
 	{
 		health += amount;
 	}
@@ -35,15 +35,15 @@ public class EnemyStatsManager : MonoBehaviour
 		StartColorFlash(new Color(1, 0, 0), 0.1f);
 	}
 
-    private void Start()
-    {
+	private void Start()
+	{
 		rb = GetComponent<Rigidbody2D>();
 		psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
 		defaultColor = sr.color;
 		maxHealth = health;
-    }
+	}
 
-    void Update()
+    	void Update()
 	{
 		if(health <= 0)
 		{
@@ -65,13 +65,13 @@ public class EnemyStatsManager : MonoBehaviour
 	}
 
 	void StartColorFlash(Color tempColor, float flashLength)
-    {
+    	{
 		StartCoroutine(ResetColor(flashLength));
 		sr.color = tempColor;
-    }
+   	 }
 
 	private IEnumerator ResetColor(float delay)
-    {
+    	{
 		yield return new WaitForSeconds(delay);
 		sr.color = defaultColor;
 	}

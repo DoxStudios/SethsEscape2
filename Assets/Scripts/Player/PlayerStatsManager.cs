@@ -165,7 +165,7 @@ public class PlayerStatsManager : MonoBehaviour
 		}
 	}
 
-	public void DamageWithoutKnockback(int amount)
+	public void DamageWithoutKnockback(float amount)
 	{
 		if(!dead && !stunned)
 		{
