@@ -19,6 +19,7 @@ public class BeetleWalking : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        GameObject.FindGameObjectWithTag("Boss").GetComponent<BeetleStateControl>().EndState();
         stateTime += Time.deltaTime;
 
         if(stateTime >= nextTime)

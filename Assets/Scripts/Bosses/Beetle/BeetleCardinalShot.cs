@@ -48,14 +48,14 @@ public class BeetleCardinalShot : StateMachineBehaviour
                 beetleUtils.ShootBullet(player.transform.position, shotgunLeft);
                 beetleUtils.ShootBullet(beetleUtils.gameObject.transform.position + new Vector3(1, 0, 0), shotgunRight);
                 beetleUtils.ShootChainsaw(player.transform.position, chainsawLeft);
-                beetleUtils.ShootChainsaw(beetleUtils.gameObject.transform.position + new Vector3(1, 0, 0), chainsawRight);
+                beetleUtils.ShootChainsaw(beetleUtils.gameObject.transform.position + new Vector3(1, 4, 0), chainsawRight);
             }
             else
             {
                 beetleUtils.ShootBullet(player.transform.position, shotgunRight);
                 beetleUtils.ShootBullet(beetleUtils.gameObject.transform.position + new Vector3(-1, 0, 0), shotgunLeft);
                 beetleUtils.ShootChainsaw(player.transform.position, chainsawRight);
-                beetleUtils.ShootChainsaw(beetleUtils.gameObject.transform.position + new Vector3(-1, 0, 0), chainsawLeft);
+                beetleUtils.ShootChainsaw(beetleUtils.gameObject.transform.position + new Vector3(-1, 4, 0), chainsawLeft);
             }
         }
 

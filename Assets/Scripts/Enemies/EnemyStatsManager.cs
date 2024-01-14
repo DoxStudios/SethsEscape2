@@ -12,6 +12,8 @@ public class EnemyStatsManager : MonoBehaviour
 	public float outgoingStunTime;
 	public SpriteRenderer sr;
 	public int state = 0;
+	public float dropChanceMultiplier;
+	public bool isWorm;
 
 	Color defaultColor;
 	Rigidbody2D rb;
@@ -47,7 +49,7 @@ public class EnemyStatsManager : MonoBehaviour
 	{
 		if(health <= 0)
 		{
-			bool shouldDrop = psm.dropWeapon();
+			bool shouldDrop = psm.dropWeapon(dropChanceMultiplier);
 			if(shouldDrop)
 			{
 				if(GetComponent<EnemyMovement>() != null)
@@ -58,6 +60,22 @@ public class EnemyStatsManager : MonoBehaviour
 					}
 				}
 
+			}
+			
+			if(isWorm)
+			{
+				shouldDrop = psm.dropWeapon(dropChanceMultiplier);
+				if(shouldDrop)
+				{
+					if(GetComponent<EnemyMovement>() != null)
+					{
+						if(GetComponent<EnemyMovement>().ranged)
+						{
+							GetComponent<WeaponDrop>().DropWeapon();
+						}
+					}
+
+				}
 			}
 			psm.Heal(maxHealth * 0.1f);
 			Destroy(gameObject);

@@ -155,6 +155,8 @@ MonoBehaviour:
   outgoingStunTime: 0.2
   sr: {fileID: 6975060581092979623}
   state: 0
+  dropChanceMultiplier: 1.1273
+  isWorm: 0
 --- !u!61 &5940062601322015933
 BoxCollider2D:
   m_ObjectHideFlags: 0

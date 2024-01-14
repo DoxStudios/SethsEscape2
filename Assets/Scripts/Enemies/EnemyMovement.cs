@@ -20,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     public bool inRange;
     public EnemyWeapon ew;
     public bool stopInRange;
+    public bool isWorm = false;
 
     Transform target;
 
@@ -68,11 +69,11 @@ public class EnemyMovement : MonoBehaviour
 
         if(player.transform.position.x < transform.position.x)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = !isWorm;
         }
         else
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = isWorm;
         }
 
         playerDetected = ((player.transform.position - transform.position).magnitude < detectRadius);
@@ -96,7 +97,7 @@ public class EnemyMovement : MonoBehaviour
                 Vector2 force = direction * speed * Time.deltaTime;
 
 
-                if(distanceToPlayer > followRadius && animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || animator.GetCurrentAnimatorStateInfo(0).IsName("Aggressive Walk"))
                 {
                     rb.AddForce(force);
                 }
@@ -115,7 +116,17 @@ public class EnemyMovement : MonoBehaviour
             {
                 if(stopInRange)
                 {
-                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    if(isWorm)
+                    {
+                        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+                        {
+                            rb.velocity = new Vector2(0, rb.velocity.y);
+                        }
+                    }
+                    else
+                    {
+                        rb.velocity = new Vector2(0, rb.velocity.y);
+                    }
                 }
                 ew.Fire();
             }

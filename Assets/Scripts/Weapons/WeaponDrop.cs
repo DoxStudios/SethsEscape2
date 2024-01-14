@@ -37,6 +37,8 @@ public class WeaponDrop : MonoBehaviour
         if(wm.type == WeaponManager.WeaponType.Revolver)
         {
             wm.currentAmmo += Random.Range(0, 3);
+            wm.maxShotsPerSecond = 20;
+            wm.fireFrames = 0.2f;
         }   
         else
         {

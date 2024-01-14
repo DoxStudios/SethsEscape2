@@ -61,11 +61,11 @@ public class PlayerStatsManager : MonoBehaviour
 	}
 	
 
-	public bool dropWeapon()
+	public bool dropWeapon(float multiplier)
 	{
 		int percent = Random.Range(1, 101);
 		
-		if(percent <= dropChance)
+		if(percent <= (dropChance * multiplier))
 		{
 			dropChance = 30;
 			return true;

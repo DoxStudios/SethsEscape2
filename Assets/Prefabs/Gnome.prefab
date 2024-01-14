@@ -155,6 +155,8 @@ MonoBehaviour:
   outgoingStunTime: 0.2
   sr: {fileID: 8243304212157251601}
   state: 0
+  dropChanceMultiplier: 1.025
+  isWorm: 0
 --- !u!61 &5940062601322015933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -245,7 +247,9 @@ MonoBehaviour:
   speed: 4500
   nextWaypointDistance: 3
   detectRadius: 200
+  initialRadius: 0
   playerDetected: 0
+  initialDetected: 0
   inRange: 0
   ew: {fileID: 208892385273561955}
   stopInRange: 1
@@ -375,10 +379,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35461cf597e8f237ca48e2142bab2a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 8243304212157251601}
-  enemyWeapon: {fileID: 208892385273561955}
-  readyTime: 0.2
-  trueReadyTime: 0.5
 --- !u!1 &8233169292980911508
 GameObject:
   m_ObjectHideFlags: 0

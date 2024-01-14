@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GnomeAnimator : MonoBehaviour
+public class EnemyAnimator : MonoBehaviour
 {
     EnemyMovement enemyMovement;
     EnemyWeapon enemyWeapon;

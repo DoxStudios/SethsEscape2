@@ -39,7 +39,7 @@ public class BeetleUtils : MonoBehaviour
     {
         GameObject chainsawInstance = Instantiate(chainsaw, origin.position, Quaternion.identity);
         Vector2 direction = (target - origin.position).normalized;
-        chainsawInstance.GetComponent<Rigidbody2D>().velocity = direction * 10;
+        chainsawInstance.GetComponent<Rigidbody2D>().velocity = direction * 100;
         EnemyChainsawDamage ecd = chainsawInstance.GetComponent<EnemyChainsawDamage>();
         EnemyChainsawHealth ech = chainsawInstance.GetComponent<EnemyChainsawHealth>();
         ChainsawMovement chainsawMovement = chainsawInstance.GetComponentInChildren<ChainsawMovement>();
