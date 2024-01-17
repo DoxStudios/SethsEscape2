@@ -24,6 +24,10 @@ public class BulletManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if(col.gameObject.tag == "Boss")
+        {
+            col.gameObject.GetComponent<BossStatsManager>().Damage(damage, transform, psm.outgoingKnockbackAmount * knockbackMultiplier);
+        }
         if(col.gameObject.tag == "Enemy")
         {
             EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
@@ -32,6 +36,11 @@ public class BulletManager : MonoBehaviour
         else if(col.gameObject.tag == "Ground")
         {
             Destroy(gameObject);
+        }
+
+        if(col.gameObject.tag == "EnemyChainsaw")
+        {
+            col.gameObject.GetComponent<EnemyChainsawHealth>().Damage(damage);
         }
 
         pierceLevel -= 1;
@@ -43,6 +52,10 @@ public class BulletManager : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        if(col.gameObject.tag == "Boss")
+        {
+            col.gameObject.GetComponent<BossStatsManager>().Damage(damage, transform, psm.outgoingKnockbackAmount * knockbackMultiplier);
+        }
         if(col.gameObject.tag == "Enemy")
         {
             EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
@@ -53,15 +66,16 @@ public class BulletManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if(col.gameObject.tag == "EnemyChainsaw")
+        {
+            col.gameObject.GetComponent<EnemyChainsawHealth>().Damage(damage);
+        }
+
         pierceLevel -= 1;
         if(pierceLevel == 0)
         {
             Destroy(gameObject);
         }
 
-        if(col.gameObject.tag == "EnemyChainsaw")
-        {
-            col.gameObject.GetComponent<EnemyChainsawHealth>().Damage(damage);
-        }
     }
 }

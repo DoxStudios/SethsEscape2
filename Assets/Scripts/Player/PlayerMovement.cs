@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 	bool inJumpCooldown = false;
 	float nextHorizontal = 0;
 	bool applyNextHorizontal = false;
+	bool finishedCoyotetime = false;
 
 	void Start()
 	{
@@ -155,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
 
 		if(isGrounded)
 		{
+			finishedCoyotetime = false;
 			doubleJumpRemaining = true;
 			hasDash = true;
 		}
@@ -290,8 +292,12 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if(col.gameObject.layer == LayerMask.NameToLayer("Ground"))
 		{
-			inCoyotetime = true;
-			currentCoyotetime = coyoteTime;
+			if(!finishedCoyotetime)
+			{
+				inCoyotetime = true;
+				currentCoyotetime = coyoteTime;
+				finishedCoyotetime = true;
+			}
 		}
 	}
 

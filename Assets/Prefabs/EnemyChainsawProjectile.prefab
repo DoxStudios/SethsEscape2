@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5029826758017564725}
   - component: {fileID: 2474375986480269229}
   - component: {fileID: 8578133711461098471}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: EnemyChainsawProjectile
-  m_TagString: Bullet
+  m_TagString: EnemyChainsaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0011444092, y: 0.00025451183}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -107,7 +107,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.5013509, y: 2.4964597}
   m_EdgeRadius: 0
 --- !u!114 &2474375986480269229
 MonoBehaviour:
@@ -145,10 +145,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6125636513781539144}
   - component: {fileID: 6940504764879945886}
-  - component: {fileID: 5088936546919399944}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Movement
-  m_TagString: Untagged
+  m_TagString: EnemyChainsaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,51 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   currentDirection: 3
---- !u!61 &5088936546919399944
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819060113853372334}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &8815532547858525369
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1852378640886929525}
   - component: {fileID: 9044056648588537655}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

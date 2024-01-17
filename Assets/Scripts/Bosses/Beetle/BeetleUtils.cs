@@ -47,14 +47,7 @@ public class BeetleUtils : MonoBehaviour
         chainsawMovement.speed = 80f;
 
         ecd.damage = 25f;
-        if(bsc.phase == 1)
-        {
-            ech.health = 85f;
-        }
-        else
-        {
-            ech.health = 170f;
-        }
+        ech.health = 1f;
     }
 
     public void ShootBomb(Transform target, Transform origin)
