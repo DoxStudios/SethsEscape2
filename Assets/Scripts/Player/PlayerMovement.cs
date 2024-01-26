@@ -318,10 +318,16 @@ public class PlayerMovement : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
+
+		if(col.gameObject.tag == "SpinHitBox")
+		{
+			return;
+		}
+
 		if(col.gameObject.tag == "Boss")
 		{
 			Vector2 direction = col.GetContact(0).normal;
-			if(direction.y == -1)
+			if(direction.y == -1 && rb.velocity.y > 0)
 			{
 				col.gameObject.GetComponent<BossStatsManager>().Damage(psm.damage, transform, psm.outgoingKnockbackAmount);
 				col.gameObject.GetComponent<BossStatsManager>().Stun(0.1f);
@@ -357,7 +363,7 @@ public class PlayerMovement : MonoBehaviour
 		if(col.gameObject.tag == "Enemy")
 		{
 			Vector2 direction = col.GetContact(0).normal;
-			if(direction.y == -1)
+			if(direction.y == -1 && rb.velocity.y > 0)
 			{
 				col.gameObject.GetComponent<EnemyStatsManager>().Damage(transform, psm.damage, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
 			}
@@ -368,13 +374,16 @@ public class PlayerMovement : MonoBehaviour
 				{
 					dashTimer = 0;
 					stopDash();
-                    psm.DealKnockback(col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+                    			psm.DealKnockback(col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
 					esm.Damage(transform, velocityMagnitude, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
-                }
-                else
+				}
+				else
 				{
 					psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
-					esm.Damage(transform, psm.damage/3, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+					if(!esm.isMoth)
+					{
+						esm.Damage(transform, psm.damage/3, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+					}
 				}
 			}
 		}

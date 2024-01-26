@@ -157,6 +157,7 @@ MonoBehaviour:
   state: 0
   dropChanceMultiplier: 1.1273
   isWorm: 0
+  knockbackDefense: 1
 --- !u!61 &5940062601322015933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -253,6 +254,7 @@ MonoBehaviour:
   inRange: 0
   ew: {fileID: 208892385273561955}
   stopInRange: 0
+  isWorm: 0
 --- !u!114 &1941087102877569787
 MonoBehaviour:
   m_ObjectHideFlags: 0

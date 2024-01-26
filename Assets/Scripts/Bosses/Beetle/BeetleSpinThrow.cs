@@ -6,7 +6,7 @@ public class BeetleSpinThrow : StateMachineBehaviour
 {
        
     float nextTime;
-
+    BeetleUtils beetleUtils;
     float stateTime = 0;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -14,6 +14,8 @@ public class BeetleSpinThrow : StateMachineBehaviour
     {
         nextTime = Random.Range(0.25f, 0.75f);
         GameObject.FindGameObjectWithTag("Boss").GetComponent<BeetleStateControl>().StateStart(true);
+        beetleUtils = GameObject.FindGameObjectWithTag("Boss").GetComponent<BeetleUtils>();
+        beetleUtils.ChainsawThrowHitbox(true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,6 +25,7 @@ public class BeetleSpinThrow : StateMachineBehaviour
 
         if(stateTime >= nextTime)
         {
+            beetleUtils.ChainsawThrowHitbox(false);
             GameObject.FindGameObjectWithTag("Boss").GetComponent<BeetleStateControl>().EndState();
         }
     }

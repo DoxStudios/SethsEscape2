@@ -8,6 +8,8 @@ public class BeetleUtils : MonoBehaviour
     public GameObject bullet;
     public GameObject chainsaw;
     public GameObject bomb;
+    public GameObject spinHitbox;
+    public GameObject throwHitbox;
 
     BossStatsManager bsm;
     BeetleStateControl bsc;
@@ -48,6 +50,16 @@ public class BeetleUtils : MonoBehaviour
 
         ecd.damage = 25f;
         ech.health = 1f;
+    }
+
+    public void ChainsawHitbox(bool state)
+    {
+        spinHitbox.SetActive(state);
+    }
+
+    public void ChainsawThrowHitbox(bool state)
+    {
+        throwHitbox.SetActive(state);
     }
 
     public void ShootBomb(Transform target, Transform origin)

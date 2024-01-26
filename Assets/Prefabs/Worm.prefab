@@ -157,6 +157,7 @@ MonoBehaviour:
   state: 0
   dropChanceMultiplier: 0.85
   isWorm: 1
+  knockbackDefense: 1
 --- !u!61 &5940062601322015933
 BoxCollider2D:
   m_ObjectHideFlags: 0

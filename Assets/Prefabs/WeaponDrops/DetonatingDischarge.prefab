@@ -67,8 +67,8 @@ MonoBehaviour:
   damage: 50
   burstCount: 1
   burstOffset: 0
-  speed: 100
-  knockbackMultiplier: 1
+  speed: 250
+  knockbackMultiplier: 2.5
   knockbackTimeMultiplier: 1
   stunTimeMultiplier: 1
   bulletSurvivalTime: 1

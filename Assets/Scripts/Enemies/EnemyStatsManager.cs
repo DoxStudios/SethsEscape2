@@ -14,6 +14,7 @@ public class EnemyStatsManager : MonoBehaviour
 	public int state = 0;
 	public float dropChanceMultiplier;
 	public bool isWorm;
+	public bool isMoth;
 
 	Color defaultColor;
 	Rigidbody2D rb;
@@ -29,11 +30,14 @@ public class EnemyStatsManager : MonoBehaviour
 	{
 		health -= amount;
 		StopAllCoroutines();
-		Vector2 direction = (transform.position - sender.position).normalized;
-		rb.AddForce(direction * knockbackAmount * 100, ForceMode2D.Impulse);
-		state = 1;
-		StartCoroutine(ResetKnockback(knockbackTime));
-		StartCoroutine(ResetStun(stunTime));
+		if(!isMoth)
+		{
+			Vector2 direction = (transform.position - sender.position).normalized;
+			rb.AddForce(direction * knockbackAmount * 100, ForceMode2D.Impulse);
+			state = 1;
+			StartCoroutine(ResetKnockback(knockbackTime));
+			StartCoroutine(ResetStun(stunTime));
+		}
 		StartColorFlash(new Color(1, 0, 0), 0.1f);
 	}
 
