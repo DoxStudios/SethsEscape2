@@ -14,6 +14,27 @@ public class ExplosivesManager : MonoBehaviour
     public float explosivePower;
     public float explosiveRange;
     public GameObject explosion;
+    GameObject[] moths;
+
+    void Awake()
+    {
+        moths = GameObject.FindGameObjectsWithTag("Moth");
+        for(int i = 0; i <moths.Length; i++)
+        {
+            moths[i] = moths[i].transform.parent.gameObject;
+        }
+
+        for(int i = 0; i < moths.Length; i++)
+        {
+            GameObject moth = moths[i];
+            if((moth.transform.position - transform.position).magnitude < 100)
+            {
+                MothMovement mv = moth.GetComponent<MothMovement>();
+                mv.targetOverride = true;
+                mv.targetOverrideTransform = transform;
+            }
+        }
+    }
 
     void Update()
     {
@@ -27,6 +48,13 @@ public class ExplosivesManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        for(int i = 0; i < moths.Length; i++)
+        {
+            GameObject moth = moths[i];
+            MothMovement mv = moth.GetComponent<MothMovement>();
+            mv.targetOverride = false;
+        }
+
         if(col.gameObject.tag == "Enemy")
         {
             EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
@@ -35,6 +63,27 @@ public class ExplosivesManager : MonoBehaviour
         else if(col.gameObject.tag == "Ground")
         {
             Destroy(gameObject);
+        }
+
+        GameObject explosionObject = Instantiate(explosion, transform.position, Quaternion.identity);
+        explosionObject.transform.localScale = new Vector3(explosiveRange*2, explosiveRange*2, 1);
+
+        Vector3 explosionSource = transform.position;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionSource, explosiveRange);
+
+        foreach(Collider2D hit in colliders)
+        {
+            if(hit.gameObject.tag == "Enemy")
+            {
+                EnemyStatsManager esm = hit.gameObject.GetComponent<EnemyStatsManager>();
+                esm.Damage(transform, (damage / (explosionSource - esm.gameObject.transform.position).magnitude) * 20, explosivePower * knockbackMultiplier / (explosionSource - esm.gameObject.transform.position).magnitude, psm.outgoingKnockbackTime * knockbackTimeMultiplier, psm.outgoingStunTime * stunTimeMultiplier);
+            }
+
+            if(hit.gameObject.tag == "Player")
+            {
+                PlayerStatsManager psm = hit.gameObject.GetComponent<PlayerStatsManager>();
+                psm.PlayerExplosive((damage / (explosionSource - psm.gameObject.transform.position).magnitude), transform, explosivePower * knockbackMultiplier);
+            }
         }
 
         pierceLevel -= 1;
@@ -46,6 +95,13 @@ public class ExplosivesManager : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        for(int i = 0; i < moths.Length; i++)
+        {
+            GameObject moth = moths[i];
+            MothMovement mv = moth.GetComponent<MothMovement>();
+            mv.targetOverride = false;
+        }
+
         if(col.gameObject.tag == "Enemy")
         {
             EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();

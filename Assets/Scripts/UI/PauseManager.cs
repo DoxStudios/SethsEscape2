@@ -31,8 +31,14 @@ public class PauseManager : MonoBehaviour
         playerStatsManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         playTimer = GameObject.FindGameObjectWithTag("Timer").GetComponent<timer>();
         rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        handgun = GameObject.FindGameObjectWithTag("Handgun").transform.position;
-        spasm = GameObject.FindGameObjectWithTag("Spasm").transform.position;
+        if(GameObject.FindGameObjectWithTag("Handgun") != null)
+        {
+            handgun = GameObject.FindGameObjectWithTag("Handgun").transform.position;
+        }
+        if(GameObject.FindGameObjectWithTag("Spasm") != null)
+        {
+            spasm = GameObject.FindGameObjectWithTag("Spasm").transform.position;
+        }
     }
 
     void DestroySpawners()

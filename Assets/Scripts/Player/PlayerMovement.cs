@@ -393,4 +393,79 @@ public class PlayerMovement : MonoBehaviour
 			psm.health = 0;
 		}
 	}
+
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if(col.gameObject.tag == "SpinHitBox")
+		{
+			return;
+		}
+
+		if(col.gameObject.tag == "Boss")
+		{
+			if(col.gameObject.transform.position.y > transform.position.y &&  rb.velocity.y > 0 && !isGrounded)
+			{
+				col.gameObject.GetComponent<BossStatsManager>().Damage(psm.damage, transform, psm.outgoingKnockbackAmount);
+				col.gameObject.GetComponent<BossStatsManager>().Stun(0.1f);
+			}
+			else
+			{
+				BossStatsManager esm = col.gameObject.GetComponent<BossStatsManager>();
+				if (velocityMagnitude > bashThreshold)
+				{
+					dashTimer = 0;
+					stopDash();
+                    			psm.DealKnockback(col.gameObject.transform, 0.5f, 0.15f, 0.2f);
+					esm.Damage(velocityMagnitude * 1.35f, transform, psm.outgoingKnockbackAmount);
+                		}
+				else
+				{
+					psm.Damage(esm.damage, col.gameObject.transform, 0.5f, 0.15f, 0.2f);
+					esm.Damage(psm.damage/3, transform, psm.outgoingKnockbackAmount);
+				}
+			}
+		}
+		if(col.gameObject.tag == "Destroyable")
+		{
+			if(velocityMagnitude > bashThreshold)
+			{
+				Destroy(col.gameObject);
+			}
+		}
+		if(col.gameObject.tag == "Spikes")
+		{
+			psm.health = 0;
+		}
+		if(col.gameObject.tag == "Enemy")
+		{
+			if(col.gameObject.transform.position.y > transform.position.y &&  rb.velocity.y > 0 && !isGrounded)
+			{
+				col.gameObject.GetComponent<EnemyStatsManager>().Damage(transform, psm.damage, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+			}
+			else
+			{
+				EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
+				if (velocityMagnitude > bashThreshold)
+				{
+					dashTimer = 0;
+					stopDash();
+                    			psm.DealKnockback(col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+					esm.Damage(transform, velocityMagnitude, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+				}
+				else
+				{
+					psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+					if(!esm.isMoth)
+					{
+						esm.Damage(transform, psm.damage/3, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+					}
+				}
+			}
+		}
+
+		if(col.gameObject.tag == "killbox")
+		{
+			psm.health = 0;
+		}
+	}
 }

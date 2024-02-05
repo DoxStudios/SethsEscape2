@@ -14,11 +14,24 @@ public class BeetleUtils : MonoBehaviour
     BossStatsManager bsm;
     BeetleStateControl bsc;
 
+    List<GameObject> chainsaws;
+
+    PlayerStatsManager psm;
+
     // Start is called before the first frame update
     void Start()
     {
         bsm = GetComponent<BossStatsManager>();
         bsc = GetComponent<BeetleStateControl>();
+        psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
+    }
+
+    void Update()
+    {
+        if(psm.health <= 0)
+        {
+            DeleteChainsaws();
+        }
     }
 
     public void ShootBullet(Vector3 target, Transform origin)
@@ -50,6 +63,10 @@ public class BeetleUtils : MonoBehaviour
 
         ecd.damage = 25f;
         ech.health = 1f;
+
+        GameObject chainsawObject = chainsawInstance;
+
+        //chainsaws.Add(chainsawObject);
     }
 
     public void ChainsawHitbox(bool state)
@@ -67,6 +84,14 @@ public class BeetleUtils : MonoBehaviour
         GameObject bombInstance = Instantiate(bomb, origin.position, Quaternion.identity);
         Vector2 direction = (target.position - origin.position).normalized;
         bombInstance.GetComponent<Rigidbody2D>().velocity = direction * 10;
+    }
+
+    public void DeleteChainsaws()
+    {
+        //foreach(GameObject chainsaw in chainsaws)
+        //{
+        //    Destroy(chainsaw);
+        //}
     }
     
 }

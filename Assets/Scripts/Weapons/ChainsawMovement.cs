@@ -7,6 +7,9 @@ public class ChainsawMovement : MonoBehaviour
 {
     public float speed;
     public direction currentDirection = direction.right;
+    
+    public GameObject sr;
+    SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
 
     Tilemap chainsawPath;
@@ -30,6 +33,7 @@ public class ChainsawMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = sr.GetComponent<SpriteRenderer>();
         rb = GetComponentInParent<Rigidbody2D>();
         chainsawPath = GameObject.Find("ChainsawPath").GetComponent<Tilemap>();
     }
@@ -56,18 +60,22 @@ public class ChainsawMovement : MonoBehaviour
             if(currentDirection == direction.left)
             {
                 targetPosition = leftPosition;
+                sr.transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             else if(currentDirection == direction.right)
             {
                 targetPosition = rightPosition;
+                sr.transform.rotation = Quaternion.Euler(0, 0, 180);
             }
             else if(currentDirection == direction.up)
             {
                 targetPosition = upPosition;
+                sr.transform.rotation = Quaternion.Euler(0, 0, -90);
             }
             else if(currentDirection == direction.down)
             {
                 targetPosition = downPosition;
+                sr.transform.rotation = Quaternion.Euler(0, 0, 90);
             }
         }
         Vector2 moveDirection = (Vector2) (targetPositionWorld - transform.parent.position);
@@ -269,10 +277,14 @@ public class ChainsawMovement : MonoBehaviour
                 if(up)
                 {
                     currentDirection = direction.up;
+                    spriteRenderer.flipX = false;
+                    spriteRenderer.flipY = true;
                 }
                 else if(down)
                 {
                     currentDirection = direction.down;
+                    spriteRenderer.flipX = false;
+                    spriteRenderer.flipY = true;
                 }
                 else
                 {
@@ -287,10 +299,14 @@ public class ChainsawMovement : MonoBehaviour
                 if(up)
                 {
                     currentDirection = direction.up;
+                    spriteRenderer.flipX = true;
+                    spriteRenderer.flipY = true;
                 }
                 else if(down)
                 {
                     currentDirection = direction.down;
+                    spriteRenderer.flipX = false;
+                    spriteRenderer.flipY = true;
                 }
                 else
                 {
@@ -305,10 +321,14 @@ public class ChainsawMovement : MonoBehaviour
                 if(left)
                 {
                     currentDirection = direction.left;
+                    spriteRenderer.flipX = false;
+                    spriteRenderer.flipY = true;
                 }
                 else if(right)
                 {
                     currentDirection = direction.right;
+                    spriteRenderer.flipX = false;
+                    spriteRenderer.flipY = true;
                 }
                 else
                 {
@@ -323,10 +343,14 @@ public class ChainsawMovement : MonoBehaviour
                 if(left)
                 {
                     currentDirection = direction.left;
+                    spriteRenderer.flipX = false;
+                    spriteRenderer.flipY = false;
                 }
                 else if(right)
                 {
                     currentDirection = direction.right;
+                    spriteRenderer.flipX = false;
+                    spriteRenderer.flipY = false;
                 }
                 else
                 {

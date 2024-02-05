@@ -17,9 +17,12 @@ public class BeetleStateControl : MonoBehaviour
 
     string category = "";
     public bool firstFrameCompleted = false;
-    int[] phase1 = {0, 1, 3, 4, 6, 8, 9, 10};
-    int[] phase2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    int[] phase1 = {0, 1, 3, 4, 6, 8, 9};
+    //int[] phase1 = {0, 8, 9};
+    int[] phase2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     BossStatsManager bsm;
+
+    bool veryFirstFrame = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +43,11 @@ public class BeetleStateControl : MonoBehaviour
         {
             phase = 1;
         }
-        
+
+        if(bsm.health <= 0)
+        {
+            veryFirstFrame = false;
+        }   
 
         if(!firstFrameCompleted)
         {    
@@ -80,10 +87,15 @@ public class BeetleStateControl : MonoBehaviour
                 next = 0;
             }
 
+            if(!veryFirstFrame)
+            {
+                next = 1;
+            }
  
             category = "";
 
             firstFrameCompleted = true;
+            veryFirstFrame = true;
             lastSelected = next;
         }
 

@@ -28,6 +28,7 @@ TagManager:
   - Boss
   - EnemyChainsaw
   - SpinHitBox
+  - Moth
   layers:
   - Default
   - TransparentFX
@@ -42,8 +43,8 @@ TagManager:
   - Pickup
   - Chainsaw
   - Enemy Chainsaw
-  - 
-  - 
+  - Moth
+  - Enemy Chainsaw Movement
   - 
   - 
   - 
