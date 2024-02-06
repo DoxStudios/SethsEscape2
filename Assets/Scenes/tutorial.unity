@@ -12588,6 +12588,280 @@ MonoBehaviour:
   gunImage: {fileID: 789113923}
   activeColor: {r: 1, g: 1, b: 1, a: 1}
   inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!1 &897300145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 897300147}
+  - component: {fileID: 897300146}
+  m_Layer: 0
+  m_Name: Input
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &897300146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897300145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 6d843272ecc0599b393498a0ba3df39f, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerStatsManager, Assembly-CSharp
+        m_MethodName: ControlsChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480843}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 64dfb736-0881-448d-936c-8d3a9a93123e
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow,/SaitekProFlightQuadrant/Stick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480842}
+        m_TargetAssemblyTypeName: PlayerStatsManager, Assembly-CSharp
+        m_MethodName: Fire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6e7871e9-1fa3-4b0c-8b59-e7ae51cac85a
+    m_ActionName: Player/Fire[/Mouse/leftButton,/SaitekProFlightQuadrant/Trigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c0ca9019-f73a-42d2-89ce-7e5aae2ecf16
+    m_ActionName: UI/Navigate[/SaitekProFlightQuadrant/Stick/up,/SaitekProFlightQuadrant/Stick/down,/SaitekProFlightQuadrant/Stick/left,/SaitekProFlightQuadrant/Stick/right,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 632a8566-314c-4059-9e09-0296947b288d
+    m_ActionName: UI/Submit[/SaitekProFlightQuadrant/Trigger,/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2a300302-73e0-42a2-8c5e-818eca474522
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3fe8da23-2420-4e05-b7b7-73b1ea9a6da3
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69fa3f7f-5add-47f3-972d-2899d786a31b
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4194c0d7-4efe-4ecc-8d07-2c86d9a861fe
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9754f7c0-483a-4f1d-8018-10063725f213
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0cfb1487-dc48-4f62-9758-9ab197214f64
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ae485a5-5f6f-463f-be4a-8694bb295b28
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 14cba96c-daf4-4aa5-a89e-9f8dc95f215b
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480842}
+        m_TargetAssemblyTypeName: PlayerStatsManager, Assembly-CSharp
+        m_MethodName: Eat
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1c6098a7-0d9b-44aa-9092-bbf262f8c796
+    m_ActionName: Player/Eat[/Keyboard/e,/SaitekProFlightQuadrant/Thumb]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480842}
+        m_TargetAssemblyTypeName: PlayerStatsManager, Assembly-CSharp
+        m_MethodName: Aim_Vertical
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3c22c217-891f-41eb-9444-0fe68fa78a1f
+    m_ActionName: Player/Aim_Vertical[/SaitekProFlightQuadrant/Base3,/Gamepad/rightStick/down,/Gamepad/rightStick/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480842}
+        m_TargetAssemblyTypeName: PlayerStatsManager, Assembly-CSharp
+        m_MethodName: Aim_Horizontal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cc2bbee9-8b82-4374-b7dc-4aefd6f4dfef
+    m_ActionName: Player/Aim_Horizontal[/SaitekProFlightQuadrant/Base2,/Gamepad/rightStick/left,/Gamepad/rightStick/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480842}
+        m_TargetAssemblyTypeName: PlayerStatsManager, Assembly-CSharp
+        m_MethodName: Cycle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 77d3799f-3ab2-4819-a74b-6d3adc002dcd
+    m_ActionName: Player/Cycle_Weapons[/Keyboard/q,/Gamepad/rightShoulder,/SaitekProFlightQuadrant/Top2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480842}
+        m_TargetAssemblyTypeName: PlayerStatsManager, Assembly-CSharp
+        m_MethodName: Primary
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7fed90d8-0bf9-4796-9c60-35824dceccc3
+    m_ActionName: Player/Primary[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480842}
+        m_TargetAssemblyTypeName: PlayerStatsManager, Assembly-CSharp
+        m_MethodName: Secondary
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f9e270e2-dda4-4a04-8448-c7b7f1ec480b
+    m_ActionName: Player/Secondary[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480843}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1bf9acdf-b77c-4bc4-abd9-24e3b5961c19
+    m_ActionName: Player/Jump[/Gamepad/leftStickPress,/Gamepad/buttonEast,/Keyboard/space,/SaitekProFlightQuadrant/Top]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538480843}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Dash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d5bff2dd-ed26-4e37-8514-8e88ed124d4a
+    m_ActionName: Player/Dash[/Gamepad/leftTrigger,/Keyboard/shift,/Mouse/rightButton,/SaitekProFlightQuadrant/Thumb2]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!4 &897300147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897300145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.347899, y: 26.243013, z: 8.34849}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &931834604
 GameObject:
   m_ObjectHideFlags: 0
@@ -14650,6 +14924,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bc56f05faab350bfb3d7e4f800e8482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1538480842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1286036964528445768, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
+  m_PrefabInstance: {fileID: 1538480840}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735488428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5cc0401c5cae07c8f5b9fb35d49029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1538480843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6275507847315061193, guid: 3c62cf2f91b662b4aa9e1d76d2f4b600, type: 3}
+  m_PrefabInstance: {fileID: 1538480840}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735488428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62d4e1ef060d4e008072f1e4270065c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1625344316
