@@ -107,6 +107,11 @@ public class ExplosivesManager : MonoBehaviour
             EnemyStatsManager esm = col.gameObject.GetComponent<EnemyStatsManager>();
             esm.Damage(transform, damage, psm.outgoingKnockbackAmount * knockbackMultiplier, psm.outgoingKnockbackTime * knockbackTimeMultiplier, psm.outgoingStunTime * stunTimeMultiplier);
         }
+        else if(col.gameObject.tag == "Boss")
+        {
+            BossStatsManager bsm = col.gameObject.GetComponent<BossStatsManager>();
+            bsm.Damage(damage, transform, psm.outgoingKnockbackAmount * knockbackMultiplier);
+        }
         else if(col.gameObject.tag == "Ground")
         {
             Destroy(gameObject);
@@ -124,6 +129,12 @@ public class ExplosivesManager : MonoBehaviour
             {
                 EnemyStatsManager esm = hit.gameObject.GetComponent<EnemyStatsManager>();
                 esm.Damage(transform, (damage / (explosionSource - esm.gameObject.transform.position).magnitude) * 20, explosivePower * knockbackMultiplier / (explosionSource - esm.gameObject.transform.position).magnitude, psm.outgoingKnockbackTime * knockbackTimeMultiplier, psm.outgoingStunTime * stunTimeMultiplier);
+            }
+
+            if(col.gameObject.tag == "Boss")
+            {
+                BossStatsManager bsm = col.gameObject.GetComponent<BossStatsManager>();
+                bsm.Damage((damage / (explosionSource - bsm.gameObject.transform.position).magnitude) * 20, transform, psm.outgoingKnockbackAmount * knockbackMultiplier);
             }
 
             if(hit.gameObject.tag == "Player")

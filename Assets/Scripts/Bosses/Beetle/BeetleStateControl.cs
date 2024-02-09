@@ -8,6 +8,10 @@ public class BeetleStateControl : MonoBehaviour
     Animator animator;
     GameObject player;
 
+    public GameObject groundCheck;
+    public LayerMask ground;
+    float groundedRadius = 5f;
+
     public int phase = 1;
     public bool transition = true;
     public int next = 0;
@@ -17,10 +21,12 @@ public class BeetleStateControl : MonoBehaviour
 
     string category = "";
     public bool firstFrameCompleted = false;
-    int[] phase1 = {0, 1, 3, 4, 6, 8, 9};
-    //int[] phase1 = {0, 8, 9};
+    int[] phase1 = {0, 1, 3, 4, 6, 8, 9, 12};
+    //int[] phase1 = {1, 3, 0, 10};
     int[] phase2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     BossStatsManager bsm;
+
+    public bool grounded = true;
 
     bool veryFirstFrame = false;
 
@@ -35,6 +41,9 @@ public class BeetleStateControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        grounded = checkGrounded();
+
         if(bsm.health <= 500)
         {
             phase = 2;
@@ -51,8 +60,6 @@ public class BeetleStateControl : MonoBehaviour
 
         if(!firstFrameCompleted)
         {    
-
-            transition = false;
 
             if(next == 0)
             {
@@ -91,7 +98,7 @@ public class BeetleStateControl : MonoBehaviour
             {
                 next = 1;
             }
- 
+
             category = "";
 
             firstFrameCompleted = true;
@@ -99,7 +106,14 @@ public class BeetleStateControl : MonoBehaviour
             lastSelected = next;
         }
 
-        animator.SetBool("Transition", transition);
+        if(grounded)
+        {
+            animator.SetBool("Transition", transition);
+        }
+        else
+        {
+            animator.SetBool("Transition", false);
+        }
         animator.SetInteger("Next", next);
     }
 
@@ -109,7 +123,7 @@ public class BeetleStateControl : MonoBehaviour
         {
             attacks++;
         }
-
+        transition = false;
         firstFrameCompleted = false;
     }
 
@@ -117,4 +131,15 @@ public class BeetleStateControl : MonoBehaviour
     {
         transition = true;
     }
+
+    bool checkGrounded()
+	{
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, groundedRadius, ground);
+		for (int i = 0; i < colliders.Length; i++) {
+			if (colliders[i].gameObject != gameObject) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

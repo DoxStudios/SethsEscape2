@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: Standard
-  name: Hangun
+  name: Handgun
   damage: 85
   burstCount: 1
   burstOffset: 0

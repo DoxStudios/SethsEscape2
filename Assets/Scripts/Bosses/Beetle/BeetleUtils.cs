@@ -10,11 +10,12 @@ public class BeetleUtils : MonoBehaviour
     public GameObject bomb;
     public GameObject spinHitbox;
     public GameObject throwHitbox;
+    public GameObject chainsawLeapHitbox;
 
     BossStatsManager bsm;
     BeetleStateControl bsc;
 
-    List<GameObject> chainsaws;
+    List<GameObject> chainsaws = new List<GameObject>();
 
     PlayerStatsManager psm;
 
@@ -29,6 +30,12 @@ public class BeetleUtils : MonoBehaviour
     void Update()
     {
         if(psm.health <= 0)
+        {
+            bsm.health = 1000;
+            DeleteChainsaws();
+        }
+
+        if(bsm.health <= 0)
         {
             DeleteChainsaws();
         }
@@ -52,7 +59,7 @@ public class BeetleUtils : MonoBehaviour
 
     public void ShootChainsaw(Vector3 target, Transform origin)
     {
-        GameObject chainsawInstance = Instantiate(chainsaw, origin.position, Quaternion.identity);
+        GameObject chainsawInstance =  Instantiate(chainsaw, origin.position, Quaternion.identity);
         Vector2 direction = (target - origin.position).normalized;
         chainsawInstance.GetComponent<Rigidbody2D>().velocity = direction * 100;
         EnemyChainsawDamage ecd = chainsawInstance.GetComponent<EnemyChainsawDamage>();
@@ -62,11 +69,12 @@ public class BeetleUtils : MonoBehaviour
         chainsawMovement.speed = 80f;
 
         ecd.damage = 25f;
+        //ecd.damage = 0f;
         ech.health = 1f;
 
         GameObject chainsawObject = chainsawInstance;
 
-        //chainsaws.Add(chainsawObject);
+        chainsaws.Add( (GameObject) chainsawObject);
     }
 
     public void ChainsawHitbox(bool state)
@@ -86,12 +94,22 @@ public class BeetleUtils : MonoBehaviour
         bombInstance.GetComponent<Rigidbody2D>().velocity = direction * 10;
     }
 
+    public void ChainsawLeapHitbox(bool state)
+    {
+        chainsawLeapHitbox.SetActive(state);
+    }
+
+    public bool GetChainsawLeap()
+    {
+        return chainsawLeapHitbox.activeSelf;
+    }
+
     public void DeleteChainsaws()
     {
-        //foreach(GameObject chainsaw in chainsaws)
-        //{
-        //    Destroy(chainsaw);
-        //}
+        foreach(GameObject chainsaw in chainsaws)
+        {
+            Destroy(chainsaw);
+        }
     }
     
 }
