@@ -57,7 +57,7 @@ public class PlayerStatsManager : MonoBehaviour
 			{
 				if(pickupTarget.GetComponent<gunpickup>() == null)
 				{
-					if(primary.GetComponent<WeaponManager>().state != 6 && secondary.GetComponent<WeaponManager>().state != 6)
+					if(primary.GetComponent<WeaponManager>().state != 6 || secondary.GetComponent<WeaponManager>().state != 6)
 					{
 						AddWeapon(pickupTarget.GetComponent<GunBall>().weapon, true);
 						pickupTarget = null;
@@ -145,6 +145,16 @@ public class PlayerStatsManager : MonoBehaviour
 
 	public GameObject GetSlot()
 	{
+		if(primary.GetComponent<WeaponManager>().state == 6)
+		{
+			return primary;
+		}
+
+		if(secondary.GetComponent<WeaponManager>().state == 6)
+		{
+			return secondary;
+		}
+
 		if(primary.GetComponent<WeaponManager>().currentAmmo == 0)
 		{
 			return primary;
@@ -160,6 +170,16 @@ public class PlayerStatsManager : MonoBehaviour
 
 	public GameObject GetGunBallSlot(WeaponManager wm)
 	{
+
+		if(primary.GetComponent<WeaponManager>().state == 6)
+		{
+			return secondary;
+		}
+		else if(secondary.GetComponent<WeaponManager>().state == 6)
+		{
+			return primary;
+		}
+
 		if(primary.GetComponent<WeaponManager>().currentAmmo == 0)
 		{
 			return primary;

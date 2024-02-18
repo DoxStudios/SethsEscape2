@@ -17,7 +17,7 @@ public class BossBulletManager : MonoBehaviour
             psm.Damage(damage, transform, outgoingKnockbackAmount, outgoingKnockbackTime, outgoingStunTime);
             Destroy(gameObject);
         }
-        else if(col.gameObject.tag == "Ground")
+        else if(col.gameObject.tag == "Ground" || col.gameObject.tag == "Door")
         {
             Destroy(gameObject);
         }

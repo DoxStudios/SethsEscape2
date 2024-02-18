@@ -367,7 +367,7 @@ Transform:
   - {fileID: 3006026278667020672}
   - {fileID: 59388021186967396}
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1826201816925717195
 BoxCollider2D:
@@ -439,7 +439,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &3454219481595284325
 MonoBehaviour:
@@ -460,6 +460,8 @@ MonoBehaviour:
   outgoingKnockbackAmount: 0
   outgoingKnockbackTime: 0
   outgoingStunTime: 0
+  sr: {fileID: 0}
+  isBeetle: 1
   stun: 0
 --- !u!114 &24584558004517388
 MonoBehaviour:
@@ -476,7 +478,7 @@ MonoBehaviour:
   groundCheck: {fileID: 6547525749176111088}
   ground:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   phase: 1
   transition: 1
   next: 1
@@ -524,6 +526,8 @@ MonoBehaviour:
   spinHitbox: {fileID: 8773581323131040686}
   throwHitbox: {fileID: 3242483793317557071}
   chainsawLeapHitbox: {fileID: 8997146955013913368}
+  doorManager: {fileID: 0}
+  inFight: 0
 --- !u!1 &5814462322301282820
 GameObject:
   m_ObjectHideFlags: 0

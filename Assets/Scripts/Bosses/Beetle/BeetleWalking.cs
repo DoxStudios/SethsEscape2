@@ -65,16 +65,16 @@ public class BeetleWalking : StateMachineBehaviour
         
         if(target.x > boss.transform.position.x)
         {
-            rb.velocity = new Vector2(10, rb.velocity.y);
+            rb.velocity = new Vector2(10, rb.velocity.y - (9.8f * Time.deltaTime));
         }
         else
         {
-            rb.velocity = new Vector2(-10, rb.velocity.y);
+            rb.velocity = new Vector2(-10, rb.velocity.y - (9.8f * Time.deltaTime));
         }
 
         if(Mathf.Abs(boss.transform.position.x - target.x) < 0.5)
         {
-            rb.velocity = new Vector2(0, 0);
+            rb.velocity = new Vector2(0, rb.velocity.y);
             GameObject.FindGameObjectWithTag("Boss").GetComponent<BeetleStateControl>().EndState();
         }
     }

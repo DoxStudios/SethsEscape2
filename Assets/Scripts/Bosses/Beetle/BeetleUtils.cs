@@ -11,17 +11,21 @@ public class BeetleUtils : MonoBehaviour
     public GameObject spinHitbox;
     public GameObject throwHitbox;
     public GameObject chainsawLeapHitbox;
+    public DoorManager doorManager;
 
     BossStatsManager bsm;
     BeetleStateControl bsc;
 
     List<GameObject> chainsaws = new List<GameObject>();
 
-    PlayerStatsManager psm;
+    public PlayerStatsManager psm;
+    Rigidbody2D rb;
+    public bool inFight = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         bsm = GetComponent<BossStatsManager>();
         bsc = GetComponent<BeetleStateControl>();
         psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
@@ -29,15 +33,39 @@ public class BeetleUtils : MonoBehaviour
 
     void Update()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        if(!inFight)
+        {
+            bsm.health = 1000;
+            rb.velocity = Vector2.zero;
+            bsm.sr.color = bsm.defaultColor;
+        }
+
+
         if(psm.health <= 0)
         {
             bsm.health = 1000;
             DeleteChainsaws();
+            doorManager.ResetArena();
+            inFight = false;
         }
 
         if(bsm.health <= 0)
         {
             DeleteChainsaws();
+            doorManager.Open();
+            inFight = false;
+        }
+    }
+
+    public void PlayerEnter()
+    {
+        if(!inFight)
+        {
+            doorManager.Close();
+
+
+            inFight = true;
         }
     }
 
@@ -46,7 +74,7 @@ public class BeetleUtils : MonoBehaviour
         for(int i = 0; i < 5; i++)
         {
             GameObject bulletInstance = Instantiate(bullet, origin.position, Quaternion.identity);
-            Vector3 finalTarget = target + new Vector3(Random.Range(-6f, 6f), Random.Range(-6f, 6f), 0);
+            Vector3 finalTarget = target + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0);
             Vector2 direction = (finalTarget - origin.position).normalized;
             bulletInstance.GetComponent<Rigidbody2D>().velocity = direction * 100;
             BossBulletManager bbm = bulletInstance.GetComponent<BossBulletManager>();
@@ -71,10 +99,33 @@ public class BeetleUtils : MonoBehaviour
         ecd.damage = 25f;
         //ecd.damage = 0f;
         ech.health = 1f;
+        ech.boss = true;
 
         GameObject chainsawObject = chainsawInstance;
 
         chainsaws.Add( (GameObject) chainsawObject);
+    }
+
+    public void ShootBomb(Vector3 target, Transform origin, bool bowling, bool pitch, float speed)
+    {
+        GameObject bombInstance = Instantiate(bomb, origin.position, Quaternion.identity);
+        Vector2 direction = (target - origin.position).normalized;
+        bombInstance.GetComponent<Rigidbody2D>().velocity = direction * speed;
+
+        BossExplosivesManager bem = bombInstance.GetComponent<BossExplosivesManager>();
+        bem.bowling = bowling;
+
+        if(pitch)
+        {
+            Rigidbody2D brb = bombInstance.GetComponent<Rigidbody2D>();
+            brb.gravityScale = 0;
+        }
+
+        if(bowling)
+        {
+            Rigidbody2D brb = bombInstance.GetComponent<Rigidbody2D>();
+            brb.gravityScale = 10;
+        }
     }
 
     public void ChainsawHitbox(bool state)

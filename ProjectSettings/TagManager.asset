@@ -29,6 +29,9 @@ TagManager:
   - EnemyChainsaw
   - SpinHitBox
   - Moth
+  - Door
+  - BossSpawn
+  - BowlingTag
   layers:
   - Default
   - TransparentFX
@@ -45,7 +48,7 @@ TagManager:
   - Enemy Chainsaw
   - Moth
   - Enemy Chainsaw Movement
-  - 
+  - Door
   - 
   - 
   - 

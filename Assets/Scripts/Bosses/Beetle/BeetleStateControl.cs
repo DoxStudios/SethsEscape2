@@ -22,9 +22,14 @@ public class BeetleStateControl : MonoBehaviour
     string category = "";
     public bool firstFrameCompleted = false;
     int[] phase1 = {0, 1, 3, 4, 6, 8, 9, 12};
-    //int[] phase1 = {1, 3, 0, 10};
+    //int[] phase1 = {0, 11};
     int[] phase2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     BossStatsManager bsm;
+    BeetleUtils beetleUtils;
+    
+
+    public bool stunned = false;
+    public bool stunBlocked = false;
 
     public bool grounded = true;
 
@@ -33,6 +38,7 @@ public class BeetleStateControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        beetleUtils = GetComponent<BeetleUtils>();
         bsm = GetComponent<BossStatsManager>();
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -106,15 +112,29 @@ public class BeetleStateControl : MonoBehaviour
             lastSelected = next;
         }
 
-        if(grounded)
+        if(!stunned)
         {
-            animator.SetBool("Transition", transition);
+            if(grounded && beetleUtils.inFight)
+            {
+                animator.SetBool("Transition", transition);
+            }
+            else
+            {
+                animator.SetBool("Transition", false);
+            }
+            animator.SetInteger("Next", next);
         }
-        else
+    }
+
+    public void Stun()
+    {
+        if(!stunBlocked)
         {
-            animator.SetBool("Transition", false);
+            animator.SetInteger("Next", 13);
+            animator.SetBool("Transition", true);
+            stunned = true;
+            stunBlocked = true;
         }
-        animator.SetInteger("Next", next);
     }
 
     public void StateStart(bool attack)
@@ -142,4 +162,12 @@ public class BeetleStateControl : MonoBehaviour
 		}
 		return false;
 	}
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Ground")
+        {
+            stunBlocked = false;
+        }
+    }
 }
