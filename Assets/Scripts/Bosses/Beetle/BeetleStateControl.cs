@@ -8,6 +8,10 @@ public class BeetleStateControl : MonoBehaviour
     Animator animator;
     GameObject player;
 
+    public GameObject groundCheck;
+    public LayerMask ground;
+    float groundedRadius = 5f;
+
     public int phase = 1;
     public bool transition = true;
     public int next = 0;
@@ -17,16 +21,24 @@ public class BeetleStateControl : MonoBehaviour
 
     string category = "";
     public bool firstFrameCompleted = false;
-    int[] phase1 = {0, 1, 3, 4, 6, 8, 9};
-    //int[] phase1 = {0, 8, 9};
+    int[] phase1 = {0, 1, 3, 4, 6, 8, 9, 12};
+    //int[] phase1 = {0, 11};
     int[] phase2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     BossStatsManager bsm;
+    BeetleUtils beetleUtils;
+    
+
+    public bool stunned = false;
+    public bool stunBlocked = false;
+
+    public bool grounded = true;
 
     bool veryFirstFrame = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        beetleUtils = GetComponent<BeetleUtils>();
         bsm = GetComponent<BossStatsManager>();
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -35,6 +47,9 @@ public class BeetleStateControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        grounded = checkGrounded();
+
         if(bsm.health <= 500)
         {
             phase = 2;
@@ -51,8 +66,6 @@ public class BeetleStateControl : MonoBehaviour
 
         if(!firstFrameCompleted)
         {    
-
-            transition = false;
 
             if(next == 0)
             {
@@ -91,7 +104,7 @@ public class BeetleStateControl : MonoBehaviour
             {
                 next = 1;
             }
- 
+
             category = "";
 
             firstFrameCompleted = true;
@@ -99,8 +112,29 @@ public class BeetleStateControl : MonoBehaviour
             lastSelected = next;
         }
 
-        animator.SetBool("Transition", transition);
-        animator.SetInteger("Next", next);
+        if(!stunned)
+        {
+            if(grounded && beetleUtils.inFight)
+            {
+                animator.SetBool("Transition", transition);
+            }
+            else
+            {
+                animator.SetBool("Transition", false);
+            }
+            animator.SetInteger("Next", next);
+        }
+    }
+
+    public void Stun()
+    {
+        if(!stunBlocked)
+        {
+            animator.SetInteger("Next", 13);
+            animator.SetBool("Transition", true);
+            stunned = true;
+            stunBlocked = true;
+        }
     }
 
     public void StateStart(bool attack)
@@ -109,12 +143,31 @@ public class BeetleStateControl : MonoBehaviour
         {
             attacks++;
         }
-
+        transition = false;
         firstFrameCompleted = false;
     }
 
     public void EndState()
     {
         transition = true;
+    }
+
+    bool checkGrounded()
+	{
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, groundedRadius, ground);
+		for (int i = 0; i < colliders.Length; i++) {
+			if (colliders[i].gameObject != gameObject) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Ground")
+        {
+            stunBlocked = false;
+        }
     }
 }

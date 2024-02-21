@@ -7,18 +7,7 @@ public class DoorManager : MonoBehaviour
 
     public DoorOperator leftDoor;
     public DoorOperator rightDoor;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public BossStatsManager bsm;
 
     public void ResetArena()
     {
@@ -26,12 +15,20 @@ public class DoorManager : MonoBehaviour
         rightDoor.Reset();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    public void Close()
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            leftDoor.Close();
-            rightDoor.Close();
-        }
+        leftDoor.Close();
+        rightDoor.Close();
+    }
+
+    public void Open()
+    {
+        leftDoor.Open();
+        rightDoor.Open();
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        bsm.PlayerEnter();
     }
 }

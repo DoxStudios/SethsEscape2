@@ -9,12 +9,13 @@ public class DoorOperator : MonoBehaviour
 
     bool opened = false;
     bool closed = false;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         boxCollider2D = GetComponent<BoxCollider2D>();
-        
+        animator = GetComponent<Animator>();
         Reset();
     }
 
@@ -29,6 +30,7 @@ public class DoorOperator : MonoBehaviour
         opened = false;
         closed = false;
         boxCollider2D.enabled = false;
+        animator.SetBool("Closed", false);
     }
 
     public void Open()
@@ -37,6 +39,7 @@ public class DoorOperator : MonoBehaviour
         {
             opened = true;
             boxCollider2D.enabled = false;
+            animator.SetBool("Closed", false);
         }
     }
 
@@ -46,6 +49,7 @@ public class DoorOperator : MonoBehaviour
         {
             closed = true;
             boxCollider2D.enabled = true;
+            animator.SetBool("Closed", true);
         }
     }
 }

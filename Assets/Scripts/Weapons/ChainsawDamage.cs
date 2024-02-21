@@ -19,5 +19,10 @@ public class ChainsawDamage : MonoBehaviour
         {
             col.gameObject.GetComponent<BossStatsManager>().Damage(damage, transform, psm.outgoingKnockbackAmount);
         }
+
+        if(col.gameObject.tag == "EnemyChainsaw")
+        {
+            col.gameObject.GetComponent<EnemyChainsawHealth>().Damage(0.5f);
+        }
     }
 }

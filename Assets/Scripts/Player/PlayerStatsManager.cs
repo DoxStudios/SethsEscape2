@@ -44,6 +44,8 @@ public class PlayerStatsManager : MonoBehaviour
 	public bool skipAnimation = false;
 	int dropChance = 30;
 
+	bool alternateDropSlot = false;
+
 
 	string currentWeapon = "No";
 
@@ -53,9 +55,20 @@ public class PlayerStatsManager : MonoBehaviour
 		{
 			if(pickupTarget != null)
 			{
-				AddWeapon(pickupTarget.GetComponent<gunpickup>().weapon);
-				Destroy(pickupTarget);
-				pickupTarget = null;
+				if(pickupTarget.GetComponent<gunpickup>() == null)
+				{
+					if(primary.GetComponent<WeaponManager>().state != 6 || secondary.GetComponent<WeaponManager>().state != 6)
+					{
+						AddWeapon(pickupTarget.GetComponent<GunBall>().weapon, true);
+						pickupTarget = null;
+					}
+				}
+				else
+				{
+					AddWeapon(pickupTarget.GetComponent<gunpickup>().weapon, false);
+					Destroy(pickupTarget);
+					pickupTarget = null;
+				}
 			}
 		}
 	}
@@ -77,9 +90,18 @@ public class PlayerStatsManager : MonoBehaviour
 		}
 	}
 
-	public void AddWeapon(WeaponManager weapon)
+	public void AddWeapon(WeaponManager weapon, bool gunBall)
 	{
-		GameObject slot = GetSlot();
+		GameObject slot;
+
+		if(gunBall)
+		{
+			slot = GetGunBallSlot(weapon);
+		}
+		else
+		{
+			slot = GetSlot();
+		}
 
 		WeaponManager weaponSlot = slot.GetComponent<WeaponManager>();
 		slot.GetComponent<AudioSource>().clip = weapon.gameObject.GetComponent<AudioSource>().clip;
@@ -123,9 +145,18 @@ public class PlayerStatsManager : MonoBehaviour
 
 	public GameObject GetSlot()
 	{
+		if(primary.GetComponent<WeaponManager>().state == 6)
+		{
+			return primary;
+		}
+
+		if(secondary.GetComponent<WeaponManager>().state == 6)
+		{
+			return secondary;
+		}
+
 		if(primary.GetComponent<WeaponManager>().currentAmmo == 0)
 		{
-
 			return primary;
 		}
 		
@@ -135,6 +166,61 @@ public class PlayerStatsManager : MonoBehaviour
 		}
 
 		return currentPrimary;
+	}
+
+	public GameObject GetGunBallSlot(WeaponManager wm)
+	{
+
+		if(primary.GetComponent<WeaponManager>().state == 6)
+		{
+			return secondary;
+		}
+		else if(secondary.GetComponent<WeaponManager>().state == 6)
+		{
+			return primary;
+		}
+
+		if(primary.GetComponent<WeaponManager>().currentAmmo == 0)
+		{
+			return primary;
+		}
+		
+		if(secondary.GetComponent<WeaponManager>().currentAmmo == 0)
+		{
+			return secondary;
+		}
+
+		if(currentPrimary.GetComponent<WeaponManager>().state != 0)
+		{
+			return currentPrimary;
+		}
+
+		if(primary.GetComponent<WeaponManager>().name != wm.name)
+		{
+			return primary;
+		}
+
+		if(secondary.GetComponent<WeaponManager>().name != wm.name)
+		{
+			return secondary;
+		}
+
+		alternateDropSlot = !alternateDropSlot;
+		if(!alternateDropSlot)
+		{
+			return currentPrimary;
+		}
+		else
+		{
+			if(currentPrimary == primary)
+			{
+				return secondary;
+			}
+			else
+			{
+				return primary;
+			}
+		}
 	}
 
 	public void Heal(float amount)

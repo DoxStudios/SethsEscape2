@@ -35,7 +35,7 @@ public class ChainsawMovement : MonoBehaviour
     {
         spriteRenderer = sr.GetComponent<SpriteRenderer>();
         rb = GetComponentInParent<Rigidbody2D>();
-        chainsawPath = GameObject.Find("ChainsawPath").GetComponent<Tilemap>();
+        chainsawPath = GameObject.FindGameObjectWithTag("ChainsawPath").GetComponent<Tilemap>();
     }
 
     // Update is called once per frame

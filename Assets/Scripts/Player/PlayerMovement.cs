@@ -305,13 +305,16 @@ public class PlayerMovement : MonoBehaviour
 	{	
 		if(col.gameObject.layer == LayerMask.NameToLayer("Ground"))
 		{
-			Tilemap tilemap = col.gameObject.GetComponent<Tilemap>();
-			if(tilemap.HasTile(tilemap.WorldToCell(transform.position)) && !psm.inWall)
+			if(col.gameObject.tag != "Door")
 			{
-				psm.inWall = true;
-				currentWallDamageCooldown = 0;
-				psm.stunned = true;
-				rb.constraints = RigidbodyConstraints2D.FreezeAll;
+				Tilemap tilemap = col.gameObject.GetComponent<Tilemap>();
+				if(tilemap.HasTile(tilemap.WorldToCell(transform.position)) && !psm.inWall)
+				{
+					psm.inWall = true;
+					currentWallDamageCooldown = 0;
+					psm.stunned = true;
+					rb.constraints = RigidbodyConstraints2D.FreezeAll;
+				}
 			}
 		}
 	}
@@ -330,7 +333,7 @@ public class PlayerMovement : MonoBehaviour
 			if(direction.y == -1 && rb.velocity.y > 0)
 			{
 				col.gameObject.GetComponent<BossStatsManager>().Damage(psm.damage, transform, psm.outgoingKnockbackAmount);
-				col.gameObject.GetComponent<BossStatsManager>().Stun(0.1f);
+				col.gameObject.GetComponent<BossStatsManager>().Stun();
 			}
 			else
 			{
@@ -406,7 +409,7 @@ public class PlayerMovement : MonoBehaviour
 			if(col.gameObject.transform.position.y > transform.position.y &&  rb.velocity.y > 0 && !isGrounded)
 			{
 				col.gameObject.GetComponent<BossStatsManager>().Damage(psm.damage, transform, psm.outgoingKnockbackAmount);
-				col.gameObject.GetComponent<BossStatsManager>().Stun(0.1f);
+				col.gameObject.GetComponent<BossStatsManager>().Stun();
 			}
 			else
 			{

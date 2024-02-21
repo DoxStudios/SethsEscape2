@@ -14,33 +14,64 @@ public class BossStatsManager : MonoBehaviour
 	public float outgoingStunTime;
 
     Rigidbody2D rb;
-    SpriteRenderer sr;
+    public SpriteRenderer sr;
+
+    public bool isBeetle = false;
+    BeetleUtils beetleUtils;
+    BeetleStateControl beetleStateControl;
+    Transform bossSpawn;
+    PlayerStatsManager psm;
 
     public bool stun = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
+        bossSpawn = GameObject.FindGameObjectWithTag("BossSpawn").transform;
+        transform.position = bossSpawn.position;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
         if(sr == null)
         {
             Debug.Log("Sprite renderer not found");
         }
+
+        if(isBeetle)
+        {
+            beetleUtils = GetComponent<BeetleUtils>();
+            beetleStateControl = GetComponent<BeetleStateControl>();
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
+        if(psm.health <= 0)
+        {
+            transform.position = bossSpawn.position;
+        }
+
         if(health <= 0)
         {
             death();
         }
     }
 
-    public void Stun(float duration)
+    public void PlayerEnter()
     {
-        StartCoroutine(ResetStun(duration));
+        if(isBeetle)
+        {
+            beetleUtils.PlayerEnter();
+        }
+    }
+
+    public void Stun()
+    {
+        if(isBeetle)
+        {
+            beetleStateControl.Stun();
+        }
     }
 
     public void Damage(float amount, Transform source, float knockbackAmount)
@@ -77,11 +108,5 @@ public class BossStatsManager : MonoBehaviour
 		yield return new WaitForSeconds(delay);
 		Vector3 minimizedVelocity = new Vector2(rb.velocity.x / 5, rb.velocity.y / 5);
 		rb.velocity = minimizedVelocity;
-	}
-
-	private IEnumerator ResetStun(float delay)
-	{
-		yield return new WaitForSeconds(delay);
-		stun = false;
 	}
 }

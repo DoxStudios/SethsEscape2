@@ -9,6 +9,7 @@ public class BeetleRunning : StateMachineBehaviour
     Vector3 target;
     Tilemap ground;
     Rigidbody2D rb;
+    float stateTime;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -35,11 +36,11 @@ public class BeetleRunning : StateMachineBehaviour
             iterations++;
             if(player.transform.position.x < boss.transform.position.x)
             {
-                target = new Vector3(boss.transform.position.x - Random.Range(10, 20), boss.transform.position.y, boss.transform.position.z);
+                target = new Vector3(boss.transform.position.x - Random.Range(10, 20), boss.transform.position.y - 1, boss.transform.position.z);
             }
             else
             {
-                target = new Vector3(boss.transform.position.x + Random.Range(10, 20), boss.transform.position.y, boss.transform.position.z);
+                target = new Vector3(boss.transform.position.x + Random.Range(10, 20), boss.transform.position.y - 1, boss.transform.position.z);
             }
 
             if(iterations > 10)
@@ -48,16 +49,32 @@ public class BeetleRunning : StateMachineBehaviour
                 break;
             }
         }
+        
+        stateTime = 0f;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb.velocity = new Vector2((target.x - boss.transform.position.x), 0).normalized * 40;
+        stateTime += Time.deltaTime;
+
+        if(stateTime > 1.5f)
+        {
+            GameObject.FindGameObjectWithTag("Boss").GetComponent<BeetleStateControl>().EndState();
+        }
+        
+        if(target.x > boss.transform.position.x)
+        {
+            rb.velocity = new Vector2(20, rb.velocity.y - (9.8f * Time.deltaTime));
+        }
+        else
+        {
+            rb.velocity = new Vector2(-20, rb.velocity.y - (9.8f * Time.deltaTime));
+        }
 
         if(Mathf.Abs(boss.transform.position.x - target.x) < 0.5)
         {
-            rb.velocity = new Vector2(0, 0);
+            rb.velocity = new Vector2(0, rb.velocity.y);
             GameObject.FindGameObjectWithTag("Boss").GetComponent<BeetleStateControl>().EndState();
         }
     }

@@ -31,9 +31,14 @@ public class pickupText : MonoBehaviour
         else
         {
             WeaponManager wm = psm.pickupTarget.GetComponent<WeaponManager>();
+            transform.position = psm.pickupTarget.transform.position + new Vector3(0, 6, 0);
+            if(wm == null)
+            {
+                wm = psm.pickupTarget.GetComponent<GunBall>().weapon;
+                transform.position = psm.pickupTarget.transform.position + new Vector3(0, 12, 0);
+            }
             string pickupText = wm.title + " " + wm.name + "\nE to Eat";
 
-            transform.position = psm.pickupTarget.transform.position + new Vector3(0, 6, 0);
             text.text = pickupText;
         }
     }

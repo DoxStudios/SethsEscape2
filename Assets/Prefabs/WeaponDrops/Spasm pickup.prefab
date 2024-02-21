@@ -111,7 +111,7 @@ MonoBehaviour:
   damage: 20
   burstCount: 9
   burstOffset: 3
-  speed: 100
+  speed: 200
   knockbackMultiplier: 1
   knockbackTimeMultiplier: 1
   stunTimeMultiplier: 1
