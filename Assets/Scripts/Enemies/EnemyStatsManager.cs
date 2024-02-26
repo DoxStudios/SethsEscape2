@@ -15,6 +15,7 @@ public class EnemyStatsManager : MonoBehaviour
 	public float dropChanceMultiplier;
 	public bool isWorm;
 	public bool isMoth;
+	public bool contactImmunity = false;
 
 	Color defaultColor;
 	Rigidbody2D rb;

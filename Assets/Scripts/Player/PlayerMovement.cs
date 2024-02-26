@@ -382,6 +382,7 @@ public class PlayerMovement : MonoBehaviour
 				}
 				else
 				{
+					if(esm.contactImmunity) return;
 					psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
 					if(!esm.isMoth)
 					{
@@ -457,6 +458,7 @@ public class PlayerMovement : MonoBehaviour
 				}
 				else
 				{
+					if(esm.contactImmunity) return;
 					psm.Damage(esm.damage, col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
 					if(!esm.isMoth)
 					{

@@ -6,9 +6,18 @@ public class Spawner : MonoBehaviour
 {
 
     public GameObject prefab;
+    public bool isSpider = false;
+    public float rotation = 0f;
 
     public void Spawn()
     {
-        Instantiate(prefab, transform.position, transform.rotation);
+        if(!isSpider)
+        {
+            Instantiate(prefab, transform.position, transform.rotation);
+        }
+        else
+        {
+            Instantiate(prefab, transform.position, Quaternion.Euler(0, 0, rotation));
+        }
     }
 }

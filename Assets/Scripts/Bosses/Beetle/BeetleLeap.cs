@@ -33,7 +33,7 @@ public class BeetleLeap : StateMachineBehaviour
         if(!lept)
         {
             Vector3 target = player.transform.position;
-            target.y += 75;
+            target.y += (target.x - boss.transform.position.x);
             rb.AddForce((target - boss.transform.position).normalized * 5000);
             lept = true;
         }
