@@ -177,7 +177,7 @@ MonoBehaviour:
   isaacNewton: 0
   ranged: 0
   followRadius: 50
-  speed: 150
+  speed: 200
   nextWaypointDistance: 3
   detectRadius: 100
   initialRadius: 50
@@ -187,6 +187,7 @@ MonoBehaviour:
   ew: {fileID: 0}
   stopInRange: 0
   isWorm: 0
+  isFly: 0
   isJunebug: 1
   explosion: {fileID: 1257806673292980903, guid: 95531446d3757e7b0b6456a7d937c6d0, type: 3}
   explosiveRange: 20

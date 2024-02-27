@@ -34,6 +34,9 @@ public class EnemyWeapon : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
+    public float explosivePower;
+    public float explosiveRange;
+
     Animator animator;
 
 
@@ -76,7 +79,7 @@ public class EnemyWeapon : MonoBehaviour
         }
     }
 
-    public void Fire()
+    public void Fire(bool explosive=false)
     {
         if(state != 1) return;
         if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_1")) return;
@@ -93,17 +96,34 @@ public class EnemyWeapon : MonoBehaviour
             Vector3 direction = psm.gameObject.transform.position - firePosition.position;
             direction = new Vector3(direction.x + Random.Range(-burstOffset, burstOffset), direction.y + Random.Range(-burstOffset, burstOffset), direction.z);
             direction.Normalize();
-
             GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
             firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
-            EnemyBulletManager bm = firedBullet.GetComponent<EnemyBulletManager>();
-            bm.damage = damage;
-            bm.knockbackTimeMultiplier = knockbackTimeMultiplier;
-            bm.knockbackMultiplier = knockbackMultiplier;
-            bm.stunTimeMultiplier = stunTimeMultiplier;
-            bm.pierceLevel = pierceLevel;
-            bm.esm = esm;
-            bm.survivalTime = bulletSurvivalTime;
+
+            if(explosive)
+            {
+                EnemyExplosivesManager em = firedBullet.GetComponent<EnemyExplosivesManager>();
+                em.damage = damage;
+                em.knockbackTime = knockbackTimeMultiplier;
+                em.knockbackAmount = knockbackMultiplier;
+                em.stunTime = stunTimeMultiplier;
+                em.explosivePower = explosivePower;
+                em.explosiveRange = explosiveRange;
+
+                Debug.Log((-direction * 5000).magnitude);
+                transform.parent.gameObject.GetComponent<Rigidbody2D>().AddForce(-direction * 5000);
+            }
+            else
+            {
+                EnemyBulletManager bm = firedBullet.GetComponent<EnemyBulletManager>();
+                bm.damage = damage;
+                bm.knockbackTimeMultiplier = knockbackTimeMultiplier;
+                bm.knockbackMultiplier = knockbackMultiplier;
+                bm.stunTimeMultiplier = stunTimeMultiplier;
+                bm.pierceLevel = pierceLevel;
+                bm.esm = esm;
+                bm.survivalTime = bulletSurvivalTime;
+            }
+
         }
     }
 }

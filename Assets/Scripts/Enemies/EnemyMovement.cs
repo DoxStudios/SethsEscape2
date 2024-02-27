@@ -21,6 +21,7 @@ public class EnemyMovement : MonoBehaviour
     public EnemyWeapon ew;
     public bool stopInRange;
     public bool isWorm = false;
+    public bool isFly = false;
     public bool isJunebug = false;
     public GameObject explosion;
     public float explosiveRange;
@@ -29,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
     public float knockback;
     public float knockbackTime;
     public float stunTime;
+    bool juneDashed = false;
 
 
     Transform target;
@@ -78,15 +80,16 @@ public class EnemyMovement : MonoBehaviour
 
         if(player.transform.position.x < transform.position.x)
         {
-            spriteRenderer.flipX = !isWorm;
+            spriteRenderer.flipX = !(isWorm || isFly);
         }
         else
         {
-            spriteRenderer.flipX = isWorm;
+            spriteRenderer.flipX = (isWorm || isFly);
         }
 
         playerDetected = ((player.transform.position - transform.position).magnitude < detectRadius);
         initialDetected = ((player.transform.position - transform.position).magnitude < initialRadius);
+
         if(!isJunebug)
         {
             if(path != null)
@@ -108,7 +111,7 @@ public class EnemyMovement : MonoBehaviour
                     Vector2 force = direction * speed * Time.deltaTime;
 
 
-                    if(animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || animator.GetCurrentAnimatorStateInfo(0).IsName("Aggressive Walk"))
+                    if((animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || animator.GetCurrentAnimatorStateInfo(0).IsName("Aggressive Walk")) && playerDetected)
                     {
                         rb.AddForce(force);
                     }
@@ -139,12 +142,13 @@ public class EnemyMovement : MonoBehaviour
                             rb.velocity = new Vector2(0, rb.velocity.y);
                         }
                     }
-                    ew.Fire();
+                    ew.Fire(isFly);
                 }
             }
         }
-        else if(playerDetected)
+        else if(playerDetected && !juneDashed)
         {
+            juneDashed = true;
             rb.velocity = (player.transform.position - transform.position).normalized * speed;
         }
     }

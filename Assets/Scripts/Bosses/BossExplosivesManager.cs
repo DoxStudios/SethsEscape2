@@ -13,11 +13,6 @@ public class BossExplosivesManager : MonoBehaviour
     public GameObject explosion;
     public bool bowling;
 
-    void Update()
-    {
-    
-    }
-
     public void Explode()
     {
         GameObject explosionObject = Instantiate(explosion, transform.position, Quaternion.identity);

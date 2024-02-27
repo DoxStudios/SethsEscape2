@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760761198813442699}
-  - component: {fileID: 2001134561948789614}
   - component: {fileID: 8039282438972517589}
   - component: {fileID: -4283043714718258952}
+  - component: {fileID: 6925982918253421579}
   m_Layer: 0
   m_Name: EnemyExplosive
   m_TagString: Untagged
@@ -35,26 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2001134561948789614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6078854909077243150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfdce78e0594169a4b2b19ea4b06feb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 480
-  knockbackAmount: 0.5
-  knockbackTime: 0.5
-  stunTime: 0.2
-  explosivePower: 0.5
-  explosiveRange: 10
-  explosion: {fileID: 1257806673292980903, guid: 95531446d3757e7b0b6456a7d937c6d0, type: 3}
-  bowling: 0
 --- !u!50 &8039282438972517589
 Rigidbody2D:
   serializedVersion: 4
@@ -127,6 +107,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6925982918253421579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6078854909077243150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62012c09fe30f11d0aa43e36ef28a679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  knockbackAmount: 0
+  knockbackTime: 0
+  stunTime: 0
+  explosivePower: 0
+  explosiveRange: 0
+  explosion: {fileID: 1257806673292980903, guid: 95531446d3757e7b0b6456a7d937c6d0, type: 3}
 --- !u!1 &6563103705935773381
 GameObject:
   m_ObjectHideFlags: 0
