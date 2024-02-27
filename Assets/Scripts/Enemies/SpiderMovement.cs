@@ -134,11 +134,25 @@ public class SpiderMovement : MonoBehaviour
         {
             if(player.transform.position.x > transform.position.x)
             {
-                rb.AddForce(new Vector2(1, 1) * 50);
+                if(bypass && !Grounded())
+                {
+                    rb.AddForce(new Vector2(1, -2) * 50);
+                }
+                else
+                {
+                    rb.AddForce(new Vector2(1, 2) * 50);
+                }
             }
             else
             {
-                rb.AddForce(new Vector2(-1, 1) * 50);
+                if(bypass && !Grounded())
+                {
+                    rb.AddForce(new Vector2(-1, -2) * 50);
+                }
+                else
+                {
+                    rb.AddForce(new Vector2(-1, 2) * 50);
+                }
             }
         }
         else

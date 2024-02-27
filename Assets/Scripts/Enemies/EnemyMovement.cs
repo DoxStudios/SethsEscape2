@@ -21,6 +21,15 @@ public class EnemyMovement : MonoBehaviour
     public EnemyWeapon ew;
     public bool stopInRange;
     public bool isWorm = false;
+    public bool isJunebug = false;
+    public GameObject explosion;
+    public float explosiveRange;
+    public float damage;
+    public float explosivePower;
+    public float knockback;
+    public float knockbackTime;
+    public float stunTime;
+
 
     Transform target;
 
@@ -139,6 +148,30 @@ public class EnemyMovement : MonoBehaviour
         {
             path = p;
             currentWaypoint = 0;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(isJunebug)
+        {
+            Debug.Log("Boom");
+            GameObject explosionObject = Instantiate(explosion, transform.position, Quaternion.identity);
+            explosionObject.transform.localScale = new Vector3(explosiveRange*2, explosiveRange*2, 1);
+
+            Vector3 explosionSource = transform.position;
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionSource, explosiveRange);
+
+            foreach(Collider2D hit in colliders)
+            {
+                if(hit.gameObject.tag == "Player")
+                {
+                    PlayerStatsManager psm = hit.gameObject.GetComponent<PlayerStatsManager>();
+                    psm.PlayerExplosive((damage / (explosionSource - psm.gameObject.transform.position).magnitude * 20), transform, explosivePower * knockback);
+                }
+            }
+
+            esm.health = 0;
         }
     }
 }
