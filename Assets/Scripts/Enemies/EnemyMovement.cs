@@ -87,58 +87,65 @@ public class EnemyMovement : MonoBehaviour
 
         playerDetected = ((player.transform.position - transform.position).magnitude < detectRadius);
         initialDetected = ((player.transform.position - transform.position).magnitude < initialRadius);
-        if(path != null)
+        if(!isJunebug)
         {
-            if(currentWaypoint >= path.vectorPath.Count)
+            if(path != null)
             {
-                reachedEndOfPath = true;
-            }
-            else
-            {
-                reachedEndOfPath = false;
-            }
-
-            distanceToPlayer = Vector2.Distance(rb.position, target.position);
-
-            if(playerDetected && path != null && !reachedEndOfPath && esm.state == 0)
-            {
-                Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-                Vector2 force = direction * speed * Time.deltaTime;
-
-
-                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || animator.GetCurrentAnimatorStateInfo(0).IsName("Aggressive Walk"))
+                if(currentWaypoint >= path.vectorPath.Count)
                 {
-                    rb.AddForce(force);
+                    reachedEndOfPath = true;
+                }
+                else
+                {
+                    reachedEndOfPath = false;
                 }
 
-                float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+                distanceToPlayer = Vector2.Distance(rb.position, target.position);
 
-                if(distance < nextWaypointDistance)
+                if(playerDetected && path != null && !reachedEndOfPath && esm.state == 0)
                 {
-                    currentWaypoint++;
-                }
-            }
+                    Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+                    Vector2 force = direction * speed * Time.deltaTime;
 
-            inRange = distanceToPlayer <= followRadius;
 
-            if(inRange && ranged)
-            {
-                if(stopInRange)
-                {
-                    if(isWorm)
+                    if(animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || animator.GetCurrentAnimatorStateInfo(0).IsName("Aggressive Walk"))
                     {
-                        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+                        rb.AddForce(force);
+                    }
+
+                    float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+
+                    if(distance < nextWaypointDistance)
+                    {
+                        currentWaypoint++;
+                    }
+                }
+
+                inRange = distanceToPlayer <= followRadius;
+
+                if(inRange && ranged)
+                {
+                    if(stopInRange)
+                    {
+                        if(isWorm)
+                        {
+                            if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+                            {
+                                rb.velocity = new Vector2(0, rb.velocity.y);
+                            }
+                        }
+                        else
                         {
                             rb.velocity = new Vector2(0, rb.velocity.y);
                         }
                     }
-                    else
-                    {
-                        rb.velocity = new Vector2(0, rb.velocity.y);
-                    }
+                    ew.Fire();
                 }
-                ew.Fire();
             }
+        }
+        else if(playerDetected)
+        {
+            rb.velocity = (player.transform.position - transform.position).normalized * speed;
         }
     }
 

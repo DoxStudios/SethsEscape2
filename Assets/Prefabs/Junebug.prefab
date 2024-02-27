@@ -177,10 +177,10 @@ MonoBehaviour:
   isaacNewton: 0
   ranged: 0
   followRadius: 50
-  speed: 5000
+  speed: 150
   nextWaypointDistance: 3
-  detectRadius: 250
-  initialRadius: 90
+  detectRadius: 100
+  initialRadius: 50
   playerDetected: 0
   initialDetected: 0
   inRange: 0
