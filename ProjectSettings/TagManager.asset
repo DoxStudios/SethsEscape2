@@ -16,8 +16,6 @@ TagManager:
   - Endpoint
   - Spawner
   - Timer
-  - Handgun
-  - Spasm
   - WeaponDrop
   - killbox
   - Destroyable
@@ -32,6 +30,7 @@ TagManager:
   - Door
   - BossSpawn
   - BowlingTag
+  - WeaponSpawn
   layers:
   - Default
   - TransparentFX
