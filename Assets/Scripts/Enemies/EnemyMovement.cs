@@ -80,11 +80,11 @@ public class EnemyMovement : MonoBehaviour
 
         if(player.transform.position.x < transform.position.x)
         {
-            spriteRenderer.flipX = !(isWorm || isFly);
+            spriteRenderer.flipX = !(isWorm || isFly || esm.isMoth);
         }
         else
         {
-            spriteRenderer.flipX = (isWorm || isFly);
+            spriteRenderer.flipX = (isWorm || isFly || esm.isMoth);
         }
 
         playerDetected = ((player.transform.position - transform.position).magnitude < detectRadius);

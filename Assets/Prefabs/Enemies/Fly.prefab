@@ -56,8 +56,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6933455930088242512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.592, y: 0.546, z: 0}
-  m_LocalScale: {x: 0.4126871, y: 0.06034335, z: 1}
+  m_LocalPosition: {x: 0.404, y: -0.067, z: 0}
+  m_LocalScale: {x: 0.07315704, y: 0.06034335, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8697365408835399334}
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865022dfc9ccc19f092ee164fb10fb71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 25
   burstCount: 1
   burstOffset: 0
   speed: 100
@@ -85,15 +85,17 @@ MonoBehaviour:
   stunTimeMultiplier: 1
   bulletSurvivalTime: 1
   pierceLevel: 1
-  bullet: {fileID: 1218464838308763304, guid: eead292642b685e4d858fcc27c0a709c, type: 3}
+  bullet: {fileID: 6078854909077243150, guid: ca783d81f56a81c958ba0edd79b96720, type: 3}
   firePosition: {fileID: 8697365408835399334}
-  maxShotsPerSecond: 20
-  fireFrames: 0.2
+  maxShotsPerSecond: 1
+  fireFrames: 0.25
   state: 1
-  ready: 0
-  primaryFirePosition: {x: 0.417, y: -10.4, z: 0}
-  secondaryFirePosition: {x: -2.239, y: -10.4, z: 0}
-  spriteRenderer: {fileID: 8243304212157251601}
+  ready: 1
+  primaryFirePosition: {x: 0, y: 0, z: 0}
+  secondaryFirePosition: {x: 0, y: 0, z: 0}
+  spriteRenderer: {fileID: 6975060581092979623}
+  explosivePower: 1
+  explosiveRange: 20
 --- !u!1 &7461102481258243548
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,14 +108,14 @@ GameObject:
   - component: {fileID: 5549068192276358892}
   - component: {fileID: 5940062601322015933}
   - component: {fileID: 2539815302615199318}
-  - component: {fileID: 3855625040257269667}
-  - component: {fileID: 5227333060968085980}
-  - component: {fileID: 353399187781952481}
-  - component: {fileID: 6721516231034387652}
-  - component: {fileID: 8243304212157251601}
-  - component: {fileID: 6146465034412770133}
+  - component: {fileID: 9155392242349399802}
+  - component: {fileID: 1941087102877569787}
+  - component: {fileID: -6259406610038276305}
+  - component: {fileID: 8669913548163818876}
+  - component: {fileID: 6975060581092979623}
+  - component: {fileID: 7532932472182109816}
   m_Layer: 8
-  m_Name: Worm
+  m_Name: Fly
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,8 +129,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7461102481258243548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6602674489131022129}
@@ -148,16 +150,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1efd75942b4facc6bc6fd0f4ba9aef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 90
-  damage: 5
+  health: 100
+  damage: 10
   outgoingKnockbackAmount: 0.5
   outgoingKnockbackTime: 0.15
   outgoingStunTime: 0.2
-  sr: {fileID: 8243304212157251601}
+  sr: {fileID: 6975060581092979623}
   state: 0
-  dropChanceMultiplier: 0.85
-  isWorm: 1
-  knockbackDefense: 1
+  dropChanceMultiplier: 0.985
+  isWorm: 0
+  isMoth: 0
+  contactImmunity: 0
 --- !u!61 &5940062601322015933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,18 +193,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.3340702, y: -1.7705079}
+  m_Offset: {x: 0.37115383, y: 8.67}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.32, y: 12.28}
-    newSize: {x: 0.56, y: 1.92}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 18.25, y: 18.51}
+    newSize: {x: 1.03, y: 0.79}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.613297, y: 8.788752}
+  m_Size: {x: 15.427786, y: 17.790184}
   m_EdgeRadius: 0
 --- !u!50 &2539815302615199318
 Rigidbody2D:
@@ -230,7 +233,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3855625040257269667
+--- !u!114 &9155392242349399802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,20 +245,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941d32368d40bff46840ae27a91e085d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isaacNewton: 1
+  isaacNewton: 0
   ranged: 1
   followRadius: 75
-  speed: 3000
+  speed: 3500
   nextWaypointDistance: 3
-  detectRadius: 400
-  initialRadius: 51.1
+  detectRadius: 250
+  initialRadius: 250
   playerDetected: 0
   initialDetected: 0
   inRange: 0
   ew: {fileID: 208892385273561955}
-  stopInRange: 1
-  isWorm: 1
---- !u!114 &5227333060968085980
+  stopInRange: 0
+  isWorm: 0
+  isFly: 1
+  isJunebug: 0
+  explosion: {fileID: 0}
+  explosiveRange: 0
+  damage: 0
+  explosivePower: 0
+  knockback: 0
+  knockbackTime: 0
+  stunTime: 0
+--- !u!114 &1941087102877569787
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,8 +294,8 @@ MonoBehaviour:
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
-    value: -1
---- !u!114 &353399187781952481
+    value: 2
+--- !u!114 &-6259406610038276305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,8 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a101e4fdf8c1d87ff8fbfd955eeb8109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 5776122562750340743, guid: 51222c2c4d631bdf58f07a401ebbad11, type: 3}
---- !u!95 &6721516231034387652
+  weaponPrefab: {fileID: 5776122562750340743, guid: de2bc1702bc3c7399a24890a5aa755a2, type: 3}
+--- !u!95 &8669913548163818876
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -306,7 +318,7 @@ Animator:
   m_GameObject: {fileID: 7461102481258243548}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d4b2fb1cf2e61eac4bed9a78e6014848, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3da89ce8d0f64e08295587291e615e94, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -317,7 +329,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!212 &8243304212157251601
+--- !u!212 &6975060581092979623
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -358,18 +370,18 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 12ae144170b8fdf269fac4aa64a635db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa14ef6836cf62d53a343045b53b9b10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.56, y: 1.92}
+  m_Size: {x: 1.03, y: 0.79}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!114 &6146465034412770133
+  m_SpriteSortPoint: 1
+--- !u!114 &7532932472182109816
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -405,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8233169292980911508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.239, y: -10.4, z: 0}
+  m_LocalPosition: {x: 2.08, y: 0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

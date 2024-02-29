@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8201688662533020788}
   m_Layer: 10
   m_Name: Chainsaw
-  m_TagString: Handgun
+  m_TagString: WeaponDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0066223145, y: -0.019584656}
+  m_Offset: {x: -0.086364746, y: 0.16745377}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -93,7 +93,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.3009644, y: 3.574356}
+  m_Size: {x: 12.483887, y: 3.948433}
   m_EdgeRadius: 0
 --- !u!114 &8831223989558059455
 MonoBehaviour:
@@ -142,6 +142,7 @@ MonoBehaviour:
   GFXScale: {x: 0.5820104, y: 0.5820104, z: 0.5820104}
   UIScale: {x: 0.1, y: 0.1, z: 0.1}
   type: 6
+  gravity: 0
   currentFireTime: 0
   explosivePower: 0
   explosiveRange: 0
@@ -294,7 +295,7 @@ Transform:
   m_GameObject: {fileID: 6339694609238414228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.08255741}
-  m_LocalScale: {x: 1.5, y: 2.38, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2945850920366436491}
@@ -341,7 +342,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 76a1a3deae5a489388e56580f29c1493, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c74909a4bdbb003796aa3c28cb4bbb9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

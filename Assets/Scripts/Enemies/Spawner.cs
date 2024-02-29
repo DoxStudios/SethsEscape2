@@ -9,6 +9,11 @@ public class Spawner : MonoBehaviour
     public bool isSpider = false;
     public float rotation = 0f;
 
+    void Awake()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+
     public void Spawn()
     {
         if(!isSpider)

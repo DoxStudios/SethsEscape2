@@ -31,13 +31,21 @@ public class PauseManager : MonoBehaviour
         playerStatsManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         playTimer = GameObject.FindGameObjectWithTag("Timer").GetComponent<timer>();
         rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        if(GameObject.FindGameObjectWithTag("Handgun") != null)
+        SpawnWeapons();
+    }
+
+    void SpawnWeapons()
+    {
+        GameObject[] weaponDrops = GameObject.FindGameObjectsWithTag("WeaponDrop");
+        foreach(GameObject weaponDrop in weaponDrops)
         {
-            handgun = GameObject.FindGameObjectWithTag("Handgun").transform.position;
+            Destroy(weaponDrop);
         }
-        if(GameObject.FindGameObjectWithTag("Spasm") != null)
+
+        GameObject[] weaponSpawners = GameObject.FindGameObjectsWithTag("WeaponSpawn");
+        foreach(GameObject weaponSpawner in weaponSpawners)
         {
-            spasm = GameObject.FindGameObjectWithTag("Spasm").transform.position;
+            weaponSpawner.GetComponent<WeaponSpawner>().Spawn();
         }
     }
 
@@ -120,23 +128,13 @@ public class PauseManager : MonoBehaviour
         playerStatsManager.secondary.GetComponent<WeaponManager>().name = "";
         playerStatsManager.secondary.GetComponent<WeaponManager>().currentAmmo = 0;
 
-        GameObject[] weaponDrops = GameObject.FindGameObjectsWithTag("WeaponDrop");
-        foreach(GameObject weaponDrop in weaponDrops)
-        {
-            Destroy(weaponDrop);
-        }
+        SpawnWeapons();
 
         DoorManager[] doors = FindObjectsOfType<DoorManager>();
         foreach(DoorManager door in doors)
         {
             door.ResetArena();
         }
-
-        Destroy(GameObject.FindGameObjectWithTag("Handgun"));
-        Destroy(GameObject.FindGameObjectWithTag("Spasm"));
-
-        Instantiate(handgunPickup, handgun, transform.rotation);
-        Instantiate(spasmPickup, spasm, transform.rotation);
     }
 
     public void MainMenu()

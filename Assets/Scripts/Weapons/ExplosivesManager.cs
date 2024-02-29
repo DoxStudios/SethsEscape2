@@ -42,6 +42,12 @@ public class ExplosivesManager : MonoBehaviour
 
         if(survivalTime <= 0)
         {
+            for(int i = 0; i < moths.Length; i++)
+            {
+                GameObject moth = moths[i];
+                MothMovement mv = moth.GetComponent<MothMovement>();
+                mv.targetOverride = false;
+            }
             Destroy(gameObject);
         }
     }

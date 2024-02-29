@@ -33,7 +33,6 @@ public class EnemyWeapon : MonoBehaviour
     public Vector3 secondaryFirePosition;
 
     public SpriteRenderer spriteRenderer;
-
     public float explosivePower;
     public float explosiveRange;
 

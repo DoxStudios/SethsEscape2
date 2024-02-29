@@ -70,7 +70,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1.72}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -105,6 +105,7 @@ MonoBehaviour:
   dropChanceMultiplier: 150
   isWorm: 0
   isMoth: 1
+  contactImmunity: 0
 --- !u!50 &103940822842983130
 Rigidbody2D:
   serializedVersion: 4
@@ -146,10 +147,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   target: {x: 0, y: 0, z: 0}
+  targetOverride: 0
+  targetOverrideTransform: {fileID: 0}
   detectionRange: 500
   attackRange: 75
   nextWaypointDistance: 3
-  targetOverride: 0
   nextTargetDistance: 13
   targetRange: 15
 --- !u!114 &4923926859564511543
@@ -264,7 +266,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &4043696204329330023
 Animator:
   serializedVersion: 5

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 863087807980853510}
   m_Layer: 10
   m_Name: Spasm pickup
-  m_TagString: Spasm
+  m_TagString: WeaponDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   GFXScale: {x: 0.7552, y: 0.7552, z: 0.7552}
   UIScale: {x: 0.15, y: 0.15, z: 0.15}
   type: 1
+  gravity: 0
   currentFireTime: 0
   explosivePower: 0
   explosiveRange: 0

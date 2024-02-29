@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -776279733147566834}
   m_Layer: 10
   m_Name: Handgun Pickup
-  m_TagString: Handgun
+  m_TagString: WeaponDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,6 +142,7 @@ MonoBehaviour:
   GFXScale: {x: 0.5820104, y: 0.5820104, z: 0.5820104}
   UIScale: {x: 0.1, y: 0.1, z: 0.1}
   type: 0
+  gravity: 0
   currentFireTime: 0
   explosivePower: 0
   explosiveRange: 0

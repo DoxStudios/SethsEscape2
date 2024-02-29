@@ -84,6 +84,7 @@ MonoBehaviour:
   GFXScale: {x: 1, y: 1, z: 1}
   UIScale: {x: 0.15, y: 0.15, z: 0.15}
   type: 2
+  gravity: 0
   currentFireTime: 0
   explosivePower: 0
   explosiveRange: 0

@@ -51,6 +51,7 @@ public class WeaponManager : MonoBehaviour
     float currentReloadTime;
 
     float cooldown;
+    public bool gravity;
     public float currentFireTime;
     public float explosivePower;
     public float explosiveRange;
@@ -190,6 +191,10 @@ public class WeaponManager : MonoBehaviour
 
             GameObject firedBullet = Instantiate(bullet, firePosition.position, Quaternion.identity);
             firedBullet.GetComponent<Rigidbody2D>().velocity = direction * speed;
+            if(gravity)
+            {
+                firedBullet.GetComponent<Rigidbody2D>().gravityScale = 36;
+            }
             if(type == WeaponType.Explosive)
             {
                 ExplosivesManager em = firedBullet.GetComponent<ExplosivesManager>();
@@ -202,6 +207,7 @@ public class WeaponManager : MonoBehaviour
                 em.survivalTime = bulletSurvivalTime;
                 em.explosivePower = explosivePower;
                 em.explosiveRange = explosiveRange;
+
             }
             else if(type == WeaponType.Chainsaw)
             {

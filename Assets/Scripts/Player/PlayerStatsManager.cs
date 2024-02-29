@@ -139,6 +139,7 @@ public class PlayerStatsManager : MonoBehaviour
 		weaponSlot.type = weapon.type;
 		weaponSlot.explosivePower = weapon.explosivePower;
 		weaponSlot.explosiveRange = weapon.explosiveRange;
+		weaponSlot.gravity = weapon.gravity;
 
 		weaponSlot.state = 0;
 	}
