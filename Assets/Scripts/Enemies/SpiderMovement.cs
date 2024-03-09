@@ -7,7 +7,7 @@ public class SpiderMovement : MonoBehaviour
 {
 
     public bool stealth = true;
-    public float speed ;
+    public float speed;
     public float exitStealthRange;
     public float followRange;
     public float attackRange;

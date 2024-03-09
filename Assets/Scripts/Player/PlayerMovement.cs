@@ -377,8 +377,15 @@ public class PlayerMovement : MonoBehaviour
 				{
 					dashTimer = 0;
 					stopDash();
-                    			psm.DealKnockback(col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
-					esm.Damage(transform, velocityMagnitude, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+					if(col.gameObject.GetComponent<CentipedeMovement>() == null)
+					{
+                    				psm.DealKnockback(col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+						esm.Damage(transform, velocityMagnitude, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+					}
+					else
+					{
+						col.gameObject.GetComponent<CentipedeMovement>().Parry();
+					}
 				}
 				else
 				{
@@ -453,8 +460,15 @@ public class PlayerMovement : MonoBehaviour
 				{
 					dashTimer = 0;
 					stopDash();
-                    			psm.DealKnockback(col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
-					esm.Damage(transform, velocityMagnitude, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+					if(col.gameObject.GetComponent<CentipedeMovement>() == null)
+					{
+                    				psm.DealKnockback(col.gameObject.transform, esm.outgoingKnockbackAmount, esm.outgoingKnockbackTime, esm.outgoingStunTime);
+						esm.Damage(transform, velocityMagnitude, psm.outgoingKnockbackAmount, psm.outgoingKnockbackTime, psm.outgoingStunTime);
+					}
+					else
+					{
+						col.gameObject.GetComponent<CentipedeMovement>().Parry();
+					}
 				}
 				else
 				{

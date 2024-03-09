@@ -54,6 +54,12 @@ public class ExplosivesManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+
+        if(col.gameObject.tag == "BulletDetect")
+        {
+            return;
+        }
+
         for(int i = 0; i < moths.Length; i++)
         {
             GameObject moth = moths[i];
@@ -101,6 +107,12 @@ public class ExplosivesManager : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+
+         if(col.gameObject.tag == "BulletDetect")
+        {
+            return;
+        }
+        
         for(int i = 0; i < moths.Length; i++)
         {
             GameObject moth = moths[i];
