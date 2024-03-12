@@ -11,6 +11,7 @@ public class EnemyBulletManager : MonoBehaviour
     public EnemyStatsManager esm;
     public int pierceLevel;
     public float survivalTime;
+    public bool noLimit = false;
 
     void Update()
     {
@@ -27,7 +28,14 @@ public class EnemyBulletManager : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             PlayerStatsManager psm = col.gameObject.GetComponent<PlayerStatsManager>();
-            psm.Damage(damage, transform, esm.outgoingKnockbackAmount * knockbackMultiplier, esm.outgoingKnockbackTime * knockbackTimeMultiplier, esm.outgoingStunTime * stunTimeMultiplier);
+            if(noLimit)
+            {
+                psm.Damage(damage, transform, esm.outgoingKnockbackAmount * knockbackMultiplier, esm.outgoingKnockbackTime * knockbackTimeMultiplier, esm.outgoingStunTime * stunTimeMultiplier, true);
+            }
+            else
+            {
+                psm.Damage(damage, transform, esm.outgoingKnockbackAmount * knockbackMultiplier, esm.outgoingKnockbackTime * knockbackTimeMultiplier, esm.outgoingStunTime * stunTimeMultiplier);
+            }
         }
         else if(col.gameObject.tag == "Ground")
         {
@@ -46,7 +54,14 @@ public class EnemyBulletManager : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             PlayerStatsManager psm = col.gameObject.GetComponent<PlayerStatsManager>();
-            psm.Damage(damage, transform, esm.outgoingKnockbackAmount * knockbackMultiplier, esm.outgoingKnockbackTime * knockbackTimeMultiplier, esm.outgoingStunTime * stunTimeMultiplier);
+            if(noLimit)
+            {
+                psm.Damage(damage, transform, esm.outgoingKnockbackAmount * knockbackMultiplier, esm.outgoingKnockbackTime * knockbackTimeMultiplier, esm.outgoingStunTime * stunTimeMultiplier, true);
+            }
+            else
+            {
+                psm.Damage(damage, transform, esm.outgoingKnockbackAmount * knockbackMultiplier, esm.outgoingKnockbackTime * knockbackTimeMultiplier, esm.outgoingStunTime * stunTimeMultiplier);
+            }
         }
         else if(col.gameObject.tag == "Ground")
         {

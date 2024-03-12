@@ -243,6 +243,12 @@ public class PlayerStatsManager : MonoBehaviour
 		}
 	}
 
+	public void Damage(float amount, Transform knockbackPosition, float knockbackAmount, float knockbackTime, float stunTime, bool noLimit)
+	{
+		health -= (amount) * defense;
+		DealKnockback(knockbackPosition, knockbackAmount, knockbackTime, stunTime);
+	}
+
 	public void PlayerExplosive(float amount, Transform knockbackPosition, float knockbackAmount)
 	{
 		if(!dead && !stunned)

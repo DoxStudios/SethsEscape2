@@ -76,14 +76,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865022dfc9ccc19f092ee164fb10fb71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
-  burstCount: 1
-  burstOffset: 0
+  damage: 2
+  burstCount: 9
+  burstOffset: 7
   speed: 100
-  knockbackMultiplier: 1
-  knockbackTimeMultiplier: 1
-  stunTimeMultiplier: 1
-  bulletSurvivalTime: 1
+  knockbackMultiplier: 0.1
+  knockbackTimeMultiplier: 0.1
+  stunTimeMultiplier: 0.1
+  bulletSurvivalTime: 60
   pierceLevel: 1
   bullet: {fileID: 1218464838308763304, guid: eead292642b685e4d858fcc27c0a709c, type: 3}
   firePosition: {fileID: 8697365408835399334}
@@ -91,8 +91,8 @@ MonoBehaviour:
   fireFrames: 0.2
   state: 1
   ready: 0
-  primaryFirePosition: {x: 0.417, y: -10.4, z: 0}
-  secondaryFirePosition: {x: -2.239, y: -10.4, z: 0}
+  primaryFirePosition: {x: 25.2, y: 162.1, z: 0}
+  secondaryFirePosition: {x: -28.4, y: 162.1, z: 0}
   spriteRenderer: {fileID: 8243304212157251601}
   explosivePower: 0
   explosiveRange: 0
@@ -108,12 +108,11 @@ GameObject:
   - component: {fileID: 5549068192276358892}
   - component: {fileID: 5940062601322015933}
   - component: {fileID: 2539815302615199318}
-  - component: {fileID: 3855625040257269667}
   - component: {fileID: 5227333060968085980}
   - component: {fileID: 353399187781952481}
   - component: {fileID: 6721516231034387652}
   - component: {fileID: 8243304212157251601}
-  - component: {fileID: 6146465034412770133}
+  - component: {fileID: 1239976070176601636}
   m_Layer: 8
   m_Name: Caterpillar
   m_TagString: Enemy
@@ -233,40 +232,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3855625040257269667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7461102481258243548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 941d32368d40bff46840ae27a91e085d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isaacNewton: 1
-  ranged: 1
-  followRadius: 75
-  speed: 3000
-  nextWaypointDistance: 3
-  detectRadius: 400
-  initialRadius: 51.1
-  playerDetected: 0
-  initialDetected: 0
-  inRange: 0
-  ew: {fileID: 208892385273561955}
-  stopInRange: 1
-  isWorm: 0
-  isFly: 0
-  isJunebug: 0
-  explosion: {fileID: 0}
-  explosiveRange: 0
-  damage: 0
-  explosivePower: 0
-  knockback: 0
-  knockbackTime: 0
-  stunTime: 0
 --- !u!114 &5227333060968085980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +346,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &6146465034412770133
+--- !u!114 &1239976070176601636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -390,9 +355,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7461102481258243548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35461cf597e8f237ca48e2142bab2a13, type: 3}
+  m_Script: {fileID: 11500000, guid: 82901eb04702e60e594ba3e3c6651635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectRange: 100
+  followDistance: 50
+  riseDistance: 50
+  speed: 100
 --- !u!1 &8233169292980911508
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8233169292980911508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.239, y: -10.4, z: 0}
+  m_LocalPosition: {x: -28.4, y: 162.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

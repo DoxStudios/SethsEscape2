@@ -78,10 +78,13 @@ public class EnemyWeapon : MonoBehaviour
         }
     }
 
-    public void Fire(bool explosive=false)
+    public void Fire(bool explosive=false, bool noLimit=false)
     {
-        if(state != 1) return;
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_1")) return;
+        if(!noLimit)
+        {
+            if(state != 1) return;
+            if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_1")) return;
+        }
         state = 2;
         currentFireTime = fireFrames;
         cooldown = 1 / maxShotsPerSecond;
@@ -121,6 +124,7 @@ public class EnemyWeapon : MonoBehaviour
                 bm.pierceLevel = pierceLevel;
                 bm.esm = esm;
                 bm.survivalTime = bulletSurvivalTime;
+                bm.noLimit = noLimit;
             }
 
         }
