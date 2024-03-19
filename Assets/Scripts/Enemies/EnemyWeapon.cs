@@ -85,6 +85,8 @@ public class EnemyWeapon : MonoBehaviour
             if(state != 1) return;
             if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_1")) return;
         }
+
+
         state = 2;
         currentFireTime = fireFrames;
         cooldown = 1 / maxShotsPerSecond;
@@ -126,7 +128,6 @@ public class EnemyWeapon : MonoBehaviour
                 bm.survivalTime = bulletSurvivalTime;
                 bm.noLimit = noLimit;
             }
-
         }
     }
 }

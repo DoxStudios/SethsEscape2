@@ -130,6 +130,12 @@ public class PauseManager : MonoBehaviour
 
         SpawnWeapons();
 
+        GameObject[] chainsaws = GameObject.FindGameObjectsWithTag("EnemyChainsaw");
+        foreach(GameObject chainsaw in chainsaws)
+        {
+            Destroy(chainsaw);
+        }
+
         DoorManager[] doors = FindObjectsOfType<DoorManager>();
         foreach(DoorManager door in doors)
         {

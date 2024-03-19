@@ -16,6 +16,7 @@ public class EnemyStatsManager : MonoBehaviour
 	public bool isWorm;
 	public bool isMoth;
 	public bool contactImmunity = false;
+	public bool isBeetle = false;
 
 	Color defaultColor;
 	Rigidbody2D rb;
@@ -82,6 +83,12 @@ public class EnemyStatsManager : MonoBehaviour
 
 				}
 			}
+
+			if(isBeetle)
+			{
+				GetComponent<BeetleMovement>().KillChainsaws();
+			}
+
 			psm.Heal(maxHealth * 0.1f);
 			Destroy(gameObject);
 		}

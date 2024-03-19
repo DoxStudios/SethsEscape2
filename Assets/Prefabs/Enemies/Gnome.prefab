@@ -91,8 +91,8 @@ MonoBehaviour:
   fireFrames: 1
   state: 1
   ready: 0
-  primaryFirePosition: {x: 0.417, y: -10.4, z: 0}
-  secondaryFirePosition: {x: -2.239, y: -10.4, z: 0}
+  primaryFirePosition: {x: 0.417, y: 1, z: 0}
+  secondaryFirePosition: {x: -2.239, y: 1, z: 0}
   spriteRenderer: {fileID: 8243304212157251601}
   explosivePower: 0
   explosiveRange: 0
@@ -417,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8233169292980911508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.239, y: -10.4, z: 0}
+  m_LocalPosition: {x: -2.239, y: 1.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
