@@ -15,6 +15,7 @@ public class EnemyStatsManager : MonoBehaviour
 	public float dropChanceMultiplier;
 	public bool isWorm;
 	public bool isMoth;
+	public bool isCaterpillar;
 	public bool contactImmunity = false;
 	public bool isBeetle = false;
 
@@ -77,14 +78,10 @@ public class EnemyStatsManager : MonoBehaviour
 				bool shouldDrop = psm.dropWeapon(dropChanceMultiplier);
 				if(shouldDrop)
 				{
-					if(GetComponent<EnemyMovement>() != null)
+					if(GetComponent<WeaponDrop>() != null)
 					{
-						if(GetComponent<EnemyMovement>().ranged)
-						{
-							GetComponent<WeaponDrop>().DropWeapon();
-						}
+						GetComponent<WeaponDrop>().DropWeapon();
 					}
-
 				}
 
 				if(isWorm)

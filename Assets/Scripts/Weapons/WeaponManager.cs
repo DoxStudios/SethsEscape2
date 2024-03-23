@@ -37,6 +37,10 @@ public class WeaponManager : MonoBehaviour
     public Sprite IMAGE_3;
     public Texture gunTexture;
 
+
+    public Sprite FlippedImage1;
+    public Sprite FlippedImage2;
+
     public bool tripleImage = false;
 
     public Vector3 secondaryPosition;
@@ -71,10 +75,16 @@ public class WeaponManager : MonoBehaviour
         Chainsaw,
     };
 
+    SpriteRenderer spriteRenderer;
+
     void Start()
     {
         psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         CURRENT = IMAGE_1;
+        if(GFX != null)
+        {
+            spriteRenderer = GFX.GetComponent<SpriteRenderer>();
+        }
     }
 
     void Update()
@@ -85,15 +95,28 @@ public class WeaponManager : MonoBehaviour
             return;
         }
 
+        if(type == WeaponType.DoubleShotgun)
+        {
+            spriteRenderer.flipX = false;
+        }
+
         if (psm.movingLeft)
         {
-            GFX.GetComponent<SpriteRenderer>().flipX = true;
+            if(type != WeaponType.DoubleShotgun)
+            {
+                spriteRenderer.flipX = true;   
+            }
+
             GFX.transform.localPosition = secondaryPosition;
             firePosition.localPosition = secondaryFirePosition;
         }
         else
         {
-            GFX.GetComponent<SpriteRenderer>().flipX = false;
+            if(type != WeaponType.DoubleShotgun)
+            {
+                spriteRenderer.flipX = false;
+            }
+
             GFX.transform.localPosition = primaryPosition;
             firePosition.localPosition = primaryFirePosition;
         }
@@ -108,7 +131,7 @@ public class WeaponManager : MonoBehaviour
             GFX.SetActive(true);
         }
 
-        GFX.GetComponent<SpriteRenderer>().sprite = CURRENT;
+        spriteRenderer.sprite = CURRENT;
         GFX.transform.localScale = GFXScale;
         
         if(state == 3)

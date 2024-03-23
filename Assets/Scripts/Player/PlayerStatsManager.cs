@@ -15,7 +15,6 @@ public class PlayerStatsManager : MonoBehaviour
 	public float outgoingKnockbackTime;
 	public float outgoingStunTime;
 
-
 	public bool movingLeft = false;
 	public bool stunned = false;
 	public bool explosiveStun;
@@ -141,6 +140,8 @@ public class PlayerStatsManager : MonoBehaviour
 		weaponSlot.explosiveRange = weapon.explosiveRange;
 		weaponSlot.gravity = weapon.gravity;
 		weaponSlot.contDmg = weapon.contDmg;
+		weaponSlot.FlippedImage1 = weapon.FlippedImage1;
+		weaponSlot.FlippedImage2 = weapon.FlippedImage2;
 
 		weaponSlot.state = 0;
 	}
@@ -363,7 +364,7 @@ public class PlayerStatsManager : MonoBehaviour
 
 	public void Fire(InputAction.CallbackContext context)
 	{
-		if(context.performed)
+		if(context.action.triggered && context.action.phase == InputActionPhase.Performed && context.action.ReadValue<float>() != 0)
 		{
 			currentPrimary.GetComponent<WeaponManager>().Fire(rangedDamage, addedPierce);
 		}
