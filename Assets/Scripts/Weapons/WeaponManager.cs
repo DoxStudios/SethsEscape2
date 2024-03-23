@@ -8,6 +8,7 @@ public class WeaponManager : MonoBehaviour
     public string title;
     public string name;
     public float damage;
+    public float contDmg;
     public int burstCount;
     public float burstOffset;
     public float speed;
@@ -35,6 +36,10 @@ public class WeaponManager : MonoBehaviour
     public Sprite IMAGE_2;
     public Sprite IMAGE_3;
     public Texture gunTexture;
+
+
+    public Sprite FlippedImage1;
+    public Sprite FlippedImage2;
 
     public bool tripleImage = false;
 
@@ -70,10 +75,16 @@ public class WeaponManager : MonoBehaviour
         Chainsaw,
     };
 
+    SpriteRenderer spriteRenderer;
+
     void Start()
     {
         psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
         CURRENT = IMAGE_1;
+        if(GFX != null)
+        {
+            spriteRenderer = GFX.GetComponent<SpriteRenderer>();
+        }
     }
 
     void Update()
@@ -84,15 +95,28 @@ public class WeaponManager : MonoBehaviour
             return;
         }
 
+        if(type == WeaponType.DoubleShotgun)
+        {
+            spriteRenderer.flipX = false;
+        }
+
         if (psm.movingLeft)
         {
-            GFX.GetComponent<SpriteRenderer>().flipX = true;
+            if(type != WeaponType.DoubleShotgun)
+            {
+                spriteRenderer.flipX = true;   
+            }
+
             GFX.transform.localPosition = secondaryPosition;
             firePosition.localPosition = secondaryFirePosition;
         }
         else
         {
-            GFX.GetComponent<SpriteRenderer>().flipX = false;
+            if(type != WeaponType.DoubleShotgun)
+            {
+                spriteRenderer.flipX = false;
+            }
+
             GFX.transform.localPosition = primaryPosition;
             firePosition.localPosition = primaryFirePosition;
         }
@@ -107,7 +131,7 @@ public class WeaponManager : MonoBehaviour
             GFX.SetActive(true);
         }
 
-        GFX.GetComponent<SpriteRenderer>().sprite = CURRENT;
+        spriteRenderer.sprite = CURRENT;
         GFX.transform.localScale = GFXScale;
         
         if(state == 3)
@@ -173,7 +197,8 @@ public class WeaponManager : MonoBehaviour
             if(psm.useAim)
             {
                 direction = psm.aim;
-                direction = new Vector3(direction.x + Random.Range(-burstOffset * 0.1f, burstOffset *0.1f), direction.y + Random.Range(-burstOffset * 0.1f, burstOffset * 0.1f), direction.z);
+                direction = new Vector3(direction.x, direction.y, 0);
+                direction = Quaternion.AngleAxis(Random.Range(-burstOffset, burstOffset), Vector3.up) * direction;
                 direction.Normalize();
             }
             else
@@ -182,7 +207,7 @@ public class WeaponManager : MonoBehaviour
                 mousePos.z = mousePos.z - (Camera.main.transform.position.z);
                 Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
                 direction = worldMousePos - firePosition.position;
-                direction = new Vector3(direction.x + Random.Range(-burstOffset, burstOffset), direction.y + Random.Range(-burstOffset, burstOffset), direction.z);
+                direction = Quaternion.AngleAxis(Random.Range(-burstOffset, burstOffset), Vector3.forward) * direction;
                 direction.Normalize();
             }
 
@@ -214,7 +239,8 @@ public class WeaponManager : MonoBehaviour
                 ChainsawMovement cm = firedBullet.GetComponentInChildren<ChainsawMovement>();
                 ChainsawDamage cd = firedBullet.GetComponent<ChainsawDamage>();
                 cm.speed = speed;
-                cd.damage = finalDamage;
+                cd.initDmg = finalDamage;
+                cd.contDmg = contDmg;
                 cd.psm = psm;
 
                 state = 6;

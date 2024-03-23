@@ -15,6 +15,7 @@ public class EnemyStatsManager : MonoBehaviour
 	public float dropChanceMultiplier;
 	public bool isWorm;
 	public bool isMoth;
+	public bool isCaterpillar;
 	public bool contactImmunity = false;
 	public bool isBeetle = false;
 
@@ -55,34 +56,52 @@ public class EnemyStatsManager : MonoBehaviour
 	{
 		if(health <= 0)
 		{
-			bool shouldDrop = psm.dropWeapon(dropChanceMultiplier);
-			if(shouldDrop)
+			if(isBeetle)
 			{
-				if(GetComponent<EnemyMovement>() != null)
+				if(GetComponent<Animator>().GetBool("Shotgun"))
 				{
-					if(GetComponent<EnemyMovement>().ranged)
+					psm.dropChance = 30;
+					WeaponDrop weaponDrop = GetComponentsInChildren<WeaponDrop>()[1];
+					weaponDrop.DropWeapon();
+				}
+				else
+				{
+					bool shouldDrop = psm.dropWeapon(dropChanceMultiplier);
+					if(shouldDrop)
+					{
+						GetComponent<WeaponDrop>().DropWeapon();
+					}
+				}
+			}
+			else
+			{
+				bool shouldDrop = psm.dropWeapon(dropChanceMultiplier);
+				if(shouldDrop)
+				{
+					if(GetComponent<WeaponDrop>() != null)
 					{
 						GetComponent<WeaponDrop>().DropWeapon();
 					}
 				}
 
-			}
-			
-			if(isWorm)
-			{
-				shouldDrop = psm.dropWeapon(dropChanceMultiplier);
-				if(shouldDrop)
+				if(isWorm)
 				{
-					if(GetComponent<EnemyMovement>() != null)
+					shouldDrop = psm.dropWeapon(dropChanceMultiplier);
+					if(shouldDrop)
 					{
-						if(GetComponent<EnemyMovement>().ranged)
+						if(GetComponent<EnemyMovement>() != null)
 						{
-							GetComponent<WeaponDrop>().DropWeapon();
+							if(GetComponent<EnemyMovement>().ranged)
+							{
+								GetComponent<WeaponDrop>().DropWeapon();
+							}
 						}
-					}
 
+					}
 				}
 			}
+			
+			
 
 			if(isBeetle)
 			{

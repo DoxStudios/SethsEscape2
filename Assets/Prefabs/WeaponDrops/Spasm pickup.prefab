@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4477653586522356718}
   - component: {fileID: 6723114274925544565}
   - component: {fileID: 863087807980853510}
+  - component: {fileID: -660063361509467446}
   m_Layer: 10
   m_Name: Spasm pickup
   m_TagString: WeaponDrop
@@ -109,8 +110,9 @@ MonoBehaviour:
   title: Standard
   name: Spasm
   damage: 20
+  contDmg: 0
   burstCount: 9
-  burstOffset: 3
+  burstOffset: 20
   speed: 200
   knockbackMultiplier: 1
   knockbackTimeMultiplier: 1
@@ -241,6 +243,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &-660063361509467446
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5572560516512390314}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 6.89
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5
 --- !u!1 &8387315587849544659
 GameObject:
   m_ObjectHideFlags: 0

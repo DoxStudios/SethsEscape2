@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerWeaponAnimator : MonoBehaviour
 {
     WeaponManager wm;
+    PlayerStatsManager psm;
 
     // Start is called before the first frame update
     void Start()
     {
         wm = GetComponent<WeaponManager>();
+        psm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
     }
 
     // Update is called once per frame
@@ -32,13 +34,42 @@ public class PlayerWeaponAnimator : MonoBehaviour
         }
         else
         {
-            if(wm.state == 2)
+            if(wm.type == WeaponManager.WeaponType.DoubleShotgun)
             {
-                wm.CURRENT = wm.IMAGE_2;
+                if(wm.state == 2)
+                {
+                    if(psm.movingLeft)
+                    {
+                        wm.CURRENT = wm.FlippedImage2;
+                    }
+                    else
+                    {
+                        wm.CURRENT = wm.IMAGE_2;
+                    }
+                }
+                else
+                {
+                    if(psm.movingLeft)
+                    {
+                        wm.CURRENT = wm.FlippedImage1;
+                    }
+                    else
+                    {
+                        wm.CURRENT = wm.IMAGE_1;
+                    }
+                
+                }
             }
             else
             {
-                wm.CURRENT = wm.IMAGE_1;
+                if(wm.state == 2)
+                {
+                    wm.CURRENT = wm.IMAGE_2;
+                }
+                else
+                {
+                    wm.CURRENT = wm.IMAGE_1;
+                }
             }
         }
     }

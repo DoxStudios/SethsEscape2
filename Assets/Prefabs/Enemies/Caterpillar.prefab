@@ -160,6 +160,7 @@ MonoBehaviour:
   isWorm: 0
   isMoth: 0
   contactImmunity: 1
+  isBeetle: 0
 --- !u!61 &5940062601322015933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -272,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a101e4fdf8c1d87ff8fbfd955eeb8109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 5776122562750340743, guid: 51222c2c4d631bdf58f07a401ebbad11, type: 3}
+  weaponPrefab: {fileID: 5572560516512390314, guid: 542b5a641586f65ba8ebbf4ce5467548, type: 3}
 --- !u!95 &6721516231034387652
 Animator:
   serializedVersion: 5

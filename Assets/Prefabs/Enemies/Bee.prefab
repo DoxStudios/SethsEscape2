@@ -161,6 +161,7 @@ MonoBehaviour:
   isWorm: 0
   isMoth: 0
   contactImmunity: 0
+  isBeetle: 0
 --- !u!61 &5940062601322015933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -250,7 +251,7 @@ MonoBehaviour:
   followRadius: 50
   speed: 3500
   nextWaypointDistance: 3
-  detectRadius: 250
+  detectRadius: 350
   initialRadius: 90
   playerDetected: 0
   initialDetected: 0
