@@ -117,6 +117,9 @@ public class Title
                     case WeaponManager.WeaponType.Chainsaw:
                         wm.damage += Random.Range(10, 16);
                         break;
+                    case WeaponManager.WeaponType.DoubleShotgun:
+                        wm.currentAmmo += 1;
+                        break;
                 }
 
                 break;
@@ -171,7 +174,7 @@ public class Title
                         break;
                     case WeaponManager.WeaponType.DoubleShotgun:
                         wm.maxShotsPerSecond += 100;
-                        wm.fireFrames = 0;
+                        wm.fireFrames = 0.05;
                         break;
                     case WeaponManager.WeaponType.Chainsaw:
                         wm.speed += Random.Range(20, 31);
@@ -207,9 +210,9 @@ public class Title
                     case WeaponManager.WeaponType.DoubleShotgun:
                         wm.damage += Random.Range(45, 66);
                         wm.maxShotsPerSecond += 300;
-                        wm.fireFrames = 0;
+                        wm.fireFrames = 0.05;
                         wm.burstCount += 5;
-                        wm.burstOffset += 0.5f;
+                        wm.burstOffset += 10f;
                         break;
                     case WeaponManager.WeaponType.Chainsaw:
                         wm.damage += Random.Range(5, 11);
