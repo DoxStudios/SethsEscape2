@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2993794174881941157}
   - component: {fileID: 208892385273561955}
+  - component: {fileID: 2593948704725738340}
   m_Layer: 8
   m_Name: EnemyWeapon
   m_TagString: Untagged
@@ -96,6 +97,19 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8243304212157251601}
   explosivePower: 0
   explosiveRange: 0
+--- !u!114 &2593948704725738340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6933455930088242512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a101e4fdf8c1d87ff8fbfd955eeb8109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 5572560516512390314, guid: ba012745a707a23efa50de47f159a608, type: 3}
 --- !u!1 &7461102481258243548
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a101e4fdf8c1d87ff8fbfd955eeb8109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 5776122562750340743, guid: 51222c2c4d631bdf58f07a401ebbad11, type: 3}
+  weaponPrefab: {fileID: 5776122562750340743, guid: 6ed3920f813d8a4388c98aaf087690b1, type: 3}
 --- !u!95 &6721516231034387652
 Animator:
   serializedVersion: 5

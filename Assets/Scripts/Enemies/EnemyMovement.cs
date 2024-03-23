@@ -144,11 +144,11 @@ public class EnemyMovement : MonoBehaviour
                         inRange = distanceToPlayer <= followRadius;
                     }
                 }
-                else if(playerDetected && !juneDashed)
-                {
-                    juneDashed = true;
-                    rb.velocity = (player.transform.position - transform.position).normalized * speed;
-                }
+            }
+            else if(playerDetected && !juneDashed)
+            {
+                juneDashed = true;
+                rb.velocity = (player.transform.position - transform.position).normalized * speed;
             }
         }
 

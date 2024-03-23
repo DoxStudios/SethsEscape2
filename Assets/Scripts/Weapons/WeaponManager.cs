@@ -8,6 +8,7 @@ public class WeaponManager : MonoBehaviour
     public string title;
     public string name;
     public float damage;
+    public float contDmg;
     public int burstCount;
     public float burstOffset;
     public float speed;
@@ -173,7 +174,8 @@ public class WeaponManager : MonoBehaviour
             if(psm.useAim)
             {
                 direction = psm.aim;
-                direction = new Vector3(direction.x + Random.Range(-burstOffset * 0.1f, burstOffset *0.1f), direction.y + Random.Range(-burstOffset * 0.1f, burstOffset * 0.1f), direction.z);
+                direction = new Vector3(direction.x, direction.y, 0);
+                direction = Quaternion.AngleAxis(Random.Range(-burstOffset, burstOffset), Vector3.up) * direction;
                 direction.Normalize();
             }
             else
@@ -182,7 +184,7 @@ public class WeaponManager : MonoBehaviour
                 mousePos.z = mousePos.z - (Camera.main.transform.position.z);
                 Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
                 direction = worldMousePos - firePosition.position;
-                direction = new Vector3(direction.x + Random.Range(-burstOffset, burstOffset), direction.y + Random.Range(-burstOffset, burstOffset), direction.z);
+                direction = Quaternion.AngleAxis(Random.Range(-burstOffset, burstOffset), Vector3.forward) * direction;
                 direction.Normalize();
             }
 
@@ -214,7 +216,8 @@ public class WeaponManager : MonoBehaviour
                 ChainsawMovement cm = firedBullet.GetComponentInChildren<ChainsawMovement>();
                 ChainsawDamage cd = firedBullet.GetComponent<ChainsawDamage>();
                 cm.speed = speed;
-                cd.damage = finalDamage;
+                cd.initDmg = finalDamage;
+                cd.contDmg = contDmg;
                 cd.psm = psm;
 
                 state = 6;

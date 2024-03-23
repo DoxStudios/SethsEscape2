@@ -109,7 +109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: 
   name: Chainsaw
-  damage: 150
+  damage: 75
+  contDmg: 75
   burstCount: 1
   burstOffset: 0
   speed: 80

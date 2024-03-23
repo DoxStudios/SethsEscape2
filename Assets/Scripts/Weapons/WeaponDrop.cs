@@ -32,18 +32,12 @@ public class WeaponDrop : MonoBehaviour
             wm.burstOffset += Random.Range(-1, 2);
         }
 
-        wm.speed += Random.Range(-10, 21);
         wm.maxShotsPerSecond += Random.Range(0, 2);
         if(wm.type == WeaponManager.WeaponType.Revolver)
         {
-            wm.currentAmmo += Random.Range(0, 3);
             wm.maxShotsPerSecond = 20;
             wm.fireFrames = 0.2f;
         }   
-        else
-        {
-            wm.currentAmmo += Random.Range(-2, 10);
-        }
 
         Title title = new Title();
         Title.titles t = title.GenerateTitle();
@@ -84,7 +78,7 @@ public class Title
 
     public titles GenerateTitle()
     {
-        int title = Random.Range(0, 3);
+        int title = Random.Range(0, 4);
         switch (title)
         {
 
@@ -94,6 +88,8 @@ public class Title
                 return titles.Rapid;
             case 2:
                 return titles.Lucky;
+            case 3:
+                return titles.Loaded;
             default:
                 return titles.None;
         }
@@ -103,6 +99,27 @@ public class Title
     {
         switch (title)
         {
+            case titles.Loaded:
+                switch (wm.type)
+                {
+                    case WeaponManager.WeaponType.Pistol:
+                        wm.currentAmmo += Random.Range(7, 11);
+                        break;
+                    case WeaponManager.WeaponType.Shotgun:
+                        wm.currentAmmo += Random.Range(2,7);
+                        break;
+                    case WeaponManager.WeaponType.Rifle:
+                        wm.currentAmmo += Random.Range(5, 11);
+                        break;
+                    case WeaponManager.WeaponType.Explosive:
+                        wm.currentAmmo += Random.Range(1, 4);
+                        break;
+                    case WeaponManager.WeaponType.Chainsaw:
+                        wm.damage += Random.Range(10, 16);
+                        break;
+                }
+
+                break;
             case titles.Strengthened:
                 switch (wm.type)
                 {
@@ -123,6 +140,9 @@ public class Title
                         break;
                     case WeaponManager.WeaponType.DoubleShotgun:
                         wm.damage += Random.Range(50, 101);
+                        break;
+                    case WeaponManager.WeaponType.Chainsaw:
+                        wm.contDmg += Random.Range(20, 26);
                         break;
                 }
 
@@ -152,6 +172,9 @@ public class Title
                     case WeaponManager.WeaponType.DoubleShotgun:
                         wm.maxShotsPerSecond += 100;
                         wm.fireFrames = 0;
+                        break;
+                    case WeaponManager.WeaponType.Chainsaw:
+                        wm.speed += Random.Range(20, 31);
                         break;
                 }
 
@@ -187,6 +210,11 @@ public class Title
                         wm.fireFrames = 0;
                         wm.burstCount += 5;
                         wm.burstOffset += 0.5f;
+                        break;
+                    case WeaponManager.WeaponType.Chainsaw:
+                        wm.damage += Random.Range(5, 11);
+                        wm.contDmg += Random.Range(5, 11);
+                        wm.speed -= Random.Range(5, 11);
                         break;
                 }
 

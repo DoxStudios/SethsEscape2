@@ -42,7 +42,7 @@ public class PlayerStatsManager : MonoBehaviour
 	Transform sprite;
 	public Transform lastCheckpoint;
 	public bool skipAnimation = false;
-	int dropChance = 30;
+	public int dropChance = 30;
 
 	bool alternateDropSlot = false;
 
@@ -140,6 +140,7 @@ public class PlayerStatsManager : MonoBehaviour
 		weaponSlot.explosivePower = weapon.explosivePower;
 		weaponSlot.explosiveRange = weapon.explosiveRange;
 		weaponSlot.gravity = weapon.gravity;
+		weaponSlot.contDmg = weapon.contDmg;
 
 		weaponSlot.state = 0;
 	}

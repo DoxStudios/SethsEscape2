@@ -74,7 +74,7 @@ public class BeetleUtils : MonoBehaviour
         for(int i = 0; i < 5; i++)
         {
             GameObject bulletInstance = Instantiate(bullet, origin.position, Quaternion.identity);
-            Vector3 finalTarget = target + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0);
+            Vector3 finalTarget = Quaternion.AngleAxis(Random.Range(-10, 10), Vector3.forward) * target;
             Vector2 direction = (finalTarget - origin.position).normalized;
             bulletInstance.GetComponent<Rigidbody2D>().velocity = direction * 100;
             BossBulletManager bbm = bulletInstance.GetComponent<BossBulletManager>();
